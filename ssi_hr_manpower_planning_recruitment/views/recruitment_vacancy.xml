@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 OpenSynergy Indonesia
+     Copyright 2026 PT. Simetri Sinergi Indonesia
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+<record id="recruitment_vacancy_view_search" model="ir.ui.view">
+    <field name="name">recruitment_vacancy - search (manpower planning)</field>
+    <field name="model">recruitment_vacancy</field>
+    <field name="inherit_id" ref="ssi_hr_recruitment.recruitment_vacancy_view_search" />
+    <field name="arch" type="xml">
+        <data>
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="manpower_planning_id" />
+            </xpath>
+            <xpath
+                    expr="//filter[@name='filter_has_expected_join_date']"
+                    position="after"
+                >
+                <filter
+                        name="filter_has_manpower_planning"
+                        string="From Manpower Planning"
+                        domain="[('manpower_planning_id', '!=', False)]"
+                    />
+            </xpath>
+            <xpath expr="//filter[@name='grp_expected_join_date']" position="after">
+                <filter
+                        name="grp_manpower_planning"
+                        string="Manpower Planning"
+                        context="{'group_by':'manpower_planning_id'}"
+                    />
+            </xpath>
+        </data>
+    </field>
+</record>
+
+<record id="recruitment_vacancy_view_form" model="ir.ui.view">
+    <field name="name">recruitment_vacancy - form (manpower planning)</field>
+    <field name="model">recruitment_vacancy</field>
+    <field name="inherit_id" ref="ssi_hr_recruitment.recruitment_vacancy_view_form" />
+    <field name="arch" type="xml">
+        <data>
+            <xpath expr="//field[@name='expected_join_date']" position="after">
+                <field name="manpower_planning_id" options="{'no_create': True}" />
+            </xpath>
+        </data>
+    </field>
+</record>
+</odoo>

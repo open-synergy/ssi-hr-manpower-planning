@@ -1,0 +1,355 @@
+options:
+  auto_refresh: true
+
+scenarios:
+  - name:
+      "Create Recruitment Vacancy - Wizard proposes the remaining need and creates
+      vacancies"
+    steps:
+      - step: "Create department WZ"
+        action: "create"
+        model: "hr.department"
+        save_as: "dept"
+        values:
+          name: "MPPR Department WZ"
+
+      - step: "Create job A WZ"
+        action: "create"
+        model: "hr.job"
+        save_as: "job_a"
+        values:
+          name: "MPPR Job A WZ"
+
+      - step: "Create job B WZ"
+        action: "create"
+        model: "hr.job"
+        save_as: "job_b"
+        values:
+          name: "MPPR Job B WZ"
+
+      - step: "Create planning with vacant formation of two jobs"
+        action: "create"
+        model: "manpower_planning"
+        save_as: "planning"
+        values:
+          department_id: "REC: dept.id"
+          date_start: 2026-01-01
+          date_end: 2026-12-31
+          formation_ids:
+            - - 0
+              - 0
+              - job_id: "REC: job_a.id"
+                quantity: 2
+            - - 0
+              - 0
+              - job_id: "REC: job_a.id"
+                quantity: 1
+            - - 0
+              - 0
+              - job_id: "REC: job_b.id"
+                quantity: 1
+
+      - step: "Confirm planning"
+        action: "call"
+        target: "planning"
+        method: "action_confirm"
+        as_user: "base.user_admin"
+        asserts:
+          state:
+            type: "value"
+            expected: "confirm"
+
+      - step: "Approve planning"
+        action: "call"
+        target: "planning"
+        method: "action_approve_approval"
+        as_user: "base.user_admin"
+        asserts:
+          state:
+            type: "value"
+            expected: "open"
+
+      - step: "A vacancy of job A already asks for one person"
+        action: "create"
+        model: "recruitment_vacancy"
+        save_as: "vacancy_existing"
+        as_user: "base.user_admin"
+        values:
+          job_id: "REC: job_a.id"
+          applicant_number: 1
+          date_start: 2026-01-01
+          date_end: 2026-12-31
+          manpower_planning_id: "REC: planning.id"
+
+      - step: "Planning counts the existing vacancy"
+        action: "assert"
+        target: "planning"
+        asserts:
+          recruitment_vacancy_count:
+            type: "value"
+            expected: 1
+
+      - step: "Wizard proposes job A with 2 left and job B with 1"
+        action: "form"
+        model: "create_recruitment_vacancy_from_manpower_planning"
+        as_user: "base.user_admin"
+        context:
+          active_model: "manpower_planning"
+          active_id: "REC: planning.id"
+        save_as: "wizard"
+        ops:
+          - assert:
+              line_ids:
+                type: "o2m"
+                check: "count"
+                expected_count: 2
+          - set: {date_start: 2026-01-01}
+          - edit:
+              field: "line_ids"
+              index: 0
+              values:
+                expected_join_date: 2026-06-01
+                reason: "Replace leavers"
+          - edit:
+              field: "line_ids"
+              index: 1
+              values:
+                expected_join_date: 2026-07-01
+
+      - step: "Confirm the wizard"
+        action: "call"
+        target: "wizard"
+        method: "action_confirm"
+        as_user: "base.user_admin"
+
+      - step: "Find the new vacancy of job A"
+        action: "search"
+        model: "recruitment_vacancy"
+        domain:
+          - ["manpower_planning_id", "=", "REC: planning.id"]
+          - ["job_id", "=", "REC: job_a.id"]
+          - ["id", "!=", "REC: vacancy_existing.id"]
+        save_as: "vacancy_a"
+        expect_count: 1
+
+      - step: "Vacancy of job A keeps the need, dates and reason"
+        action: "assert"
+        target: "vacancy_a"
+        asserts:
+          state:
+            type: "value"
+            expected: "draft"
+          applicant_number:
+            type: "value"
+            expected: 2
+          reason:
+            type: "value"
+            expected: "Replace leavers"
+          manpower_planning_id:
+            type: "m2o"
+            expected: "REC: planning"
+
+      - step: "Find the new vacancy of job B"
+        action: "search"
+        model: "recruitment_vacancy"
+        domain:
+          - ["manpower_planning_id", "=", "REC: planning.id"]
+          - ["job_id", "=", "REC: job_b.id"]
+        save_as: "vacancy_b"
+        expect_count: 1
+
+      - step: "Vacancy of job B is a draft for one person"
+        action: "assert"
+        target: "vacancy_b"
+        asserts:
+          state:
+            type: "value"
+            expected: "draft"
+          applicant_number:
+            type: "value"
+            expected: 1
+
+      - step: "Planning counts all three vacancies"
+        action: "assert"
+        target: "planning"
+        asserts:
+          recruitment_vacancy_count:
+            type: "value"
+            expected: 3
+
+  - name: "Create Recruitment Vacancy - Vacancy of the wizard goes through approval"
+    steps:
+      - step: "Create department AP"
+        action: "create"
+        model: "hr.department"
+        save_as: "dept"
+        values:
+          name: "MPPR Department AP"
+
+      - step: "Create job AP"
+        action: "create"
+        model: "hr.job"
+        save_as: "job"
+        values:
+          name: "MPPR Job AP"
+
+      - step: "Create planning with one vacant position"
+        action: "create"
+        model: "manpower_planning"
+        save_as: "planning"
+        values:
+          department_id: "REC: dept.id"
+          date_start: 2026-01-01
+          date_end: 2026-12-31
+          formation_ids:
+            - - 0
+              - 0
+              - job_id: "REC: job.id"
+                quantity: 1
+
+      - step: "Confirm planning"
+        action: "call"
+        target: "planning"
+        method: "action_confirm"
+        as_user: "base.user_admin"
+        asserts:
+          state:
+            type: "value"
+            expected: "confirm"
+
+      - step: "Approve planning"
+        action: "call"
+        target: "planning"
+        method: "action_approve_approval"
+        as_user: "base.user_admin"
+        asserts:
+          state:
+            type: "value"
+            expected: "open"
+
+      - step: "Create the wizard with one complete line"
+        action: "wizard"
+        model: "create_recruitment_vacancy_from_manpower_planning"
+        target: "planning"
+        as_user: "base.user_admin"
+        save_as: "wizard"
+        values:
+          planning_id: "REC: planning.id"
+          date_start: 2026-01-01
+          line_ids:
+            - - 0
+              - 0
+              - job_id: "REC: job.id"
+                quantity: 1
+                expected_join_date: 2026-03-01
+
+      - step: "Confirm the wizard"
+        action: "call"
+        target: "wizard"
+        method: "action_confirm"
+        as_user: "base.user_admin"
+
+      - step: "Find the vacancy of the wizard"
+        action: "search"
+        model: "recruitment_vacancy"
+        domain:
+          - ["manpower_planning_id", "=", "REC: planning.id"]
+        save_as: "vacancy"
+        expect_count: 1
+
+      - step: "Confirm vacancy"
+        action: "call"
+        target: "vacancy"
+        method: "action_confirm"
+        as_user: "base.user_admin"
+        asserts:
+          state:
+            type: "value"
+            expected: "confirm"
+
+      - step: "Approve vacancy"
+        action: "call"
+        target: "vacancy"
+        method: "action_approve_approval"
+        as_user: "base.user_admin"
+        asserts:
+          state:
+            type: "value"
+            expected: "open"
+
+  - name: "Create Recruitment Vacancy - Negative paths"
+    steps:
+      - step: "Create department NG"
+        action: "create"
+        model: "hr.department"
+        save_as: "dept"
+        values:
+          name: "MPPR Department NG"
+
+      - step: "Create job NG"
+        action: "create"
+        model: "hr.job"
+        save_as: "job"
+        values:
+          name: "MPPR Job NG"
+
+      - step: "Create planning left in draft"
+        action: "create"
+        model: "manpower_planning"
+        save_as: "planning"
+        values:
+          department_id: "REC: dept.id"
+          date_start: 2026-01-01
+          date_end: 2026-12-31
+          formation_ids:
+            - - 0
+              - 0
+              - job_id: "REC: job.id"
+                quantity: 1
+
+      - step: "Create the wizard of the draft planning"
+        action: "create"
+        model: "create_recruitment_vacancy_from_manpower_planning"
+        save_as: "wizard"
+        as_user: "base.user_admin"
+        values:
+          planning_id: "REC: planning.id"
+          date_start: 2026-01-01
+          line_ids:
+            - - 0
+              - 0
+              - job_id: "REC: job.id"
+                quantity: 1
+                expected_join_date: 2026-03-01
+
+      - step: "Wizard on a planning that is not open is rejected"
+        action: "call"
+        target: "wizard"
+        method: "action_confirm"
+        as_user: "base.user_admin"
+        expect_error:
+          type: "UserError"
+
+      - step: "Line with quantity 0 is rejected"
+        action: "create"
+        model: "create_recruitment_vacancy_from_manpower_planning_line"
+        as_user: "base.user_admin"
+        expect_error:
+          type: "ValidationError"
+        values:
+          wizard_id: "REC: wizard.id"
+          job_id: "REC: job.id"
+          quantity: 0
+          expected_join_date: 2026-03-01
+
+      - step: "Line joining before the start date is rejected"
+        action: "create"
+        model: "create_recruitment_vacancy_from_manpower_planning_line"
+        as_user: "base.user_admin"
+        expect_error:
+          type: "ValidationError"
+        values:
+          wizard_id: "REC: wizard.id"
+          job_id: "REC: job.id"
+          quantity: 1
+          expected_join_date: 2025-12-31
