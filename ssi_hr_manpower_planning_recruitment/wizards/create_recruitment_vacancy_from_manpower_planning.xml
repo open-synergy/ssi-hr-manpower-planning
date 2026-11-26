@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 OpenSynergy Indonesia
+     Copyright 2026 PT. Simetri Sinergi Indonesia
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+<record
+        id="create_recruitment_vacancy_from_manpower_planning_view_form"
+        model="ir.ui.view"
+    >
+    <field name="name">create_recruitment_vacancy_from_manpower_planning - form</field>
+    <field name="model">create_recruitment_vacancy_from_manpower_planning</field>
+    <field name="arch" type="xml">
+        <form>
+            <group name="group_1" colspan="4" col="2">
+                <field
+                        name="planning_id"
+                        readonly="1"
+                        force_save="1"
+                        options="{'no_open': True, 'no_create': True}"
+                    />
+                <field name="date_start" />
+            </group>
+            <field name="line_ids" nolabel="1">
+                <tree editable="bottom">
+                    <field name="job_id" options="{'no_create': True}" />
+                    <field name="quantity" />
+                    <field name="expected_join_date" />
+                    <field name="reason" />
+                </tree>
+                <form>
+                    <group name="line_group_1">
+                        <field name="job_id" />
+                        <field name="quantity" />
+                        <field name="expected_join_date" />
+                        <field name="reason" />
+                    </group>
+                </form>
+            </field>
+            <footer>
+                <button
+                        name="action_confirm"
+                        type="object"
+                        string="Create Vacancies"
+                        class="btn-primary"
+                    />
+                <button string="Cancel" class="btn-default" special="cancel" />
+            </footer>
+        </form>
+    </field>
+</record>
+</odoo>

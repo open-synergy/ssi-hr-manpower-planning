@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 OpenSynergy Indonesia
+     Copyright 2026 PT. Simetri Sinergi Indonesia
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+<record
+        id="manpower_planning_open_recruitment_vacancy_action"
+        model="ir.actions.act_window"
+    >
+    <field name="name">Recruitment Vacancies</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">recruitment_vacancy</field>
+    <field name="view_mode">tree,form</field>
+    <field name="domain">[('manpower_planning_id', '=', active_id)]</field>
+</record>
+
+<record id="manpower_planning_view_form" model="ir.ui.view">
+    <field name="name">manpower_planning - form (recruitment)</field>
+    <field name="model">manpower_planning</field>
+    <field
+            name="inherit_id"
+            ref="ssi_hr_manpower_planning.manpower_planning_view_form"
+        />
+    <field name="arch" type="xml">
+        <data>
+            <xpath expr="//header" position="inside">
+                <button
+                        name="action_create_recruitment_vacancy"
+                        string="Create Recruitment Vacancy"
+                        type="object"
+                        class="oe_highlight"
+                        groups="ssi_hr_recruitment.recruitment_vacancy_user_group"
+                        attrs="{'invisible': [('state', '!=', 'open')]}"
+                    />
+            </xpath>
+            <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                <button
+                        class="oe_stat_button"
+                        type="action"
+                        name="%(manpower_planning_open_recruitment_vacancy_action)d"
+                        icon="fa-users"
+                        groups="ssi_hr_recruitment.recruitment_vacancy_viewer_group"
+                    >
+                    <field
+                            name="recruitment_vacancy_count"
+                            string="Vacancies"
+                            widget="statinfo"
+                        />
+                </button>
+            </xpath>
+        </data>
+    </field>
+</record>
+</odoo>
