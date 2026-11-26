@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo14-addon-ssi_hr_manpower_planning',
+        'odoo14-addon-ssi_hr_manpower_planning_school',
     ],
     classifiers=[
         'Programming Language :: Python',
