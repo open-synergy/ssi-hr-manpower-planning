@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 OpenSynergy Indonesia
+     Copyright 2026 PT. Simetri Sinergi Indonesia
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+<record id="manpower_planning_summary_view_search" model="ir.ui.view">
+    <field name="name">manpower_planning_summary - search</field>
+    <field name="model">manpower_planning_summary</field>
+    <field name="arch" type="xml">
+        <search>
+            <field name="planning_id" />
+            <field name="department_id" />
+            <field name="job_id" />
+            <group name="group_by">
+                <filter
+                        name="grp_planning"
+                        string="Manpower Planning"
+                        context="{'group_by':'planning_id'}"
+                    />
+                <filter
+                        name="grp_department"
+                        string="Department"
+                        context="{'group_by':'department_id'}"
+                    />
+                <filter
+                        name="grp_job"
+                        string="Job Position"
+                        context="{'group_by':'job_id'}"
+                    />
+                <filter
+                        name="grp_state"
+                        string="State"
+                        context="{'group_by':'state'}"
+                    />
+            </group>
+        </search>
+    </field>
+</record>
+
+<record id="manpower_planning_summary_view_tree" model="ir.ui.view">
+    <field name="name">manpower_planning_summary - tree</field>
+    <field name="model">manpower_planning_summary</field>
+    <field name="arch" type="xml">
+        <tree>
+            <field name="planning_id" />
+            <field name="department_id" />
+            <field name="job_id" />
+            <field name="state" />
+            <field name="quantity_needed" sum="Total" />
+            <field name="quantity_filled" sum="Total" />
+            <field name="quantity_vacant" sum="Total" />
+        </tree>
+    </field>
+</record>
+
+<record id="manpower_planning_summary_view_pivot" model="ir.ui.view">
+    <field name="name">manpower_planning_summary - pivot</field>
+    <field name="model">manpower_planning_summary</field>
+    <field name="arch" type="xml">
+        <pivot>
+            <field name="department_id" type="row" />
+            <field name="job_id" type="row" />
+            <field name="quantity_needed" type="measure" />
+            <field name="quantity_filled" type="measure" />
+        </pivot>
+    </field>
+</record>
+
+<record id="manpower_planning_summary_view_pivot_vacant" model="ir.ui.view">
+    <field name="name">manpower_planning_summary - pivot vacant</field>
+    <field name="model">manpower_planning_summary</field>
+    <field name="arch" type="xml">
+        <pivot>
+            <field name="department_id" type="row" />
+            <field name="job_id" type="row" />
+            <field name="quantity_vacant" type="measure" />
+        </pivot>
+    </field>
+</record>
+
+<record id="manpower_planning_summary_view_graph" model="ir.ui.view">
+    <field name="name">manpower_planning_summary - graph</field>
+    <field name="model">manpower_planning_summary</field>
+    <field name="arch" type="xml">
+        <graph type="bar">
+            <field name="job_id" type="row" />
+            <field name="quantity_needed" type="measure" />
+            <field name="quantity_filled" type="measure" />
+        </graph>
+    </field>
+</record>
+
+<record id="manpower_planning_summary_view_graph_vacant" model="ir.ui.view">
+    <field name="name">manpower_planning_summary - graph vacant</field>
+    <field name="model">manpower_planning_summary</field>
+    <field name="arch" type="xml">
+        <graph type="bar">
+            <field name="job_id" type="row" />
+            <field name="quantity_vacant" type="measure" />
+        </graph>
+    </field>
+</record>
+
+<record id="manpower_fulfillment_action" model="ir.actions.act_window">
+    <field name="name">Manpower Fulfillment</field>
+    <field name="res_model">manpower_planning_summary</field>
+    <field name="view_mode">pivot,graph,tree</field>
+    <field
+            name="view_ids"
+            eval="[(5, 0, 0),
+        (0, 0, {'view_mode': 'pivot', 'view_id': ref('manpower_planning_summary_view_pivot')}),
+        (0, 0, {'view_mode': 'graph', 'view_id': ref('manpower_planning_summary_view_graph')}),
+        (0, 0, {'view_mode': 'tree', 'view_id': ref('manpower_planning_summary_view_tree')})]"
+        />
+</record>
+
+<record id="manpower_vacancy_action" model="ir.actions.act_window">
+    <field name="name">Manpower Vacancy</field>
+    <field name="res_model">manpower_planning_summary</field>
+    <field name="view_mode">pivot,graph,tree</field>
+    <field
+            name="view_ids"
+            eval="[(5, 0, 0),
+        (0, 0, {'view_mode': 'pivot', 'view_id': ref('manpower_planning_summary_view_pivot_vacant')}),
+        (0, 0, {'view_mode': 'graph', 'view_id': ref('manpower_planning_summary_view_graph_vacant')}),
+        (0, 0, {'view_mode': 'tree', 'view_id': ref('manpower_planning_summary_view_tree')})]"
+        />
+</record>
+
+<menuitem
+        id="manpower_fulfillment_menu"
+        name="Manpower Fulfillment"
+        parent="ssi_hr.menu_human_resource_report"
+        action="manpower_fulfillment_action"
+        groups="manpower_planning_viewer_group"
+        sequence="20"
+    />
+
+<menuitem
+        id="manpower_vacancy_menu"
+        name="Manpower Vacancy"
+        parent="ssi_hr.menu_human_resource_report"
+        action="manpower_vacancy_action"
+        groups="manpower_planning_viewer_group"
+        sequence="21"
+    />
+</odoo>

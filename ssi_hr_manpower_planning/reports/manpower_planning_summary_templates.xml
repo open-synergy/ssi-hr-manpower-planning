@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 OpenSynergy Indonesia
+     Copyright 2026 PT. Simetri Sinergi Indonesia
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <template id="manpower_planning_summary">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="o" t-value="doc['planning']" />
+                <t t-call="web.internal_layout">
+                    <t
+                        t-call="ssi_hr_manpower_planning.manpower_planning_summary_content"
+                    />
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="manpower_planning_summary_content">
+        <t t-set="planning" t-value="doc['planning']" />
+        <div class="page">
+            <h4>
+                Manpower Planning
+                <t t-esc="planning.name" />
+            </h4>
+            <div>
+                Department:
+                <t t-esc="planning.department_id.name" />
+            </div>
+            <div>
+                Period:
+                <t
+                    t-esc="planning.date_start and planning.date_start.strftime('%d/%m/%Y')"
+                />
+                -
+                <t
+                    t-esc="planning.date_end and planning.date_end.strftime('%d/%m/%Y')"
+                />
+            </div>
+
+            <h5 class="mt-3">Manpower Summary</h5>
+            <table class="table table-sm table-bordered">
+                <thead>
+                    <tr>
+                        <th>Job Position</th>
+                        <th class="text-right">Needed</th>
+                        <th class="text-right">Filled</th>
+                        <th class="text-right">Vacant</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr t-foreach="doc['summary_lines']" t-as="line">
+                        <td>
+                            <t t-esc="line['job'].name" />
+                        </td>
+                        <td class="text-right">
+                            <t t-esc="line['quantity_needed']" />
+                        </td>
+                        <td class="text-right">
+                            <t t-esc="line['quantity_filled']" />
+                        </td>
+                        <td class="text-right">
+                            <t t-esc="line['quantity_vacant']" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Total</th>
+                        <th class="text-right">
+                            <t t-esc="doc['summary_total']['quantity_needed']" />
+                        </th>
+                        <th class="text-right">
+                            <t t-esc="doc['summary_total']['quantity_filled']" />
+                        </th>
+                        <th class="text-right">
+                            <t t-esc="doc['summary_total']['quantity_vacant']" />
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h5 class="mt-3">Contract Review</h5>
+            <table class="table table-sm table-bordered">
+                <thead>
+                    <tr>
+                        <th>Employee</th>
+                        <th>Job Position</th>
+                        <th>Contract Start</th>
+                        <th>Contract End</th>
+                        <th>Recommendation</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr t-foreach="doc['contract_lines']" t-as="line">
+                        <td>
+                            <t t-esc="line['employee'].name" />
+                        </td>
+                        <td>
+                            <t t-esc="line['job'].name" />
+                        </td>
+                        <td>
+                            <t
+                                t-esc="line['date_contract_start'] and line['date_contract_start'].strftime('%d/%m/%Y')"
+                            />
+                        </td>
+                        <td>
+                            <t
+                                t-esc="line['date_contract_end'] and line['date_contract_end'].strftime('%d/%m/%Y')"
+                            />
+                        </td>
+                        <td>
+                            <t t-esc="line['recommendation'].name" />
+                        </td>
+                        <td>
+                            <t t-esc="line['notes']" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </template>
+
+</odoo>

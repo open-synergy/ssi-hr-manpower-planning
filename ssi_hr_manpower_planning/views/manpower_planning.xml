@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 OpenSynergy Indonesia
+     Copyright 2026 PT. Simetri Sinergi Indonesia
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+<record id="manpower_planning_view_search" model="ir.ui.view">
+    <field name="name">manpower_planning - search</field>
+    <field name="model">manpower_planning</field>
+    <field
+            name="inherit_id"
+            ref="ssi_transaction_mixin.mixin_transaction_view_search"
+        />
+    <field name="mode">primary</field>
+    <field name="arch" type="xml">
+        <data>
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="department_id" />
+                <field name="date_start" />
+            </xpath>
+            <xpath expr="//filter[@name='grp_responsible']" position="before">
+                <filter
+                        name="grp_department"
+                        string="Department"
+                        context="{'group_by':'department_id'}"
+                    />
+            </xpath>
+        </data>
+    </field>
+</record>
+
+<record id="manpower_planning_view_tree" model="ir.ui.view">
+    <field name="name">manpower_planning - tree</field>
+    <field name="model">manpower_planning</field>
+    <field name="inherit_id" ref="ssi_transaction_mixin.mixin_transaction_view_tree" />
+    <field name="mode">primary</field>
+    <field name="arch" type="xml">
+        <data>
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="department_id" />
+                <field name="date_start" />
+                <field name="date_end" optional="hide" />
+                <field name="quantity_needed" optional="hide" />
+                <field name="quantity_filled" optional="hide" />
+                <field name="quantity_vacant" optional="show" />
+            </xpath>
+        </data>
+    </field>
+</record>
+
+<record id="manpower_planning_view_form" model="ir.ui.view">
+    <field name="name">manpower_planning - form</field>
+    <field name="model">manpower_planning</field>
+    <field name="inherit_id" ref="ssi_transaction_mixin.mixin_transaction_view_form" />
+    <field name="mode">primary</field>
+    <field name="arch" type="xml">
+        <data>
+            <xpath expr="//group[@name='header_right']" position="inside">
+                <field name="department_id" options="{'no_create': True}" />
+                <field name="date_start" />
+                <field name="date_end" />
+            </xpath>
+            <xpath expr="//group[@name='footer_left']" position="inside">
+                <field name="quantity_needed" />
+                <field name="quantity_filled" />
+                <field name="quantity_vacant" />
+            </xpath>
+            <xpath expr="//page[1]" position="before">
+                <page name="formation" string="Formations">
+                    <field name="formation_ids" nolabel="1">
+                        <tree editable="bottom">
+                            <field name="job_id" options="{'no_create': True}" />
+                            <field name="employee_id" options="{'no_create': True}" />
+                            <field name="quantity" />
+                            <field name="quantity_filled" />
+                            <field name="is_vacant" optional="hide" />
+                            <field name="notes" optional="hide" />
+                        </tree>
+                        <form>
+                            <group name="formation_group_1">
+                                <field name="job_id" />
+                                <field name="employee_id" />
+                                <field name="quantity" />
+                                <field name="quantity_filled" />
+                                <field name="notes" />
+                            </group>
+                        </form>
+                    </field>
+                </page>
+                <page name="contract" string="Contract Reviews">
+                    <field name="contract_ids" nolabel="1">
+                        <tree editable="bottom">
+                            <field name="employee_id" options="{'no_create': True}" />
+                            <field name="job_id" />
+                            <field name="date_contract_start" />
+                            <field name="date_contract_end" />
+                            <field
+                                    name="recommendation_id"
+                                    options="{'no_create': True}"
+                                />
+                            <field name="notes" optional="show" />
+                        </tree>
+                        <form>
+                            <group name="contract_group_1">
+                                <field name="employee_id" />
+                                <field name="job_id" />
+                                <field name="date_contract_start" />
+                                <field name="date_contract_end" />
+                                <field name="recommendation_id" />
+                                <field name="notes" />
+                            </group>
+                        </form>
+                    </field>
+                </page>
+                <page name="summary" string="Summary">
+                    <field name="summary_ids" nolabel="1">
+                        <tree>
+                            <field name="job_id" />
+                            <field name="quantity_needed" sum="Total" />
+                            <field name="quantity_filled" sum="Total" />
+                            <field name="quantity_vacant" sum="Total" />
+                        </tree>
+                        <form>
+                            <group name="summary_group_1">
+                                <field name="job_id" />
+                                <field name="quantity_needed" />
+                                <field name="quantity_filled" />
+                                <field name="quantity_vacant" />
+                            </group>
+                        </form>
+                    </field>
+                </page>
+            </xpath>
+        </data>
+    </field>
+</record>
+
+<record id="manpower_planning_action" model="ir.actions.act_window">
+    <field name="name">Manpower Plannings</field>
+    <field name="res_model">manpower_planning</field>
+    <field name="view_mode">tree,form</field>
+</record>
+
+<menuitem
+        id="manpower_planning_menu_item"
+        name="Manpower Plannings"
+        parent="manpower_planning_menu"
+        action="manpower_planning_action"
+        groups="manpower_planning_viewer_group"
+        sequence="10"
+    />
+</odoo>

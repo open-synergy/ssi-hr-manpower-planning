@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 OpenSynergy Indonesia
+     Copyright 2026 PT. Simetri Sinergi Indonesia
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+<record id="manpower_head_count_view_search" model="ir.ui.view">
+    <field name="name">manpower_head_count - search</field>
+    <field name="model">manpower_head_count</field>
+    <field
+            name="inherit_id"
+            ref="ssi_transaction_mixin.mixin_transaction_view_search"
+        />
+    <field name="mode">primary</field>
+    <field name="arch" type="xml">
+        <data>
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="department_id" />
+                <field name="date_start" />
+            </xpath>
+            <xpath expr="//filter[@name='grp_responsible']" position="before">
+                <filter
+                        name="grp_department"
+                        string="Department"
+                        context="{'group_by':'department_id'}"
+                    />
+            </xpath>
+        </data>
+    </field>
+</record>
+
+<record id="manpower_head_count_view_tree" model="ir.ui.view">
+    <field name="name">manpower_head_count - tree</field>
+    <field name="model">manpower_head_count</field>
+    <field name="inherit_id" ref="ssi_transaction_mixin.mixin_transaction_view_tree" />
+    <field name="mode">primary</field>
+    <field name="arch" type="xml">
+        <data>
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="department_id" />
+                <field name="date_start" />
+                <field name="date_end" optional="hide" />
+            </xpath>
+        </data>
+    </field>
+</record>
+
+<record id="manpower_head_count_view_form" model="ir.ui.view">
+    <field name="name">manpower_head_count - form</field>
+    <field name="model">manpower_head_count</field>
+    <field name="inherit_id" ref="ssi_transaction_mixin.mixin_transaction_view_form" />
+    <field name="mode">primary</field>
+    <field name="arch" type="xml">
+        <data>
+            <xpath expr="//header/field[@name='state']" position="before">
+                <button
+                        name="action_compute_line"
+                        type="object"
+                        string="Compute Lines"
+                        class="oe_highlight"
+                        attrs="{'invisible':[('state','!=','draft')]}"
+                    />
+            </xpath>
+            <xpath expr="//group[@name='header_right']" position="inside">
+                <field name="department_id" options="{'no_create': True}" />
+                <field name="date_start" />
+                <field name="date_end" />
+            </xpath>
+            <xpath expr="//page[1]" position="before">
+                <page name="line" string="Head Counts">
+                    <field name="line_ids" nolabel="1">
+                        <tree>
+                            <field name="department_id" />
+                            <field name="job_id" />
+                            <field name="opening_count" sum="Total" />
+                            <field name="joined_count" sum="Total" />
+                            <field name="terminated_count" sum="Total" />
+                            <field name="closing_count" sum="Total" />
+                        </tree>
+                        <form>
+                            <group name="line_group_1">
+                                <field name="department_id" />
+                                <field name="job_id" />
+                                <field name="opening_count" />
+                                <field name="joined_count" />
+                                <field name="terminated_count" />
+                                <field name="closing_count" />
+                            </group>
+                        </form>
+                    </field>
+                </page>
+            </xpath>
+        </data>
+    </field>
+</record>
+
+<record id="manpower_head_count_action" model="ir.actions.act_window">
+    <field name="name">Head Count Snapshots</field>
+    <field name="res_model">manpower_head_count</field>
+    <field name="view_mode">tree,form</field>
+</record>
+
+<menuitem
+        id="manpower_head_count_menu"
+        name="Head Count Snapshots"
+        parent="manpower_planning_menu"
+        action="manpower_head_count_action"
+        groups="manpower_head_count_viewer_group"
+        sequence="20"
+    />
+</odoo>

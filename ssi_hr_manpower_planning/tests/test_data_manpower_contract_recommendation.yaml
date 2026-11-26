@@ -1,0 +1,32 @@
+scenarios:
+  - name: "Manpower Contract Recommendation - CRUD"
+    steps:
+      - step: "Create recommendation"
+        action: "create"
+        model: "manpower_contract_recommendation"
+        save_as: "recommendation"
+        values:
+          name: "Make permanent"
+          code: "MPP-REC-1"
+          is_terminate: false
+
+      - step: "Update recommendation"
+        action: "write"
+        target: "recommendation"
+        values:
+          name: "Terminate contract"
+          is_terminate: true
+
+      - step: "Recommendation is updated"
+        action: "assert"
+        target: "recommendation"
+        asserts:
+          name:
+            type: "value"
+            expected: "Terminate contract"
+          is_terminate:
+            type: "value"
+            expected: true
+      - step: "Delete recommendation"
+        action: "unlink"
+        target: "recommendation"

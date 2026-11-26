@@ -1,0 +1,73 @@
+options:
+  auto_refresh: true
+
+scenarios:
+  - name: "Manpower Planning Contract - Onchange and duplicate"
+    steps:
+      - step: "Create department CT"
+        action: "create"
+        model: "hr.department"
+        save_as: "dept"
+        values:
+          name: "MPP Department CT"
+
+      - step: "Create job A CT"
+        action: "create"
+        model: "hr.job"
+        save_as: "job_a"
+        values:
+          name: "MPP Job A CT"
+
+      - step: "Create employee CT"
+        action: "create"
+        model: "hr.employee"
+        save_as: "employee"
+        values:
+          name: "MPP Employee CT"
+          department_id: "REC: dept.id"
+          job_id: "REC: job_a.id"
+          date_contract_start: 2026-01-01
+          date_contract_end: 2026-12-31
+
+      - step: "Create manpower planning"
+        action: "create"
+        model: "manpower_planning"
+        save_as: "planning"
+        values:
+          department_id: "REC: dept.id"
+          date_start: 2026-01-01
+          date_end: 2026-12-31
+      - step: "Create recommendation"
+        action: "create"
+        model: "manpower_contract_recommendation"
+        save_as: "recommendation"
+        values:
+          name: "Extend contract"
+          code: "MPP-REC-CT"
+
+      - step: "Pick the employee on a new contract review line"
+        action: "form"
+        model: "manpower_planning_contract"
+        save_as: "contract"
+        values:
+          planning_id: "REC: planning"
+          employee_id: "REC: employee"
+
+      - step: "Contract dates are copied from the employee"
+        action: "assert"
+        target: "contract"
+        asserts:
+          date_contract_start:
+            type: "value"
+            expected: 2026-01-01
+          date_contract_end:
+            type: "value"
+            expected: 2026-12-31
+      - step: "The same employee twice in one planning is rejected"
+        action: "create"
+        model: "manpower_planning_contract"
+        expect_error:
+          type: "ValidationError"
+        values:
+          planning_id: "REC: planning.id"
+          employee_id: "REC: employee.id"
