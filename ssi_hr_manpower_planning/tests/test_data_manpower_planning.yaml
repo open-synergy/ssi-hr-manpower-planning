@@ -1,0 +1,453 @@
+options:
+  auto_refresh: true
+
+scenarios:
+  - name: "Manpower Planning - Full Workflow: draft to done"
+    steps:
+      - step: "Create department WF"
+        action: "create"
+        model: "hr.department"
+        save_as: "dept"
+        values:
+          name: "MPP Department WF"
+
+      - step: "Create job A WF"
+        action: "create"
+        model: "hr.job"
+        save_as: "job_a"
+        values:
+          name: "MPP Job A WF"
+
+      - step: "Create job B WF"
+        action: "create"
+        model: "hr.job"
+        save_as: "job_b"
+        values:
+          name: "MPP Job B WF"
+
+      - step: "Create employee WF"
+        action: "create"
+        model: "hr.employee"
+        save_as: "employee"
+        values:
+          name: "MPP Employee WF"
+          department_id: "REC: dept.id"
+          job_id: "REC: job_a.id"
+
+      - step: "Create manpower planning"
+        action: "create"
+        model: "manpower_planning"
+        save_as: "planning"
+        values:
+          department_id: "REC: dept.id"
+          date_start: 2026-01-01
+          date_end: 2026-12-31
+          formation_ids:
+            - - 0
+              - 0
+              - job_id: "REC: job_a.id"
+                employee_id: "REC: employee.id"
+                quantity: 1
+            - - 0
+              - 0
+              - job_id: "REC: job_b.id"
+                quantity: 2
+            - - 0
+              - 0
+              - job_id: "REC: job_b.id"
+                quantity: 1
+      - step: "Header quantities are summed from the formation lines"
+        action: "assert"
+        target: "planning"
+        asserts:
+          state:
+            type: "value"
+            expected: "draft"
+          quantity_needed:
+            type: "value"
+            expected: 4
+          quantity_filled:
+            type: "value"
+            expected: 1
+          quantity_vacant:
+            type: "value"
+            expected: 3
+      - step: "Confirm planning"
+        action: "call"
+        target: "planning"
+        method: "action_confirm"
+        as_user: "base.user_admin"
+        asserts:
+          state:
+            type: "value"
+            expected: "confirm"
+      - step: "Approve planning"
+        action: "call"
+        target: "planning"
+        method: "action_approve_approval"
+        as_user: "base.user_admin"
+        asserts:
+          state:
+            type: "value"
+            expected: "open"
+      - step: "Number is issued when the planning opens"
+        action: "assert"
+        target: "planning"
+        asserts:
+          name:
+            type: "value"
+            operator: "not_equals"
+            expected: "/"
+      - step: "Mark planning as done"
+        action: "call"
+        target: "planning"
+        method: "action_done"
+        as_user: "base.user_admin"
+        asserts:
+          state:
+            type: "value"
+            expected: "done"
+
+  - name: "Manpower Planning - Reject workflow"
+    steps:
+      - step: "Create department RJ"
+        action: "create"
+        model: "hr.department"
+        save_as: "dept"
+        values:
+          name: "MPP Department RJ"
+
+      - step: "Create job A RJ"
+        action: "create"
+        model: "hr.job"
+        save_as: "job_a"
+        values:
+          name: "MPP Job A RJ"
+
+      - step: "Create job B RJ"
+        action: "create"
+        model: "hr.job"
+        save_as: "job_b"
+        values:
+          name: "MPP Job B RJ"
+
+      - step: "Create employee RJ"
+        action: "create"
+        model: "hr.employee"
+        save_as: "employee"
+        values:
+          name: "MPP Employee RJ"
+          department_id: "REC: dept.id"
+          job_id: "REC: job_a.id"
+
+      - step: "Create manpower planning"
+        action: "create"
+        model: "manpower_planning"
+        save_as: "planning"
+        values:
+          department_id: "REC: dept.id"
+          date_start: 2026-01-01
+          date_end: 2026-12-31
+          formation_ids:
+            - - 0
+              - 0
+              - job_id: "REC: job_a.id"
+                employee_id: "REC: employee.id"
+                quantity: 1
+            - - 0
+              - 0
+              - job_id: "REC: job_b.id"
+                quantity: 2
+            - - 0
+              - 0
+              - job_id: "REC: job_b.id"
+                quantity: 1
+      - step: "Confirm planning"
+        action: "call"
+        target: "planning"
+        method: "action_confirm"
+        as_user: "base.user_admin"
+        asserts:
+          state:
+            type: "value"
+            expected: "confirm"
+      - step: "Reject planning"
+        action: "call"
+        target: "planning"
+        method: "action_reject_approval"
+        as_user: "base.user_admin"
+        asserts:
+          state:
+            type: "value"
+            expected: "reject"
+
+  - name: "Manpower Planning - Cancel workflow"
+    steps:
+      - step: "Create department CN"
+        action: "create"
+        model: "hr.department"
+        save_as: "dept"
+        values:
+          name: "MPP Department CN"
+
+      - step: "Create job A CN"
+        action: "create"
+        model: "hr.job"
+        save_as: "job_a"
+        values:
+          name: "MPP Job A CN"
+
+      - step: "Create job B CN"
+        action: "create"
+        model: "hr.job"
+        save_as: "job_b"
+        values:
+          name: "MPP Job B CN"
+
+      - step: "Create employee CN"
+        action: "create"
+        model: "hr.employee"
+        save_as: "employee"
+        values:
+          name: "MPP Employee CN"
+          department_id: "REC: dept.id"
+          job_id: "REC: job_a.id"
+
+      - step: "Create manpower planning"
+        action: "create"
+        model: "manpower_planning"
+        save_as: "planning"
+        values:
+          department_id: "REC: dept.id"
+          date_start: 2026-01-01
+          date_end: 2026-12-31
+          formation_ids:
+            - - 0
+              - 0
+              - job_id: "REC: job_a.id"
+                employee_id: "REC: employee.id"
+                quantity: 1
+            - - 0
+              - 0
+              - job_id: "REC: job_b.id"
+                quantity: 2
+            - - 0
+              - 0
+              - job_id: "REC: job_b.id"
+                quantity: 1
+      - step: "Create cancel reason"
+        action: "create"
+        model: "base.cancel_reason"
+        save_as: "reason"
+        values:
+          name: "MPP cancel reason"
+          code: "MPP-CANCEL-1"
+
+      - step: "Cancel planning through the reason wizard"
+        action: "wizard"
+        model: "base.select_cancel_reason"
+        target: "planning"
+        as_user: "base.user_admin"
+        values:
+          cancel_reason_id: "REC: reason"
+        method: "action_confirm"
+        asserts:
+          state:
+            type: "value"
+            expected: "cancel"
+
+  - name: "Manpower Planning - Summary per job position"
+    steps:
+      - step: "Create department SM"
+        action: "create"
+        model: "hr.department"
+        save_as: "dept"
+        values:
+          name: "MPP Department SM"
+
+      - step: "Create job A SM"
+        action: "create"
+        model: "hr.job"
+        save_as: "job_a"
+        values:
+          name: "MPP Job A SM"
+
+      - step: "Create job B SM"
+        action: "create"
+        model: "hr.job"
+        save_as: "job_b"
+        values:
+          name: "MPP Job B SM"
+
+      - step: "Create employee SM"
+        action: "create"
+        model: "hr.employee"
+        save_as: "employee"
+        values:
+          name: "MPP Employee SM"
+          department_id: "REC: dept.id"
+          job_id: "REC: job_a.id"
+
+      - step: "Create manpower planning"
+        action: "create"
+        model: "manpower_planning"
+        save_as: "planning"
+        values:
+          department_id: "REC: dept.id"
+          date_start: 2026-01-01
+          date_end: 2026-12-31
+          formation_ids:
+            - - 0
+              - 0
+              - job_id: "REC: job_a.id"
+                employee_id: "REC: employee.id"
+                quantity: 1
+            - - 0
+              - 0
+              - job_id: "REC: job_b.id"
+                quantity: 2
+            - - 0
+              - 0
+              - job_id: "REC: job_b.id"
+                quantity: 1
+      - step: "Summary view has one row per job position"
+        action: "search"
+        model: "manpower_planning_summary"
+        domain:
+          - ["planning_id", "=", "REC: planning.id"]
+        save_as: "summaries"
+        expect_count: 2
+
+      - step: "Find the summary row of the vacant job"
+        action: "search"
+        model: "manpower_planning_summary"
+        domain:
+          - ["planning_id", "=", "REC: planning.id"]
+          - ["job_id", "=", "REC: job_b.id"]
+        save_as: "summary_vacant"
+        expect_count: 1
+
+      - step: "Vacant job needs 3 and fills none"
+        action: "assert"
+        target: "summary_vacant"
+        asserts:
+          quantity_needed:
+            type: "value"
+            expected: 3
+          quantity_filled:
+            type: "value"
+            expected: 0
+          quantity_vacant:
+            type: "value"
+            expected: 3
+      - step: "Find the summary row of the filled job"
+        action: "search"
+        model: "manpower_planning_summary"
+        domain:
+          - ["planning_id", "=", "REC: planning.id"]
+          - ["job_id", "=", "REC: job_a.id"]
+        save_as: "summary_filled"
+        expect_count: 1
+
+      - step: "Filled job needs 1 and fills 1"
+        action: "assert"
+        target: "summary_filled"
+        asserts:
+          quantity_needed:
+            type: "value"
+            expected: 1
+          quantity_filled:
+            type: "value"
+            expected: 1
+          quantity_vacant:
+            type: "value"
+            expected: 0
+
+  - name: "Manpower Planning - Negative paths"
+    steps:
+      - step: "Create department NG"
+        action: "create"
+        model: "hr.department"
+        save_as: "dept"
+        values:
+          name: "MPP Department NG"
+
+      - step: "Create job A NG"
+        action: "create"
+        model: "hr.job"
+        save_as: "job_a"
+        values:
+          name: "MPP Job A NG"
+
+      - step: "Create job B NG"
+        action: "create"
+        model: "hr.job"
+        save_as: "job_b"
+        values:
+          name: "MPP Job B NG"
+
+      - step: "Create employee NG"
+        action: "create"
+        model: "hr.employee"
+        save_as: "employee"
+        values:
+          name: "MPP Employee NG"
+          department_id: "REC: dept.id"
+          job_id: "REC: job_a.id"
+
+      - step: "Create manpower planning"
+        action: "create"
+        model: "manpower_planning"
+        save_as: "planning"
+        values:
+          department_id: "REC: dept.id"
+          date_start: 2026-01-01
+          date_end: 2026-12-31
+      - step: "Employee line with quantity 2 is rejected"
+        action: "create"
+        model: "manpower_planning_formation"
+        expect_error:
+          type: "ValidationError"
+        values:
+          planning_id: "REC: planning.id"
+          job_id: "REC: job_a.id"
+          employee_id: "REC: employee.id"
+          quantity: 2
+      - step: "Quantity 0 is rejected"
+        action: "create"
+        model: "manpower_planning_formation"
+        expect_error:
+          type: "ValidationError"
+        values:
+          planning_id: "REC: planning.id"
+          job_id: "REC: job_b.id"
+          quantity: 0
+      - step: "Create the first formation line of the employee"
+        action: "create"
+        model: "manpower_planning_formation"
+        save_as: "line_first"
+        values:
+          planning_id: "REC: planning.id"
+          job_id: "REC: job_a.id"
+          employee_id: "REC: employee.id"
+          quantity: 1
+
+      - step: "The same employee twice in one planning is rejected"
+        action: "create"
+        model: "manpower_planning_formation"
+        expect_error:
+          type: "ValidationError"
+        values:
+          planning_id: "REC: planning.id"
+          job_id: "REC: job_a.id"
+          employee_id: "REC: employee.id"
+          quantity: 1
+      - step: "Date end before date start is rejected"
+        action: "create"
+        model: "manpower_planning"
+        expect_error:
+          type: "UserError"
+        values:
+          department_id: "REC: dept.id"
+          date_start: 2026-12-31
+          date_end: 2026-01-01

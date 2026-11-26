@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 OpenSynergy Indonesia
+     Copyright 2026 PT. Simetri Sinergi Indonesia
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+<record id="manpower_contract_recommendation_view_search" model="ir.ui.view">
+    <field name="name">manpower_contract_recommendation - search</field>
+    <field name="model">manpower_contract_recommendation</field>
+    <field
+            name="inherit_id"
+            ref="ssi_master_data_mixin.mixin_master_data_view_search"
+        />
+    <field name="mode">primary</field>
+    <field name="arch" type="xml">
+        <data />
+    </field>
+</record>
+
+<record id="manpower_contract_recommendation_view_tree" model="ir.ui.view">
+    <field name="name">manpower_contract_recommendation - tree</field>
+    <field name="model">manpower_contract_recommendation</field>
+    <field name="inherit_id" ref="ssi_master_data_mixin.mixin_master_data_view_tree" />
+    <field name="mode">primary</field>
+    <field name="arch" type="xml">
+        <data>
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="is_terminate" />
+            </xpath>
+        </data>
+    </field>
+</record>
+
+<record id="manpower_contract_recommendation_view_form" model="ir.ui.view">
+    <field name="name">manpower_contract_recommendation - form</field>
+    <field name="model">manpower_contract_recommendation</field>
+    <field name="inherit_id" ref="ssi_master_data_mixin.mixin_master_data_view_form" />
+    <field name="mode">primary</field>
+    <field name="arch" type="xml">
+        <data>
+            <xpath expr="//notebook/page[@name='note']" position="before">
+                <page name="contract" string="Contract">
+                    <group name="contract_group_1">
+                        <field name="is_terminate" />
+                    </group>
+                </page>
+            </xpath>
+        </data>
+    </field>
+</record>
+
+<record id="manpower_contract_recommendation_action" model="ir.actions.act_window">
+    <field name="name">Contract Recommendations</field>
+    <field name="res_model">manpower_contract_recommendation</field>
+    <field name="view_mode">tree,form</field>
+</record>
+
+<menuitem
+        id="manpower_contract_recommendation_menu"
+        name="Contract Recommendations"
+        parent="manpower_planning_configuration_menu"
+        action="manpower_contract_recommendation_action"
+        groups="manpower_contract_recommendation_group"
+        sequence="10"
+    />
+</odoo>

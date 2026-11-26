@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 OpenSynergy Indonesia
+     Copyright 2026 PT. Simetri Sinergi Indonesia
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+<record id="manpower_planning_all_access" model="ir.model.access">
+    <field name="name">manpower_planning - all</field>
+    <field name="model_id" ref="model_manpower_planning" />
+    <field name="perm_read" eval="1" />
+    <field name="perm_write" eval="0" />
+    <field name="perm_create" eval="0" />
+    <field name="perm_unlink" eval="0" />
+</record>
+
+<record id="manpower_planning_user_access" model="ir.model.access">
+    <field name="name">manpower_planning - user</field>
+    <field name="model_id" ref="model_manpower_planning" />
+    <field name="group_id" ref="manpower_planning_user_group" />
+    <field name="perm_read" eval="1" />
+    <field name="perm_write" eval="1" />
+    <field name="perm_create" eval="1" />
+    <field name="perm_unlink" eval="1" />
+</record>
+
+<record id="manpower_planning_formation_all_access" model="ir.model.access">
+    <field name="name">manpower_planning_formation - all</field>
+    <field name="model_id" ref="model_manpower_planning_formation" />
+    <field name="perm_read" eval="1" />
+    <field name="perm_write" eval="0" />
+    <field name="perm_create" eval="0" />
+    <field name="perm_unlink" eval="0" />
+</record>
+
+<record id="manpower_planning_formation_user_access" model="ir.model.access">
+    <field name="name">manpower_planning_formation - user</field>
+    <field name="model_id" ref="model_manpower_planning_formation" />
+    <field name="group_id" ref="manpower_planning_user_group" />
+    <field name="perm_read" eval="1" />
+    <field name="perm_write" eval="1" />
+    <field name="perm_create" eval="1" />
+    <field name="perm_unlink" eval="1" />
+</record>
+
+<record id="manpower_planning_contract_all_access" model="ir.model.access">
+    <field name="name">manpower_planning_contract - all</field>
+    <field name="model_id" ref="model_manpower_planning_contract" />
+    <field name="perm_read" eval="1" />
+    <field name="perm_write" eval="0" />
+    <field name="perm_create" eval="0" />
+    <field name="perm_unlink" eval="0" />
+</record>
+
+<record id="manpower_planning_contract_user_access" model="ir.model.access">
+    <field name="name">manpower_planning_contract - user</field>
+    <field name="model_id" ref="model_manpower_planning_contract" />
+    <field name="group_id" ref="manpower_planning_user_group" />
+    <field name="perm_read" eval="1" />
+    <field name="perm_write" eval="1" />
+    <field name="perm_create" eval="1" />
+    <field name="perm_unlink" eval="1" />
+</record>
+
+<record id="manpower_planning_summary_viewer_access" model="ir.model.access">
+    <field name="name">manpower_planning_summary - viewer</field>
+    <field name="model_id" ref="model_manpower_planning_summary" />
+    <field name="group_id" ref="manpower_planning_viewer_group" />
+    <field name="perm_read" eval="1" />
+    <field name="perm_write" eval="0" />
+    <field name="perm_create" eval="0" />
+    <field name="perm_unlink" eval="0" />
+</record>
+
+</odoo>

@@ -1,0 +1,164 @@
+options:
+  auto_refresh: true
+
+scenarios:
+  - name: "Manpower Head Count - Compute lines and done"
+    steps:
+      - step: "Create department HC"
+        action: "create"
+        model: "hr.department"
+        save_as: "dept"
+        values:
+          name: "MPP Department HC"
+
+      - step: "Create job A HC"
+        action: "create"
+        model: "hr.job"
+        save_as: "job_a"
+        values:
+          name: "MPP Job A HC"
+
+      - step: "Create employee 1"
+        action: "create"
+        model: "hr.employee"
+        save_as: "emp_1"
+        values:
+          name: "MPP HC Employee 1"
+          department_id: "REC: dept.id"
+          job_id: "REC: job_a.id"
+          date_join: 2020-01-01
+
+      - step: "Create employee 2"
+        action: "create"
+        model: "hr.employee"
+        save_as: "emp_2"
+        values:
+          name: "MPP HC Employee 2"
+          department_id: "REC: dept.id"
+          job_id: "REC: job_a.id"
+          date_join: 2026-03-01
+
+      - step: "Create employee 3"
+        action: "create"
+        model: "hr.employee"
+        save_as: "emp_3"
+        values:
+          name: "MPP HC Employee 3"
+          department_id: "REC: dept.id"
+          job_id: "REC: job_a.id"
+          date_join: 2021-01-01
+          date_termination: 2026-06-30
+
+      - step: "Create employee 4"
+        action: "create"
+        model: "hr.employee"
+        save_as: "emp_4"
+        values:
+          name: "MPP HC Employee 4"
+          department_id: "REC: dept.id"
+          job_id: "REC: job_a.id"
+          date_join: 2019-01-01
+          date_termination: 2025-06-30
+          active: false
+
+      - step: "Create head count snapshot"
+        action: "create"
+        model: "manpower_head_count"
+        save_as: "head_count"
+        values:
+          department_id: "REC: dept.id"
+          date_start: 2026-01-01
+          date_end: 2026-12-31
+
+      - step: "Compute the lines"
+        action: "call"
+        target: "head_count"
+        method: "action_compute_line"
+        as_user: "base.user_admin"
+
+      - step: "One line for the department and job"
+        action: "search"
+        model: "manpower_head_count_line"
+        domain:
+          - ["head_count_id", "=", "REC: head_count.id"]
+        save_as: "line"
+        expect_count: 1
+
+      - step: "Opening, joined, terminated and closing are counted"
+        action: "assert"
+        target: "line"
+        asserts:
+          opening_count:
+            type: "value"
+            expected: 2
+          joined_count:
+            type: "value"
+            expected: 1
+          terminated_count:
+            type: "value"
+            expected: 1
+          closing_count:
+            type: "value"
+            expected: 2
+      - step: "Mark snapshot as done"
+        action: "call"
+        target: "head_count"
+        method: "action_done"
+        as_user: "base.user_admin"
+        asserts:
+          state:
+            type: "value"
+            expected: "done"
+      - step: "Computing the lines of a done snapshot is rejected"
+        action: "call"
+        target: "head_count"
+        method: "action_compute_line"
+        as_user: "base.user_admin"
+        expect_error:
+          type: "UserError"
+
+  - name: "Manpower Head Count - Cancel workflow"
+    steps:
+      - step: "Create department HX"
+        action: "create"
+        model: "hr.department"
+        save_as: "dept"
+        values:
+          name: "MPP Department HX"
+
+      - step: "Create job A HX"
+        action: "create"
+        model: "hr.job"
+        save_as: "job_a"
+        values:
+          name: "MPP Job A HX"
+
+      - step: "Create head count snapshot"
+        action: "create"
+        model: "manpower_head_count"
+        save_as: "head_count"
+        values:
+          department_id: "REC: dept.id"
+          date_start: 2026-01-01
+          date_end: 2026-12-31
+
+      - step: "Create cancel reason"
+        action: "create"
+        model: "base.cancel_reason"
+        save_as: "reason"
+        values:
+          name: "MPP head count cancel reason"
+          code: "MPP-CANCEL-HC"
+
+      - step: "Cancel snapshot through the reason wizard"
+        action: "wizard"
+        model: "base.select_cancel_reason"
+        target: "head_count"
+        as_user: "base.user_admin"
+        values:
+          cancel_reason_id: "REC: reason"
+        method: "action_confirm"
+        asserts:
+          state:
+            type: "value"
+            expected: "cancel"

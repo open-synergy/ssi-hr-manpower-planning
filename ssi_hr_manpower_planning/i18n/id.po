@@ -1,0 +1,668 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* ssi_hr_manpower_planning
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-26 00:00+0000\n"
+"PO-Revision-Date: 2026-11-26 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: id\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model,name:ssi_hr_manpower_planning.model_manpower_contract_recommendation
+#: model:res.groups,name:ssi_hr_manpower_planning.manpower_contract_recommendation_group
+msgid "Manpower Contract Recommendation"
+msgstr "Rekomendasi Kontrak Perencanaan Tenaga Kerja"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_contract_recommendation__is_terminate
+msgid "Terminate Contract"
+msgstr "Akhiri Kontrak"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_contract_recommendation__is_terminate
+msgid ""
+"Check if this recommendation means the employee contract should be "
+"ended instead of continued."
+msgstr ""
+"Centang bila rekomendasi ini berarti kontrak karyawan harus "
+"diakhiri, bukan dilanjutkan."
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model,name:ssi_hr_manpower_planning.model_manpower_head_count
+msgid "Manpower Head Count Snapshot"
+msgstr "Rekam Jumlah Karyawan"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_head_count__department_id
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_head_count_line__department_id
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning__department_id
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning_summary__department_id
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.manpower_head_count_view_search
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.manpower_planning_view_search
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.manpower_planning_summary_view_search
+msgid "Department"
+msgstr "Departemen"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_head_count__department_id
+msgid ""
+"Limit the snapshot to the employees of this department. Leave empty "
+"to count all departments."
+msgstr ""
+"Batasi rekaman pada karyawan departemen ini. Kosongkan untuk "
+"menghitung semua departemen."
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_head_count__line_ids
+msgid "Lines"
+msgstr "Baris"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_head_count__line_ids
+msgid ""
+"Head count per department and job position, built by the compute "
+"button."
+msgstr "Jumlah karyawan per departemen dan jabatan, dibuat oleh tombol hitung."
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model,name:ssi_hr_manpower_planning.model_manpower_head_count_line
+msgid "Manpower Head Count - Line"
+msgstr "Jumlah Karyawan - Baris"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_head_count_line__head_count_id
+msgid "# Head Count Snapshot"
+msgstr "# Rekam Jumlah Karyawan"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_head_count_line__head_count_id
+msgid "Head count snapshot that owns this line."
+msgstr "Rekam jumlah karyawan pemilik baris ini."
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_head_count_line__department_id
+msgid "Department the head count is counted for."
+msgstr "Departemen yang jumlah karyawannya dihitung."
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_head_count_line__job_id
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning_contract__job_id
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning_formation__job_id
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning_summary__job_id
+#: code:addons/ssi_hr_manpower_planning/reports/report_ssi_hr_manpower_planning_manpower_planning_summary_xlsx.py:0
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.manpower_planning_summary_content
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.manpower_planning_summary_view_search
+msgid "Job Position"
+msgstr "Jabatan"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_head_count_line__job_id
+msgid "Job position the head count is counted for."
+msgstr "Jabatan yang jumlah karyawannya dihitung."
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_head_count_line__opening_count
+msgid "Opening"
+msgstr "Awal"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_head_count_line__opening_count
+msgid "Number of employees active on the first day of the period."
+msgstr "Jumlah karyawan aktif pada hari pertama periode."
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_head_count_line__joined_count
+msgid "Joined"
+msgstr "Masuk"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_head_count_line__joined_count
+msgid "Number of employees who joined during the period."
+msgstr "Jumlah karyawan yang masuk selama periode."
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_head_count_line__terminated_count
+msgid "Terminated"
+msgstr "Keluar"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_head_count_line__terminated_count
+msgid "Number of employees whose employment ended during the period."
+msgstr "Jumlah karyawan yang masa kerjanya berakhir selama periode."
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_head_count_line__closing_count
+msgid "Closing"
+msgstr "Akhir"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_head_count_line__closing_count
+msgid "Number of employees active on the last day of the period."
+msgstr "Jumlah karyawan aktif pada hari terakhir periode."
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model,name:ssi_hr_manpower_planning.model_manpower_planning
+#: code:addons/ssi_hr_manpower_planning/reports/report_ssi_hr_manpower_planning_manpower_planning_summary_xlsx.py:0
+#: model:ir.ui.menu,name:ssi_hr_manpower_planning.manpower_planning_menu
+#: model:ir.ui.menu,name:ssi_hr_manpower_planning.manpower_planning_configuration_menu
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.manpower_planning_summary_content
+#: model:ir.module.category,name:ssi_hr_manpower_planning.manpower_planning_module_category
+#: model:ir.module.category,name:ssi_hr_manpower_planning.manpower_planning_data_ownership_module_category
+#: model:ir.module.category,name:ssi_hr_manpower_planning.manpower_planning_configurator_module_category
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.manpower_planning_summary_view_search
+msgid "Manpower Planning"
+msgstr "Perencanaan Tenaga Kerja"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_planning__department_id
+msgid "Department the manpower planning is made for."
+msgstr "Departemen yang dibuatkan perencanaan tenaga kerja."
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning__formation_ids
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.manpower_planning_view_form
+msgid "Formations"
+msgstr "Formasi"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_planning__formation_ids
+msgid "Planned formation per job position of the department."
+msgstr "Formasi yang direncanakan per jabatan di departemen."
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning__contract_ids
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.manpower_planning_view_form
+msgid "Contract Reviews"
+msgstr "Tinjauan Kontrak"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_planning__contract_ids
+msgid "Contract reviews of the employees of the department."
+msgstr "Tinjauan kontrak karyawan departemen."
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning__summary_ids
+msgid "Summaries"
+msgstr "Ringkasan"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_planning__summary_ids
+msgid "Needed, filled and vacant manpower per job position."
+msgstr "Tenaga kerja yang dibutuhkan, terisi, dan kosong per jabatan."
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning__quantity_needed
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning_formation__quantity
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning_summary__quantity_needed
+msgid "Quantity Needed"
+msgstr "Jumlah Dibutuhkan"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_planning__quantity_needed
+msgid "Total manpower needed, the sum of all formation lines."
+msgstr "Total tenaga kerja yang dibutuhkan, jumlah seluruh baris formasi."
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning__quantity_filled
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning_formation__quantity_filled
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning_summary__quantity_filled
+msgid "Quantity Filled"
+msgstr "Jumlah Terisi"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_planning__quantity_filled
+msgid "Total manpower already filled by an employee."
+msgstr "Total tenaga kerja yang sudah diisi karyawan."
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning__quantity_vacant
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning_summary__quantity_vacant
+msgid "Quantity Vacant"
+msgstr "Jumlah Kosong"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_planning__quantity_vacant
+msgid "Total manpower still vacant: needed minus filled."
+msgstr "Total tenaga kerja yang masih kosong: dibutuhkan dikurangi terisi."
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model,name:ssi_hr_manpower_planning.model_manpower_planning_contract
+msgid "Manpower Planning - Contract Review"
+msgstr "Perencanaan Tenaga Kerja - Tinjauan Kontrak"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning_contract__planning_id
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning_formation__planning_id
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning_summary__planning_id
+msgid "# Manpower Planning"
+msgstr "# Perencanaan Tenaga Kerja"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_planning_contract__planning_id
+msgid "Manpower planning document that owns this review line."
+msgstr "Dokumen perencanaan tenaga kerja pemilik baris tinjauan ini."
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning_contract__employee_id
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning_formation__employee_id
+#: code:addons/ssi_hr_manpower_planning/reports/report_ssi_hr_manpower_planning_manpower_planning_summary_xlsx.py:0
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.manpower_planning_summary_content
+msgid "Employee"
+msgstr "Karyawan"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_planning_contract__employee_id
+msgid "Employee whose contract is reviewed."
+msgstr "Karyawan yang kontraknya ditinjau."
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_planning_contract__job_id
+msgid "Job position of the employee, copied from the employee."
+msgstr "Jabatan karyawan, disalin dari karyawan."
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning_contract__date_contract_start
+msgid "Contract Start Date"
+msgstr "Tanggal Mulai Kontrak"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_planning_contract__date_contract_start
+msgid ""
+"Start date of the employee contract. Filled from the employee and "
+"can be corrected manually."
+msgstr ""
+"Tanggal mulai kontrak karyawan. Diisi dari karyawan dan dapat "
+"dikoreksi secara manual."
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning_contract__date_contract_end
+msgid "Contract End Date"
+msgstr "Tanggal Akhir Kontrak"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_planning_contract__date_contract_end
+msgid ""
+"End date of the employee contract. Filled from the employee and can "
+"be corrected manually."
+msgstr ""
+"Tanggal akhir kontrak karyawan. Diisi dari karyawan dan dapat "
+"dikoreksi secara manual."
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning_contract__recommendation_id
+#: code:addons/ssi_hr_manpower_planning/reports/report_ssi_hr_manpower_planning_manpower_planning_summary_xlsx.py:0
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.manpower_planning_summary_content
+msgid "Recommendation"
+msgstr "Rekomendasi"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_planning_contract__recommendation_id
+msgid "Recommendation given for the contract of this employee."
+msgstr "Rekomendasi yang diberikan untuk kontrak karyawan ini."
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning_contract__notes
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning_formation__notes
+#: code:addons/ssi_hr_manpower_planning/reports/report_ssi_hr_manpower_planning_manpower_planning_summary_xlsx.py:0
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.manpower_planning_summary_content
+msgid "Notes"
+msgstr "Catatan"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_planning_contract__notes
+msgid "Free-form remarks about this contract review."
+msgstr "Catatan bebas tentang tinjauan kontrak ini."
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model,name:ssi_hr_manpower_planning.model_manpower_planning_formation
+msgid "Manpower Planning - Formation"
+msgstr "Perencanaan Tenaga Kerja - Formasi"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_planning_formation__planning_id
+msgid "Manpower planning document that owns this formation line."
+msgstr "Dokumen perencanaan tenaga kerja pemilik baris formasi ini."
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_planning_formation__job_id
+msgid "Job position this formation line is planned for."
+msgstr "Jabatan yang direncanakan pada baris formasi ini."
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_planning_formation__employee_id
+msgid ""
+"Employee who already fills this position. Leave empty when the "
+"position is vacant."
+msgstr ""
+"Karyawan yang sudah mengisi posisi ini. Kosongkan bila posisi masih "
+"kosong."
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning_formation__is_vacant
+#: code:addons/ssi_hr_manpower_planning/reports/report_ssi_hr_manpower_planning_manpower_planning_summary_xlsx.py:0
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.manpower_planning_summary_content
+msgid "Vacant"
+msgstr "Kosong"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_planning_formation__is_vacant
+msgid "Checked automatically when no employee fills this line."
+msgstr "Dicentang otomatis bila tidak ada karyawan yang mengisi baris ini."
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_planning_formation__quantity
+msgid ""
+"Number of people needed for this job position. It must be exactly 1 "
+"when an employee is selected."
+msgstr ""
+"Jumlah orang yang dibutuhkan untuk jabatan ini. Harus tepat 1 bila "
+"karyawan dipilih."
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_planning_formation__quantity_filled
+msgid ""
+"Number of people already filling this line: 1 when an employee is "
+"selected, otherwise 0."
+msgstr ""
+"Jumlah orang yang sudah mengisi baris ini: 1 bila karyawan dipilih, "
+"selain itu 0."
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_planning_formation__notes
+msgid "Free-form remarks about this formation line."
+msgstr "Catatan bebas tentang baris formasi ini."
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model,name:ssi_hr_manpower_planning.model_manpower_planning_summary
+#: model:ir.actions.report,name:ssi_hr_manpower_planning.action_report_manpower_planning_summary_html
+msgid "Manpower Planning Summary"
+msgstr "Ringkasan Perencanaan Tenaga Kerja"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_planning_summary__planning_id
+msgid "Manpower planning document the summary line belongs to."
+msgstr "Dokumen perencanaan tenaga kerja pemilik baris ringkasan ini."
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_planning_summary__job_id
+msgid "Job position the manpower is summarized for."
+msgstr "Jabatan yang tenaga kerjanya diringkas."
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning_summary__company_id
+#: model:res.groups,name:ssi_hr_manpower_planning.manpower_head_count_company_group
+#: model:res.groups,name:ssi_hr_manpower_planning.manpower_planning_company_group
+msgid "Company"
+msgstr "Perusahaan"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_planning_summary__company_id
+msgid "Company of the manpower planning."
+msgstr "Perusahaan pemilik perencanaan tenaga kerja."
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_planning_summary__department_id
+msgid "Department of the manpower planning."
+msgstr "Departemen pada perencanaan tenaga kerja."
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning_summary__user_id
+msgid "Responsible"
+msgstr "Penanggung Jawab"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_planning_summary__user_id
+msgid "User responsible for the manpower planning."
+msgstr "Pengguna yang bertanggung jawab atas perencanaan tenaga kerja."
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning_summary__date_start
+msgid "Date Start"
+msgstr "Tanggal Mulai"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_planning_summary__date_start
+msgid "Start date of the manpower planning period."
+msgstr "Tanggal mulai periode perencanaan tenaga kerja."
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning_summary__date_end
+msgid "Date End"
+msgstr "Tanggal Akhir"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_planning_summary__date_end
+msgid "End date of the manpower planning period."
+msgstr "Tanggal akhir periode perencanaan tenaga kerja."
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning_summary__state
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.manpower_planning_summary_view_search
+msgid "State"
+msgstr "Status"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields.selection,name:ssi_hr_manpower_planning.selection__manpower_planning_summary__state__draft
+msgid "Draft"
+msgstr "Draf"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields.selection,name:ssi_hr_manpower_planning.selection__manpower_planning_summary__state__confirm
+msgid "Waiting for Approval"
+msgstr "Menunggu Persetujuan"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields.selection,name:ssi_hr_manpower_planning.selection__manpower_planning_summary__state__reject
+msgid "Rejected"
+msgstr "Ditolak"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields.selection,name:ssi_hr_manpower_planning.selection__manpower_planning_summary__state__open
+msgid "On Progress"
+msgstr "Dalam Proses"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields.selection,name:ssi_hr_manpower_planning.selection__manpower_planning_summary__state__done
+msgid "Done"
+msgstr "Selesai"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields.selection,name:ssi_hr_manpower_planning.selection__manpower_planning_summary__state__cancel
+msgid "Cancelled"
+msgstr "Dibatalkan"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_planning_summary__state
+msgid "State of the manpower planning."
+msgstr "Status perencanaan tenaga kerja."
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_planning_summary__quantity_needed
+msgid "Total manpower needed for the job position."
+msgstr "Total tenaga kerja yang dibutuhkan untuk jabatan."
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_planning_summary__quantity_filled
+msgid "Total manpower already filled for the job position."
+msgstr "Total tenaga kerja yang sudah terisi untuk jabatan."
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_planning_summary__quantity_vacant
+msgid "Total manpower still vacant for the job position."
+msgstr "Total tenaga kerja yang masih kosong untuk jabatan."
+
+#. module: ssi_hr_manpower_planning
+#: code:addons/ssi_hr_manpower_planning/reports/report_ssi_hr_manpower_planning_manpower_planning_summary_xlsx.py:0
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.manpower_planning_summary_content
+msgid "Needed"
+msgstr "Dibutuhkan"
+
+#. module: ssi_hr_manpower_planning
+#: code:addons/ssi_hr_manpower_planning/reports/report_ssi_hr_manpower_planning_manpower_planning_summary_xlsx.py:0
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.manpower_planning_summary_content
+msgid "Filled"
+msgstr "Terisi"
+
+#. module: ssi_hr_manpower_planning
+#: code:addons/ssi_hr_manpower_planning/reports/report_ssi_hr_manpower_planning_manpower_planning_summary_xlsx.py:0
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.manpower_planning_summary_content
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.manpower_head_count_view_form
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.manpower_planning_view_form
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.manpower_planning_summary_view_tree
+msgid "Total"
+msgstr "Total"
+
+#. module: ssi_hr_manpower_planning
+#: code:addons/ssi_hr_manpower_planning/reports/report_ssi_hr_manpower_planning_manpower_planning_summary_xlsx.py:0
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.manpower_planning_summary_content
+msgid "Contract Start"
+msgstr "Mulai Kontrak"
+
+#. module: ssi_hr_manpower_planning
+#: code:addons/ssi_hr_manpower_planning/reports/report_ssi_hr_manpower_planning_manpower_planning_summary_xlsx.py:0
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.manpower_planning_summary_content
+msgid "Contract End"
+msgstr "Akhir Kontrak"
+
+#. module: ssi_hr_manpower_planning
+#: code:addons/ssi_hr_manpower_planning/reports/report_ssi_hr_manpower_planning_manpower_planning_summary_xlsx.py:0
+#, python-format
+msgid "MANPOWER PLANNING %s"
+msgstr "PERENCANAAN TENAGA KERJA %s"
+
+#. module: ssi_hr_manpower_planning
+#: code:addons/ssi_hr_manpower_planning/reports/report_ssi_hr_manpower_planning_manpower_planning_summary_xlsx.py:0
+#, python-format
+msgid "Department: %s"
+msgstr "Departemen: %s"
+
+#. module: ssi_hr_manpower_planning
+#: code:addons/ssi_hr_manpower_planning/reports/report_ssi_hr_manpower_planning_manpower_planning_summary_xlsx.py:0
+#, python-format
+msgid "Period: %s - %s"
+msgstr "Periode: %s - %s"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.actions.report,name:ssi_hr_manpower_planning.action_report_manpower_planning_summary_pdf
+msgid "Manpower Planning Summary PDF"
+msgstr "Ringkasan Perencanaan Tenaga Kerja PDF"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.actions.report,name:ssi_hr_manpower_planning.action_report_manpower_planning_summary_xlsx
+msgid "Manpower Planning Summary XLSX"
+msgstr "Ringkasan Perencanaan Tenaga Kerja XLSX"
+
+#. module: ssi_hr_manpower_planning
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.manpower_planning_summary_content
+msgid "Department:"
+msgstr "Departemen:"
+
+#. module: ssi_hr_manpower_planning
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.manpower_planning_summary_content
+msgid "Period:"
+msgstr "Periode:"
+
+#. module: ssi_hr_manpower_planning
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.manpower_planning_summary_content
+msgid "Manpower Summary"
+msgstr "Ringkasan Tenaga Kerja"
+
+#. module: ssi_hr_manpower_planning
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.manpower_planning_summary_content
+msgid "Contract Review"
+msgstr "Tinjauan Kontrak"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.module.category,name:ssi_hr_manpower_planning.manpower_head_count_module_category
+#: model:ir.module.category,name:ssi_hr_manpower_planning.manpower_head_count_data_ownership_module_category
+msgid "Manpower Head Count"
+msgstr "Jumlah Karyawan"
+
+#. module: ssi_hr_manpower_planning
+#: model:res.groups,name:ssi_hr_manpower_planning.manpower_head_count_viewer_group
+#: model:res.groups,name:ssi_hr_manpower_planning.manpower_planning_viewer_group
+msgid "Viewer"
+msgstr "Pelihat"
+
+#. module: ssi_hr_manpower_planning
+#: model:res.groups,name:ssi_hr_manpower_planning.manpower_head_count_user_group
+#: model:res.groups,name:ssi_hr_manpower_planning.manpower_planning_user_group
+msgid "User"
+msgstr "Pengguna"
+
+#. module: ssi_hr_manpower_planning
+#: model:res.groups,name:ssi_hr_manpower_planning.manpower_head_count_validator_group
+#: model:res.groups,name:ssi_hr_manpower_planning.manpower_planning_validator_group
+msgid "Validator"
+msgstr "Validator"
+
+#. module: ssi_hr_manpower_planning
+#: model:res.groups,name:ssi_hr_manpower_planning.manpower_head_count_company_child_group
+#: model:res.groups,name:ssi_hr_manpower_planning.manpower_planning_company_child_group
+msgid "Company and All Child Companies"
+msgstr "Perusahaan dan Semua Perusahaan Anak"
+
+#. module: ssi_hr_manpower_planning
+#: model:res.groups,name:ssi_hr_manpower_planning.manpower_head_count_all_group
+#: model:res.groups,name:ssi_hr_manpower_planning.manpower_planning_all_group
+msgid "All"
+msgstr "Semua"
+
+#. module: ssi_hr_manpower_planning
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.manpower_contract_recommendation_view_form
+msgid "Contract"
+msgstr "Kontrak"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.actions.act_window,name:ssi_hr_manpower_planning.manpower_contract_recommendation_action
+#: model:ir.ui.menu,name:ssi_hr_manpower_planning.manpower_contract_recommendation_menu
+msgid "Contract Recommendations"
+msgstr "Rekomendasi Kontrak"
+
+#. module: ssi_hr_manpower_planning
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.manpower_head_count_view_form
+msgid "Compute Lines"
+msgstr "Hitung Baris"
+
+#. module: ssi_hr_manpower_planning
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.manpower_head_count_view_form
+msgid "Head Counts"
+msgstr "Jumlah Karyawan"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.actions.act_window,name:ssi_hr_manpower_planning.manpower_head_count_action
+#: model:ir.ui.menu,name:ssi_hr_manpower_planning.manpower_head_count_menu
+msgid "Head Count Snapshots"
+msgstr "Rekam Jumlah Karyawan"
+
+#. module: ssi_hr_manpower_planning
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.manpower_planning_view_form
+msgid "Summary"
+msgstr "Ringkasan"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.actions.act_window,name:ssi_hr_manpower_planning.manpower_planning_action
+#: model:ir.ui.menu,name:ssi_hr_manpower_planning.manpower_planning_menu_item
+msgid "Manpower Plannings"
+msgstr "Perencanaan Tenaga Kerja"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.actions.act_window,name:ssi_hr_manpower_planning.manpower_fulfillment_action
+#: model:ir.ui.menu,name:ssi_hr_manpower_planning.manpower_fulfillment_menu
+msgid "Manpower Fulfillment"
+msgstr "Pemenuhan Tenaga Kerja"
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.actions.act_window,name:ssi_hr_manpower_planning.manpower_vacancy_action
+#: model:ir.ui.menu,name:ssi_hr_manpower_planning.manpower_vacancy_menu
+msgid "Manpower Vacancy"
+msgstr "Kekosongan Tenaga Kerja"

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 OpenSynergy Indonesia
+     Copyright 2026 PT. Simetri Sinergi Indonesia
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+<menuitem
+        id="manpower_planning_menu"
+        name="Manpower Planning"
+        parent="ssi_hr.menu_root_human_resource"
+        sequence="20"
+    />
+
+<menuitem
+        id="manpower_planning_configuration_menu"
+        name="Manpower Planning"
+        parent="ssi_hr.menu_human_resource_configuration"
+        sequence="20"
+    />
+</odoo>
