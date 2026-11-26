@@ -17,16 +17,6 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. module: ssi_hr_manpower_planning_recruitment
-#: model:ir.model,name:ssi_hr_manpower_planning_recruitment.model_create_recruitment_vacancy_from_manpower_planning
-msgid "Create Recruitment Vacancy from Manpower Planning"
-msgstr "Buat Lowongan Rekrutmen dari Perencanaan Tenaga Kerja"
-
-#. module: ssi_hr_manpower_planning_recruitment
-#: model:ir.model,name:ssi_hr_manpower_planning_recruitment.model_create_recruitment_vacancy_from_manpower_planning_line
-msgid "Create Recruitment Vacancy from Manpower Planning - Line"
-msgstr "Buat Lowongan Rekrutmen dari Perencanaan Tenaga Kerja - Baris"
-
-#. module: ssi_hr_manpower_planning_recruitment
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_recruitment.field_create_recruitment_vacancy_from_manpower_planning__planning_id
 msgid "# Manpower Planning"
 msgstr "# Perencanaan Tenaga Kerja"
@@ -37,25 +27,64 @@ msgid "# Wizard"
 msgstr "# Wizard"
 
 #. module: ssi_hr_manpower_planning_recruitment
-#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_recruitment.field_create_recruitment_vacancy_from_manpower_planning__date_start
 #: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning_recruitment.create_recruitment_vacancy_from_manpower_planning_view_form
+msgid "Cancel"
+msgstr "Batal"
+
+#. module: ssi_hr_manpower_planning_recruitment
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning_recruitment.manpower_planning_view_form
+msgid "Create Recruitment Vacancy"
+msgstr "Buat Lowongan Rekrutmen"
+
+#. module: ssi_hr_manpower_planning_recruitment
+#: model:ir.model,name:ssi_hr_manpower_planning_recruitment.model_create_recruitment_vacancy_from_manpower_planning
+msgid "Create Recruitment Vacancy from Manpower Planning"
+msgstr "Buat Lowongan Rekrutmen dari Perencanaan Tenaga Kerja"
+
+#. module: ssi_hr_manpower_planning_recruitment
+#: model:ir.model,name:ssi_hr_manpower_planning_recruitment.model_create_recruitment_vacancy_from_manpower_planning_line
+msgid "Create Recruitment Vacancy from Manpower Planning - Line"
+msgstr "Buat Lowongan Rekrutmen dari Perencanaan Tenaga Kerja - Baris"
+
+#. module: ssi_hr_manpower_planning_recruitment
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning_recruitment.create_recruitment_vacancy_from_manpower_planning_view_form
+msgid "Create Vacancies"
+msgstr "Buat Lowongan"
+
+#. module: ssi_hr_manpower_planning_recruitment
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_recruitment.field_create_recruitment_vacancy_from_manpower_planning__create_uid
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_recruitment.field_create_recruitment_vacancy_from_manpower_planning_line__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: ssi_hr_manpower_planning_recruitment
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_recruitment.field_create_recruitment_vacancy_from_manpower_planning__create_date
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_recruitment.field_create_recruitment_vacancy_from_manpower_planning_line__create_date
+#, fuzzy
+msgid "Created on"
+msgstr "Buat Lowongan"
+
+#. module: ssi_hr_manpower_planning_recruitment
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_recruitment.field_create_recruitment_vacancy_from_manpower_planning__date_start
 msgid "Date Start"
 msgstr "Tanggal Mulai"
 
 #. module: ssi_hr_manpower_planning_recruitment
-#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_recruitment.field_create_recruitment_vacancy_from_manpower_planning__line_ids
-msgid "Lines"
-msgstr "Baris"
+#: model:ir.model.fields,help:ssi_hr_manpower_planning_recruitment.field_create_recruitment_vacancy_from_manpower_planning_line__expected_join_date
+msgid ""
+"Date on which the new employees are expected to join. It must be on or after "
+"the start date of the wizard."
+msgstr ""
+"Tanggal karyawan baru diharapkan mulai bergabung. Harus pada atau setelah "
+"tanggal mulai wizard."
 
 #. module: ssi_hr_manpower_planning_recruitment
-#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_recruitment.field_create_recruitment_vacancy_from_manpower_planning_line__job_id
-msgid "Job Position"
-msgstr "Jabatan"
-
-#. module: ssi_hr_manpower_planning_recruitment
-#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_recruitment.field_create_recruitment_vacancy_from_manpower_planning_line__quantity
-msgid "Quantity"
-msgstr "Jumlah"
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_recruitment.field_create_recruitment_vacancy_from_manpower_planning__display_name
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_recruitment.field_create_recruitment_vacancy_from_manpower_planning_line__display_name
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_recruitment.field_manpower_planning__display_name
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_recruitment.field_recruitment_vacancy__display_name
+msgid "Display Name"
+msgstr ""
 
 #. module: ssi_hr_manpower_planning_recruitment
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_recruitment.field_create_recruitment_vacancy_from_manpower_planning_line__expected_join_date
@@ -63,15 +92,103 @@ msgid "Expected Join Date"
 msgstr "Tanggal Masuk yang Diharapkan"
 
 #. module: ssi_hr_manpower_planning_recruitment
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning_recruitment.recruitment_vacancy_view_search
+msgid "From Manpower Planning"
+msgstr "Dari Perencanaan Tenaga Kerja"
+
+#. module: ssi_hr_manpower_planning_recruitment
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_recruitment.field_create_recruitment_vacancy_from_manpower_planning__id
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_recruitment.field_create_recruitment_vacancy_from_manpower_planning_line__id
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_recruitment.field_manpower_planning__id
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_recruitment.field_recruitment_vacancy__id
+msgid "ID"
+msgstr ""
+
+#. module: ssi_hr_manpower_planning_recruitment
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_recruitment.field_create_recruitment_vacancy_from_manpower_planning_line__job_id
+msgid "Job Position"
+msgstr "Jabatan"
+
+#. module: ssi_hr_manpower_planning_recruitment
+#: model:ir.model.fields,help:ssi_hr_manpower_planning_recruitment.field_create_recruitment_vacancy_from_manpower_planning_line__job_id
+msgid "Job position the vacancy is requested for."
+msgstr "Jabatan yang diminta pada lowongan."
+
+#. module: ssi_hr_manpower_planning_recruitment
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_recruitment.field_create_recruitment_vacancy_from_manpower_planning____last_update
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_recruitment.field_create_recruitment_vacancy_from_manpower_planning_line____last_update
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_recruitment.field_manpower_planning____last_update
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_recruitment.field_recruitment_vacancy____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: ssi_hr_manpower_planning_recruitment
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_recruitment.field_create_recruitment_vacancy_from_manpower_planning__write_uid
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_recruitment.field_create_recruitment_vacancy_from_manpower_planning_line__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: ssi_hr_manpower_planning_recruitment
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_recruitment.field_create_recruitment_vacancy_from_manpower_planning__write_date
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_recruitment.field_create_recruitment_vacancy_from_manpower_planning_line__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: ssi_hr_manpower_planning_recruitment
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_recruitment.field_create_recruitment_vacancy_from_manpower_planning__line_ids
+msgid "Lines"
+msgstr "Baris"
+
+#. module: ssi_hr_manpower_planning_recruitment
+#: model:ir.model,name:ssi_hr_manpower_planning_recruitment.model_manpower_planning
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_recruitment.field_recruitment_vacancy__manpower_planning_id
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning_recruitment.recruitment_vacancy_view_search
+msgid "Manpower Planning"
+msgstr "Perencanaan Tenaga Kerja"
+
+#. module: ssi_hr_manpower_planning_recruitment
+#: model:ir.model.fields,help:ssi_hr_manpower_planning_recruitment.field_create_recruitment_vacancy_from_manpower_planning__planning_id
+msgid "Manpower planning the vacancies are requested from."
+msgstr "Perencanaan tenaga kerja yang menjadi dasar permintaan lowongan."
+
+#. module: ssi_hr_manpower_planning_recruitment
+#: model:ir.model.fields,help:ssi_hr_manpower_planning_recruitment.field_recruitment_vacancy__manpower_planning_id
+msgid ""
+"Manpower planning this vacancy was requested from. Optional and filled when "
+"the vacancy is created from a manpower planning."
+msgstr ""
+"Perencanaan tenaga kerja asal permintaan lowongan ini. Opsional dan terisi "
+"saat lowongan dibuat dari perencanaan tenaga kerja."
+
+#. module: ssi_hr_manpower_planning_recruitment
+#: model:ir.model.fields,help:ssi_hr_manpower_planning_recruitment.field_create_recruitment_vacancy_from_manpower_planning_line__quantity
+msgid "Number of new employees to recruit. It must be at least 1."
+msgstr "Jumlah karyawan baru yang direkrut. Minimal 1."
+
+#. module: ssi_hr_manpower_planning_recruitment
+#: model:ir.model.fields,help:ssi_hr_manpower_planning_recruitment.field_manpower_planning__recruitment_vacancy_count
+msgid "Number of recruitment vacancies requested from this planning."
+msgstr "Jumlah lowongan rekrutmen yang diminta dari perencanaan ini."
+
+#. module: ssi_hr_manpower_planning_recruitment
+#: model:ir.model.fields,help:ssi_hr_manpower_planning_recruitment.field_create_recruitment_vacancy_from_manpower_planning__line_ids
+msgid "One line per recruitment vacancy to create."
+msgstr "Satu baris untuk setiap lowongan rekrutmen yang dibuat."
+
+#. module: ssi_hr_manpower_planning_recruitment
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_recruitment.field_create_recruitment_vacancy_from_manpower_planning_line__quantity
+msgid "Quantity"
+msgstr "Jumlah"
+
+#. module: ssi_hr_manpower_planning_recruitment
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_recruitment.field_create_recruitment_vacancy_from_manpower_planning_line__reason
 msgid "Reason"
 msgstr "Alasan"
 
 #. module: ssi_hr_manpower_planning_recruitment
-#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_recruitment.field_recruitment_vacancy__manpower_planning_id
-#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning_recruitment.recruitment_vacancy_view_search
-msgid "Manpower Planning"
-msgstr "Perencanaan Tenaga Kerja"
+#: model:ir.model.fields,help:ssi_hr_manpower_planning_recruitment.field_create_recruitment_vacancy_from_manpower_planning_line__reason
+msgid "Reason why this vacancy is needed."
+msgstr "Alasan lowongan ini dibutuhkan."
 
 #. module: ssi_hr_manpower_planning_recruitment
 #: model:ir.actions.act_window,name:ssi_hr_manpower_planning_recruitment.manpower_planning_open_recruitment_vacancy_action
@@ -85,9 +202,18 @@ msgid "Recruitment Vacancy Count"
 msgstr "Jumlah Lowongan Rekrutmen"
 
 #. module: ssi_hr_manpower_planning_recruitment
-#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning_recruitment.manpower_planning_view_form
-msgid "Create Recruitment Vacancy"
-msgstr "Buat Lowongan Rekrutmen"
+#: model:ir.model.fields,help:ssi_hr_manpower_planning_recruitment.field_manpower_planning__recruitment_vacancy_ids
+msgid "Recruitment vacancies requested from this manpower planning."
+msgstr "Lowongan rekrutmen yang diminta dari perencanaan tenaga kerja ini."
+
+#. module: ssi_hr_manpower_planning_recruitment
+#: model:ir.model.fields,help:ssi_hr_manpower_planning_recruitment.field_create_recruitment_vacancy_from_manpower_planning__date_start
+msgid ""
+"Start date of the created vacancies. Every expected join date must be on or "
+"after it."
+msgstr ""
+"Tanggal mulai lowongan yang dibuat. Setiap tanggal masuk yang diharapkan "
+"harus pada atau setelah tanggal ini."
 
 #. module: ssi_hr_manpower_planning_recruitment
 #: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning_recruitment.manpower_planning_view_form
@@ -95,83 +221,12 @@ msgid "Vacancies"
 msgstr "Lowongan"
 
 #. module: ssi_hr_manpower_planning_recruitment
-#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning_recruitment.create_recruitment_vacancy_from_manpower_planning_view_form
-msgid "Create Vacancies"
-msgstr "Buat Lowongan"
-
-#. module: ssi_hr_manpower_planning_recruitment
-#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning_recruitment.create_recruitment_vacancy_from_manpower_planning_view_form
-msgid "Cancel"
-msgstr "Batal"
-
-#. module: ssi_hr_manpower_planning_recruitment
-#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning_recruitment.recruitment_vacancy_view_search
-msgid "From Manpower Planning"
-msgstr "Dari Perencanaan Tenaga Kerja"
-
-#. module: ssi_hr_manpower_planning_recruitment
-#: model:ir.model.fields,help:ssi_hr_manpower_planning_recruitment.field_create_recruitment_vacancy_from_manpower_planning__planning_id
-msgid "Manpower planning the vacancies are requested from."
-msgstr "Perencanaan tenaga kerja yang menjadi dasar permintaan lowongan."
-
-#. module: ssi_hr_manpower_planning_recruitment
-#: model:ir.model.fields,help:ssi_hr_manpower_planning_recruitment.field_create_recruitment_vacancy_from_manpower_planning__date_start
-msgid ""
-"Start date of the created vacancies. Every expected join date must be on "
-"or after it."
-msgstr ""
-"Tanggal mulai lowongan yang dibuat. Setiap tanggal masuk yang diharapkan "
-"harus pada atau setelah tanggal ini."
-
-#. module: ssi_hr_manpower_planning_recruitment
-#: model:ir.model.fields,help:ssi_hr_manpower_planning_recruitment.field_create_recruitment_vacancy_from_manpower_planning__line_ids
-msgid "One line per recruitment vacancy to create."
-msgstr "Satu baris untuk setiap lowongan rekrutmen yang dibuat."
+#: model:ir.model,name:ssi_hr_manpower_planning_recruitment.model_recruitment_vacancy
+#, fuzzy
+msgid "Vacancy"
+msgstr "Lowongan"
 
 #. module: ssi_hr_manpower_planning_recruitment
 #: model:ir.model.fields,help:ssi_hr_manpower_planning_recruitment.field_create_recruitment_vacancy_from_manpower_planning_line__wizard_id
 msgid "Vacancy request wizard that owns this line."
 msgstr "Wizard permintaan lowongan yang memiliki baris ini."
-
-#. module: ssi_hr_manpower_planning_recruitment
-#: model:ir.model.fields,help:ssi_hr_manpower_planning_recruitment.field_create_recruitment_vacancy_from_manpower_planning_line__job_id
-msgid "Job position the vacancy is requested for."
-msgstr "Jabatan yang diminta pada lowongan."
-
-#. module: ssi_hr_manpower_planning_recruitment
-#: model:ir.model.fields,help:ssi_hr_manpower_planning_recruitment.field_create_recruitment_vacancy_from_manpower_planning_line__quantity
-msgid "Number of new employees to recruit. It must be at least 1."
-msgstr "Jumlah karyawan baru yang direkrut. Minimal 1."
-
-#. module: ssi_hr_manpower_planning_recruitment
-#: model:ir.model.fields,help:ssi_hr_manpower_planning_recruitment.field_create_recruitment_vacancy_from_manpower_planning_line__expected_join_date
-msgid ""
-"Date on which the new employees are expected to join. It must be on or "
-"after the start date of the wizard."
-msgstr ""
-"Tanggal karyawan baru diharapkan mulai bergabung. Harus pada atau setelah "
-"tanggal mulai wizard."
-
-#. module: ssi_hr_manpower_planning_recruitment
-#: model:ir.model.fields,help:ssi_hr_manpower_planning_recruitment.field_create_recruitment_vacancy_from_manpower_planning_line__reason
-msgid "Reason why this vacancy is needed."
-msgstr "Alasan lowongan ini dibutuhkan."
-
-#. module: ssi_hr_manpower_planning_recruitment
-#: model:ir.model.fields,help:ssi_hr_manpower_planning_recruitment.field_recruitment_vacancy__manpower_planning_id
-msgid ""
-"Manpower planning this vacancy was requested from. Optional and filled "
-"when the vacancy is created from a manpower planning."
-msgstr ""
-"Perencanaan tenaga kerja asal permintaan lowongan ini. Opsional dan terisi"
-" saat lowongan dibuat dari perencanaan tenaga kerja."
-
-#. module: ssi_hr_manpower_planning_recruitment
-#: model:ir.model.fields,help:ssi_hr_manpower_planning_recruitment.field_manpower_planning__recruitment_vacancy_ids
-msgid "Recruitment vacancies requested from this manpower planning."
-msgstr "Lowongan rekrutmen yang diminta dari perencanaan tenaga kerja ini."
-
-#. module: ssi_hr_manpower_planning_recruitment
-#: model:ir.model.fields,help:ssi_hr_manpower_planning_recruitment.field_manpower_planning__recruitment_vacancy_count
-msgid "Number of recruitment vacancies requested from this planning."
-msgstr "Jumlah lowongan rekrutmen yang diminta dari perencanaan ini."
