@@ -17,74 +17,6 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. module: ssi_hr_manpower_planning_school
-#: code:addons/ssi_hr_manpower_planning_school/models/manpower_planning_teaching.py:0
-#, python-format
-msgid ""
-"\n"
-"Context: Create or update a teaching assignment plan line\n"
-"Database ID: %s\n"
-"Problem: A class is already used by another line of the same subject in\n"
-"this planning\n"
-"Solution: Remove the class from this line or from the other line\n"
-msgstr ""
-"\n"
-"Konteks: Membuat atau memperbarui baris rencana penugasan mengajar\n"
-"ID Basis Data: %s\n"
-"Masalah: Sebuah kelas sudah dipakai oleh baris lain dari mata pelajaran yang sama\n"
-"dalam perencanaan ini\n"
-"Solusi: Hapus kelas dari baris ini atau dari baris yang lain\n"
-
-#. module: ssi_hr_manpower_planning_school
-#: code:addons/ssi_hr_manpower_planning_school/models/manpower_planning_teaching.py:0
-#, python-format
-msgid ""
-"\n"
-"Context: Create or update a teaching assignment plan line\n"
-"Database ID: %s\n"
-"Problem: The co-teacher is the same employee as the teacher\n"
-"Solution: Select another co-teacher or leave the co-teacher empty\n"
-msgstr ""
-"\n"
-"Konteks: Membuat atau memperbarui baris rencana penugasan mengajar\n"
-"ID Basis Data: %s\n"
-"Masalah: Guru pendamping adalah pegawai yang sama dengan guru\n"
-"Solusi: Pilih guru pendamping lain atau kosongkan guru pendamping\n"
-
-#. module: ssi_hr_manpower_planning_school
-#: code:addons/ssi_hr_manpower_planning_school/models/manpower_planning_teaching.py:0
-#, python-format
-msgid ""
-"\n"
-"Context: Create or update a teaching assignment plan line\n"
-"Database ID: %s\n"
-"Problem: The subject is not applicable to the selected grade\n"
-"Solution: Select a subject taught on the grade, or add the grade to the\n"
-"applicable grades of the subject\n"
-msgstr ""
-"\n"
-"Konteks: Membuat atau memperbarui baris rencana penugasan mengajar\n"
-"ID Basis Data: %s\n"
-"Masalah: Mata pelajaran tidak berlaku untuk tingkat yang dipilih\n"
-"Solusi: Pilih mata pelajaran yang diajarkan di tingkat tersebut, atau tambahkan tingkat\n"
-"ke tingkat yang berlaku pada mata pelajaran\n"
-
-#. module: ssi_hr_manpower_planning_school
-#: code:addons/ssi_hr_manpower_planning_school/models/manpower_planning_teaching.py:0
-#, python-format
-msgid ""
-"\n"
-"Context: Create or update a teaching assignment plan line\n"
-"Database ID: %s\n"
-"Problem: Weekly hours per class must be at least 1\n"
-"Solution: Set the weekly hours per class to 1 or more\n"
-msgstr ""
-"\n"
-"Konteks: Membuat atau memperbarui baris rencana penugasan mengajar\n"
-"ID Basis Data: %s\n"
-"Masalah: Jam per minggu per kelas minimal 1\n"
-"Solusi: Atur jam per minggu per kelas menjadi 1 atau lebih\n"
-
-#. module: ssi_hr_manpower_planning_school
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_assignment__planning_id
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_teaching__planning_id
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_workload__planning_id
@@ -92,7 +24,6 @@ msgid "# Manpower Planning"
 msgstr "# Perencanaan Tenaga Kerja"
 
 #. module: ssi_hr_manpower_planning_school
-#: model:ir.model.fields.selection,name:ssi_hr_manpower_planning_school.selection__manpower_planning_assignment__category__binpres_academic
 #: model:ir.model.fields.selection,name:ssi_hr_manpower_planning_school.selection__manpower_planning_assignment_type__category__binpres_academic
 msgid "Academic Achievement Coaching"
 msgstr "Pembinaan Prestasi Akademik"
@@ -106,9 +37,11 @@ msgstr "Tahun Ajaran"
 #. module: ssi_hr_manpower_planning_school
 #: model:ir.model.fields,help:ssi_hr_manpower_planning_school.field_manpower_planning__academic_year_id
 msgid ""
-"Academic year this manpower planning is made for. Selecting it fills the planning period."
+"Academic year this manpower planning is made for. Selecting it fills the "
+"planning period."
 msgstr ""
-"Tahun ajaran tempat perencanaan tenaga kerja ini dibuat. Memilihnya akan mengisi periode perencanaan."
+"Tahun ajaran tempat perencanaan tenaga kerja ini dibuat. Memilihnya akan "
+"mengisi periode perencanaan."
 
 #. module: ssi_hr_manpower_planning_school
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_assignment_type__message_needaction
@@ -158,7 +91,6 @@ msgid "Additional Assignments"
 msgstr "Penugasan Tambahan"
 
 #. module: ssi_hr_manpower_planning_school
-#: model:ir.model.fields.selection,name:ssi_hr_manpower_planning_school.selection__manpower_planning_assignment__category__additional
 #: model:ir.model.fields.selection,name:ssi_hr_manpower_planning_school.selection__manpower_planning_assignment_type__category__additional
 msgid "Additional Duty"
 msgstr "Tugas Tambahan"
@@ -239,9 +171,11 @@ msgstr "Kelas"
 #. module: ssi_hr_manpower_planning_school
 #: model:ir.model.fields,help:ssi_hr_manpower_planning_school.field_manpower_planning_teaching__grade_class_ids
 msgid ""
-"Classes of the grade that are taught. A class can be used by only one line of the same subject in a planning."
+"Classes of the grade that are taught. A class can be used by only one line "
+"of the same subject in a planning."
 msgstr ""
-"Kelas pada tingkat tersebut yang diajar. Satu kelas hanya dapat dipakai oleh satu baris dari mata pelajaran yang sama dalam satu perencanaan."
+"Kelas pada tingkat tersebut yang diajar. Satu kelas hanya dapat dipakai oleh "
+"satu baris dari mata pelajaran yang sama dalam satu perencanaan."
 
 #. module: ssi_hr_manpower_planning_school
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_teaching__co_employee_id
@@ -328,6 +262,7 @@ msgid "Description"
 msgstr "Deskripsi"
 
 #. module: ssi_hr_manpower_planning_school
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning__display_name
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_assignment__display_name
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_assignment_type__display_name
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_curriculum__display_name
@@ -361,13 +296,13 @@ msgstr "Pegawai yang beban kerjanya direkap."
 #. module: ssi_hr_manpower_planning_school
 #: model:ir.model.fields,help:ssi_hr_manpower_planning_school.field_manpower_planning_teaching__co_employee_id
 msgid ""
-"Employee who assists the teacher. It must be a different employee than the teacher."
+"Employee who assists the teacher. It must be a different employee than the "
+"teacher."
 msgstr "Pegawai yang mendampingi guru. Harus pegawai yang berbeda dari guru."
 
 #. module: ssi_hr_manpower_planning_school
 #: model:ir.model.fields,help:ssi_hr_manpower_planning_school.field_manpower_planning_assignment__employee_id
-msgid ""
-"Employee who holds the assignment. Leave empty when the line is vacant."
+msgid "Employee who holds the assignment. Leave empty when the line is vacant."
 msgstr "Pegawai yang memegang penugasan. Kosongkan bila baris ini lowong."
 
 #. module: ssi_hr_manpower_planning_school
@@ -376,7 +311,6 @@ msgid "Employee who teaches. Leave empty when the line is vacant."
 msgstr "Pegawai yang mengajar. Kosongkan bila baris ini lowong."
 
 #. module: ssi_hr_manpower_planning_school
-#: model:ir.model.fields.selection,name:ssi_hr_manpower_planning_school.selection__manpower_planning_assignment__category__extracurricular
 #: model:ir.model.fields.selection,name:ssi_hr_manpower_planning_school.selection__manpower_planning_assignment_type__category__extracurricular
 msgid "Extracurricular Coach"
 msgstr "Pelatih Ekstrakurikuler"
@@ -454,9 +388,11 @@ msgstr "Jam"
 #. module: ssi_hr_manpower_planning_school
 #: model:ir.model.fields,help:ssi_hr_manpower_planning_school.field_manpower_planning_assignment_type__default_hours
 msgid ""
-"Hours copied to a new assignment line of this type. The line hours can still be changed."
+"Hours copied to a new assignment line of this type. The line hours can still "
+"be changed."
 msgstr ""
-"Jam yang disalin ke baris penugasan baru jenis ini. Jam pada baris masih dapat diubah."
+"Jam yang disalin ke baris penugasan baru jenis ini. Jam pada baris masih "
+"dapat diubah."
 
 #. module: ssi_hr_manpower_planning_school
 #: model:ir.model.fields,help:ssi_hr_manpower_planning_school.field_manpower_planning_workload__assignment_daily_hours
@@ -471,11 +407,14 @@ msgstr "Jam penugasan tambahan yang dihitung per minggu."
 #. module: ssi_hr_manpower_planning_school
 #: model:ir.model.fields,help:ssi_hr_manpower_planning_school.field_manpower_planning_assignment__hours
 msgid ""
-"Hours of the assignment, counted per week or per day following the hour basis. Filled with the default hours of the type and can be changed."
+"Hours of the assignment, counted per week or per day following the hour "
+"basis. Filled with the default hours of the type and can be changed."
 msgstr ""
-"Jam penugasan, dihitung per minggu atau per hari mengikuti dasar jam. Diisi dengan jam bawaan jenisnya dan dapat diubah."
+"Jam penugasan, dihitung per minggu atau per hari mengikuti dasar jam. Diisi "
+"dengan jam bawaan jenisnya dan dapat diubah."
 
 #. module: ssi_hr_manpower_planning_school
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning__id
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_assignment__id
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_assignment_type__id
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_curriculum__id
@@ -529,11 +468,14 @@ msgstr "Posisi jabatan yang biasanya diberi jenis penugasan ini. Opsional."
 #. module: ssi_hr_manpower_planning_school
 #: model:ir.model.fields,help:ssi_hr_manpower_planning_school.field_manpower_planning_assignment_type__category
 msgid ""
-"Kind of assignment this type stands for. It decides how the assignment line is grouped and which fields it shows."
+"Kind of assignment this type stands for. It decides how the assignment line "
+"is grouped and which fields it shows."
 msgstr ""
-"Jenis penugasan yang diwakili tipe ini. Menentukan pengelompokan baris penugasan dan field yang ditampilkan."
+"Jenis penugasan yang diwakili tipe ini. Menentukan pengelompokan baris "
+"penugasan dan field yang ditampilkan."
 
 #. module: ssi_hr_manpower_planning_school
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning____last_update
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_assignment____last_update
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_assignment_type____last_update
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_curriculum____last_update
@@ -575,6 +517,7 @@ msgid "Main Attachment"
 msgstr "Lampiran Utama"
 
 #. module: ssi_hr_manpower_planning_school
+#: model:ir.model,name:ssi_hr_manpower_planning_school.model_manpower_planning
 #: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning_school.manpower_planning_workload_view_search
 msgid "Manpower Planning"
 msgstr "Perencanaan Tenaga Kerja"
@@ -684,13 +627,11 @@ msgid "Next Activity Type"
 msgstr "Jenis Aktivitas Berikutnya"
 
 #. module: ssi_hr_manpower_planning_school
-#: model:ir.model.fields.selection,name:ssi_hr_manpower_planning_school.selection__manpower_planning_assignment__category__binpres_non_academic
 #: model:ir.model.fields.selection,name:ssi_hr_manpower_planning_school.selection__manpower_planning_assignment_type__category__binpres_non_academic
 msgid "Non-Academic Achievement Coaching"
 msgstr "Pembinaan Prestasi Non-Akademik"
 
 #. module: ssi_hr_manpower_planning_school
-#: model:ir.model.fields.selection,name:ssi_hr_manpower_planning_school.selection__manpower_planning_assignment__category__non_teacher
 #: model:ir.model.fields.selection,name:ssi_hr_manpower_planning_school.selection__manpower_planning_assignment_type__category__non_teacher
 msgid "Non-Teacher"
 msgstr "Non-Guru"
@@ -764,13 +705,11 @@ msgid "On Progress"
 msgstr "Dalam Proses"
 
 #. module: ssi_hr_manpower_planning_school
-#: model:ir.model.fields.selection,name:ssi_hr_manpower_planning_school.selection__manpower_planning_assignment__hour_basis__day
 #: model:ir.model.fields.selection,name:ssi_hr_manpower_planning_school.selection__manpower_planning_assignment_type__hour_basis__day
 msgid "Per Day"
 msgstr "Per Hari"
 
 #. module: ssi_hr_manpower_planning_school
-#: model:ir.model.fields.selection,name:ssi_hr_manpower_planning_school.selection__manpower_planning_assignment__hour_basis__week
 #: model:ir.model.fields.selection,name:ssi_hr_manpower_planning_school.selection__manpower_planning_assignment_type__hour_basis__week
 msgid "Per Week"
 msgstr "Per Minggu"
@@ -778,12 +717,13 @@ msgstr "Per Minggu"
 #. module: ssi_hr_manpower_planning_school
 #: model:ir.model.fields,help:ssi_hr_manpower_planning_school.field_manpower_planning_assignment_type__hour_basis
 msgid ""
-"Period the hours of an assignment line of this type are counted in: per week or per day (for example a picket duty)."
+"Period the hours of an assignment line of this type are counted in: per week "
+"or per day (for example a picket duty)."
 msgstr ""
-"Periode penghitungan jam baris penugasan jenis ini: per minggu atau per hari (misalnya tugas piket)."
+"Periode penghitungan jam baris penugasan jenis ini: per minggu atau per hari "
+"(misalnya tugas piket)."
 
 #. module: ssi_hr_manpower_planning_school
-#: model:ir.model.fields.selection,name:ssi_hr_manpower_planning_school.selection__manpower_planning_assignment__category__picket
 #: model:ir.model.fields.selection,name:ssi_hr_manpower_planning_school.selection__manpower_planning_assignment_type__category__picket
 msgid "Picket"
 msgstr "Piket"
@@ -812,9 +752,11 @@ msgstr "Pengguna Penanggung Jawab"
 #. module: ssi_hr_manpower_planning_school
 #: model:ir.model.fields,help:ssi_hr_manpower_planning_school.field_manpower_planning_assignment__position
 msgid ""
-"Role in the activity. Used by the coaching and extracurricular categories only."
+"Role in the activity. Used by the coaching and extracurricular categories "
+"only."
 msgstr ""
-"Peran dalam kegiatan. Hanya dipakai oleh kategori pembinaan dan ekstrakurikuler."
+"Peran dalam kegiatan. Hanya dipakai oleh kategori pembinaan dan "
+"ekstrakurikuler."
 
 #. module: ssi_hr_manpower_planning_school
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning__school_id
@@ -868,7 +810,6 @@ msgid ""
 msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
-#: model:ir.model.fields.selection,name:ssi_hr_manpower_planning_school.selection__manpower_planning_assignment__category__structural
 #: model:ir.model.fields.selection,name:ssi_hr_manpower_planning_school.selection__manpower_planning_assignment_type__category__structural
 msgid "Structural"
 msgstr "Struktural"
@@ -876,9 +817,11 @@ msgstr "Struktural"
 #. module: ssi_hr_manpower_planning_school
 #: model:ir.model.fields,help:ssi_hr_manpower_planning_school.field_manpower_planning__assignment_ids
 msgid ""
-"Structural, additional duty, non-teacher, picket, coaching and extracurricular coach assignments."
+"Structural, additional duty, non-teacher, picket, coaching and "
+"extracurricular coach assignments."
 msgstr ""
-"Penugasan struktural, tugas tambahan, non-guru, piket, pembinaan, dan pelatih ekstrakurikuler."
+"Penugasan struktural, tugas tambahan, non-guru, piket, pembinaan, dan "
+"pelatih ekstrakurikuler."
 
 #. module: ssi_hr_manpower_planning_school
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_teaching__subject_id
@@ -950,7 +893,8 @@ msgstr "Total Jam per Minggu"
 #. module: ssi_hr_manpower_planning_school
 #: model:ir.model.fields,help:ssi_hr_manpower_planning_school.field_manpower_planning_assignment__type_id
 msgid ""
-"Type of the assignment. It gives the category, the hour basis and the default hours."
+"Type of the assignment. It gives the category, the hour basis and the "
+"default hours."
 msgstr "Jenis penugasan. Menentukan kategori, dasar jam, dan jam bawaan."
 
 #. module: ssi_hr_manpower_planning_school
@@ -1023,3 +967,61 @@ msgstr "Beban Kerja"
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning__workload_ids
 msgid "Workloads"
 msgstr "Beban Kerja"
+
+#~ msgid ""
+#~ "\n"
+#~ "Context: Create or update a teaching assignment plan line\n"
+#~ "Database ID: %s\n"
+#~ "Problem: A class is already used by another line of the same subject in\n"
+#~ "this planning\n"
+#~ "Solution: Remove the class from this line or from the other line\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Konteks: Membuat atau memperbarui baris rencana penugasan mengajar\n"
+#~ "ID Basis Data: %s\n"
+#~ "Masalah: Sebuah kelas sudah dipakai oleh baris lain dari mata pelajaran "
+#~ "yang sama\n"
+#~ "dalam perencanaan ini\n"
+#~ "Solusi: Hapus kelas dari baris ini atau dari baris yang lain\n"
+
+#~ msgid ""
+#~ "\n"
+#~ "Context: Create or update a teaching assignment plan line\n"
+#~ "Database ID: %s\n"
+#~ "Problem: The co-teacher is the same employee as the teacher\n"
+#~ "Solution: Select another co-teacher or leave the co-teacher empty\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Konteks: Membuat atau memperbarui baris rencana penugasan mengajar\n"
+#~ "ID Basis Data: %s\n"
+#~ "Masalah: Guru pendamping adalah pegawai yang sama dengan guru\n"
+#~ "Solusi: Pilih guru pendamping lain atau kosongkan guru pendamping\n"
+
+#~ msgid ""
+#~ "\n"
+#~ "Context: Create or update a teaching assignment plan line\n"
+#~ "Database ID: %s\n"
+#~ "Problem: The subject is not applicable to the selected grade\n"
+#~ "Solution: Select a subject taught on the grade, or add the grade to the\n"
+#~ "applicable grades of the subject\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Konteks: Membuat atau memperbarui baris rencana penugasan mengajar\n"
+#~ "ID Basis Data: %s\n"
+#~ "Masalah: Mata pelajaran tidak berlaku untuk tingkat yang dipilih\n"
+#~ "Solusi: Pilih mata pelajaran yang diajarkan di tingkat tersebut, atau "
+#~ "tambahkan tingkat\n"
+#~ "ke tingkat yang berlaku pada mata pelajaran\n"
+
+#~ msgid ""
+#~ "\n"
+#~ "Context: Create or update a teaching assignment plan line\n"
+#~ "Database ID: %s\n"
+#~ "Problem: Weekly hours per class must be at least 1\n"
+#~ "Solution: Set the weekly hours per class to 1 or more\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Konteks: Membuat atau memperbarui baris rencana penugasan mengajar\n"
+#~ "ID Basis Data: %s\n"
+#~ "Masalah: Jam per minggu per kelas minimal 1\n"
+#~ "Solusi: Atur jam per minggu per kelas menjadi 1 atau lebih\n"
