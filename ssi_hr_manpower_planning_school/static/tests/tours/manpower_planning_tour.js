@@ -282,8 +282,12 @@ odoo.define("ssi_hr_manpower_planning_school.manpower_planning_tour", function (
                 },
                 {
                     content: "The Curriculum is filled from the School",
+                    // The m2o shows the document number of the curriculum
+                    // (name_get of the transaction mixin), not its title, and
+                    // the sequence is not rolled back between tests. So the
+                    // gate is "filled and pointing at a school curriculum".
                     trigger:
-                        ".o_field_widget[name='curriculum_id']:contains(Tour MPPS Curriculum)",
+                        ".o_field_widget[name='curriculum_id'][href*='model=school_curriculum']:not(.o_field_empty)",
                     run: function () {
                         // Assertion only.
                     },
