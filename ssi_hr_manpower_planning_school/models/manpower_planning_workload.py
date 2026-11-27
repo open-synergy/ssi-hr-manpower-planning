@@ -11,9 +11,11 @@ class ManpowerPlanningWorkload(models.Model):
     every school manpower planning: the teaching hours, the number of
     co-teaching lines, the additional assignment hours per week and per
     day, the picket hours per week, the total weekly hours, and for
-    employees who teach the mandatory, lacking and excess hours. Lines
-    without an employee are left out. It feeds the workload tab of the
-    planning form and the workload analysis.
+    employees who teach the mandatory, lacking and excess hours. The
+    lines without an employee are gathered in one row per planning
+    that has no employee; it is never judged on mandatory hours. It
+    feeds the workload tab of the planning form and the workload
+    analysis.
     """
 
     _name = "manpower_planning_workload"
@@ -23,7 +25,13 @@ class ManpowerPlanningWorkload(models.Model):
     _rec_name = "employee_id"
     # Models the view reads from, flushed before the view is searched.
     _depends = {
-        "manpower_planning": ["company_id", "user_id", "school_id", "state"],
+        "manpower_planning": [
+            "company_id",
+            "user_id",
+            "school_id",
+            "academic_year_id",
+            "state",
+        ],
         "manpower_planning_teaching": [
             "planning_id",
             "employee_id",
@@ -54,7 +62,8 @@ class ManpowerPlanningWorkload(models.Model):
         string="Employee",
         comodel_name="hr.employee",
         readonly=True,
-        help="Employee the workload is recapped for.",
+        help="Employee the workload is recapped for. Empty on the row "
+        "that gathers the vacant lines of the planning.",
     )
     company_id = fields.Many2one(
         string="Company",
@@ -67,6 +76,12 @@ class ManpowerPlanningWorkload(models.Model):
         comodel_name="school",
         readonly=True,
         help="School of the manpower planning.",
+    )
+    academic_year_id = fields.Many2one(
+        string="Academic Year",
+        comodel_name="school_academic_year",
+        readonly=True,
+        help="Academic year of the manpower planning.",
     )
     user_id = fields.Many2one(
         string="Responsible",
@@ -181,6 +196,7 @@ class ManpowerPlanningWorkload(models.Model):
             w.employee_id AS employee_id,
             p.company_id AS company_id,
             p.school_id AS school_id,
+            p.academic_year_id AS academic_year_id,
             p.user_id AS user_id,
             p.state AS state,
             SUM(w.teaching_hours) AS teaching_hours,
@@ -254,7 +270,10 @@ class ManpowerPlanningWorkload(models.Model):
 
         The inner query unions the teaching lines (as teacher and as
         co-teacher) and the assignment lines, one row per line and
-        employee, so the outer query only has to sum them.
+        employee, so the outer query only has to sum them. A teaching
+        or assignment line without an employee is kept with an empty
+        employee; a teaching line without a teacher does not make an
+        employee a teacher. A line without a co-teacher adds no row.
 
         :return: SQL fragment joining the union to its planning
         """
@@ -266,12 +285,12 @@ class ManpowerPlanningWorkload(models.Model):
                 COALESCE(t.total_weekly_hours, 0) AS teaching_hours,
                 0 AS co_teaching_count,
                 0 AS co_teaching_base_hours,
-                1 AS teaching_line_count,
+                CASE WHEN t.employee_id IS NULL THEN 0 ELSE 1 END
+                    AS teaching_line_count,
                 0 AS assignment_weekly_hours,
                 0 AS assignment_daily_hours,
                 0 AS picket_daily_hours
             FROM manpower_planning_teaching t
-            WHERE t.employee_id IS NOT NULL
             UNION ALL
             SELECT
                 t.planning_id AS planning_id,
@@ -303,7 +322,6 @@ class ManpowerPlanningWorkload(models.Model):
                     THEN COALESCE(a.hours, 0) ELSE 0
                 END AS picket_daily_hours
             FROM manpower_planning_assignment a
-            WHERE a.employee_id IS NOT NULL
         ) w
         JOIN manpower_planning p ON p.id = w.planning_id
         LEFT JOIN school s ON s.id = p.school_id
@@ -322,6 +340,7 @@ class ManpowerPlanningWorkload(models.Model):
             w.employee_id,
             p.company_id,
             p.school_id,
+            p.academic_year_id,
             p.user_id,
             p.state,
             s.manpower_picket_weekly_hours_per_day,
