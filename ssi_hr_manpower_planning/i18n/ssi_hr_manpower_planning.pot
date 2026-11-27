@@ -32,6 +32,13 @@ msgid "# Manpower Planning"
 msgstr ""
 
 #. module: ssi_hr_manpower_planning
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.res_config_settings_view_form
+msgid ""
+"<span class=\"fa fa-lg fa-building-o\" title=\"Values set here are company-"
+"specific.\" groups=\"base.group_multi_company\"/>"
+msgstr ""
+
+#. module: ssi_hr_manpower_planning
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_contract_recommendation__message_needaction
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_head_count__message_needaction
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning__message_needaction
@@ -240,6 +247,11 @@ msgid "Code"
 msgstr ""
 
 #. module: ssi_hr_manpower_planning
+#: model:ir.model,name:ssi_hr_manpower_planning.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: ssi_hr_manpower_planning
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_head_count__company_id
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning__company_id
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning_summary__company_id
@@ -281,6 +293,11 @@ msgid "Compute Lines"
 msgstr ""
 
 #. module: ssi_hr_manpower_planning
+#: model:ir.model,name:ssi_hr_manpower_planning.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: ssi_hr_manpower_planning
 #: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_planning__confirm_ok
 msgid ""
 "Confirm policy\n"
@@ -299,6 +316,13 @@ msgstr ""
 #. module: ssi_hr_manpower_planning
 #: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.manpower_contract_recommendation_view_form
 msgid "Contract"
+msgstr ""
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_res_company__manpower_contract_employment_status_ids
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_res_config_settings__manpower_contract_employment_status_ids
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.res_config_settings_view_form
+msgid "Contract Employment Statuses"
 msgstr ""
 
 #. module: ssi_hr_manpower_planning
@@ -428,6 +452,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning_summary__display_name
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_report_ssi_hr_manpower_planning_manpower_planning_summary__display_name
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_report_ssi_hr_manpower_planning_manpower_planning_summary_xlsx__display_name
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_res_company__display_name
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_res_config_settings__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -469,6 +495,28 @@ msgstr ""
 #. module: ssi_hr_manpower_planning
 #: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_planning_contract__employee_id
 msgid "Employee whose contract is reviewed."
+msgstr ""
+
+#. module: ssi_hr_manpower_planning
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.res_config_settings_view_form
+msgid ""
+"Employees with one of these statuses are listed by\n"
+"                            the Generate Contract button of a manpower planning."
+msgstr ""
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_res_config_settings__manpower_contract_employment_status_ids
+msgid ""
+"Employment statuses of the employees whose contract is reviewed in a "
+"manpower planning."
+msgstr ""
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_res_company__manpower_contract_employment_status_ids
+msgid ""
+"Employment statuses of the employees whose contract is reviewed in a "
+"manpower planning. The Generate Contract button of a manpower planning takes"
+" the employees of the company that have one of these statuses."
 msgstr ""
 
 #. module: ssi_hr_manpower_planning
@@ -558,6 +606,11 @@ msgid "Free-form remarks about this formation line."
 msgstr ""
 
 #. module: ssi_hr_manpower_planning
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.manpower_planning_view_form
+msgid "Generate Contract"
+msgstr ""
+
+#. module: ssi_hr_manpower_planning
 #: model:ir.actions.act_window,name:ssi_hr_manpower_planning.manpower_head_count_action
 #: model:ir.ui.menu,name:ssi_hr_manpower_planning.manpower_head_count_menu
 msgid "Head Count Snapshots"
@@ -589,6 +642,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning_summary__id
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_report_ssi_hr_manpower_planning_manpower_planning_summary__id
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_report_ssi_hr_manpower_planning_manpower_planning_summary_xlsx__id
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_res_company__id
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_res_config_settings__id
 msgid "ID"
 msgstr ""
 
@@ -678,6 +733,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning_summary____last_update
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_report_ssi_hr_manpower_planning_manpower_planning_summary____last_update
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_report_ssi_hr_manpower_planning_manpower_planning_summary_xlsx____last_update
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_res_company____last_update
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_res_config_settings____last_update
 msgid "Last Modified on"
 msgstr ""
 
@@ -764,6 +821,7 @@ msgstr ""
 #: model:ir.ui.menu,name:ssi_hr_manpower_planning.manpower_planning_menu
 #: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.manpower_planning_summary_content
 #: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.manpower_planning_summary_view_search
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.res_config_settings_view_form
 #, python-format
 msgid "Manpower Planning"
 msgstr ""
