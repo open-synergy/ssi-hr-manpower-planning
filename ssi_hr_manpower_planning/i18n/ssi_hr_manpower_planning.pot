@@ -203,9 +203,18 @@ msgid "Cancelled"
 msgstr ""
 
 #. module: ssi_hr_manpower_planning
+#: code:addons/ssi_hr_manpower_planning/reports/report_ssi_hr_manpower_planning_manpower_planning_summary_xlsx.py:0
+#: code:addons/ssi_hr_manpower_planning/reports/report_ssi_hr_manpower_planning_manpower_planning_summary_xlsx.py:0
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning_summary__category
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.manpower_planning_summary_content
 #: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.manpower_planning_summary_view_search
+#, python-format
 msgid "Category"
+msgstr ""
+
+#. module: ssi_hr_manpower_planning
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.manpower_planning_summary_content
+msgid "Category Recap"
 msgstr ""
 
 #. module: ssi_hr_manpower_planning
@@ -277,6 +286,14 @@ msgid ""
 "Confirm policy\n"
 "\n"
 "* If active user can see and execute 'Confirm' button"
+msgstr ""
+
+#. module: ssi_hr_manpower_planning
+#: code:addons/ssi_hr_manpower_planning/reports/report_ssi_hr_manpower_planning_manpower_planning_summary_xlsx.py:0
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning__contract_continue_percent
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.manpower_planning_summary_content
+#, python-format
+msgid "Continued Contracts (%)"
 msgstr ""
 
 #. module: ssi_hr_manpower_planning
@@ -468,9 +485,19 @@ msgstr ""
 
 #. module: ssi_hr_manpower_planning
 #: code:addons/ssi_hr_manpower_planning/reports/report_ssi_hr_manpower_planning_manpower_planning_summary_xlsx.py:0
+#: code:addons/ssi_hr_manpower_planning/reports/report_ssi_hr_manpower_planning_manpower_planning_summary_xlsx.py:0
 #: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.manpower_planning_summary_content
 #, python-format
 msgid "Filled"
+msgstr ""
+
+#. module: ssi_hr_manpower_planning
+#: code:addons/ssi_hr_manpower_planning/reports/report_ssi_hr_manpower_planning_manpower_planning_summary_xlsx.py:0
+#: code:addons/ssi_hr_manpower_planning/reports/report_ssi_hr_manpower_planning_manpower_planning_summary_xlsx.py:0
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning_summary__percent_filled
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.manpower_planning_summary_content
+#, python-format
+msgid "Filled (%)"
 msgstr ""
 
 #. module: ssi_hr_manpower_planning
@@ -873,6 +900,7 @@ msgstr ""
 
 #. module: ssi_hr_manpower_planning
 #: code:addons/ssi_hr_manpower_planning/reports/report_ssi_hr_manpower_planning_manpower_planning_summary_xlsx.py:0
+#: code:addons/ssi_hr_manpower_planning/reports/report_ssi_hr_manpower_planning_manpower_planning_summary_xlsx.py:0
 #: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.manpower_planning_summary_content
 #, python-format
 msgid "Needed"
@@ -1013,6 +1041,28 @@ msgid ""
 "* Automatically follows 'company_id.partner_id'.\n"
 "* Used for reporting/printing documents that require the company-level\n"
 "  partner instead of the responsible user's partner."
+msgstr ""
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_planning__contract_continue_percent
+msgid ""
+"Percentage of the contract review lines that are not ended: lines with a "
+"recommendation that does not terminate the contract, divided by all review "
+"lines. Shown as is, without rounding up."
+msgstr ""
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_planning_summary__percent_filled
+msgid ""
+"Percentage of the needed manpower that is already filled. Shown as is, "
+"without rounding up."
+msgstr ""
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_planning_summary__percent_vacant
+msgid ""
+"Percentage of the needed manpower that is still vacant. Shown as is, without"
+" rounding up."
 msgstr ""
 
 #. module: ssi_hr_manpower_planning
@@ -1303,10 +1353,20 @@ msgstr ""
 
 #. module: ssi_hr_manpower_planning
 #: code:addons/ssi_hr_manpower_planning/reports/report_ssi_hr_manpower_planning_manpower_planning_summary_xlsx.py:0
+#: code:addons/ssi_hr_manpower_planning/reports/report_ssi_hr_manpower_planning_manpower_planning_summary_xlsx.py:0
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning_formation__is_vacant
 #: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.manpower_planning_summary_content
 #, python-format
 msgid "Vacant"
+msgstr ""
+
+#. module: ssi_hr_manpower_planning
+#: code:addons/ssi_hr_manpower_planning/reports/report_ssi_hr_manpower_planning_manpower_planning_summary_xlsx.py:0
+#: code:addons/ssi_hr_manpower_planning/reports/report_ssi_hr_manpower_planning_manpower_planning_summary_xlsx.py:0
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning_summary__percent_vacant
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.manpower_planning_summary_content
+#, python-format
+msgid "Vacant (%)"
 msgstr ""
 
 #. module: ssi_hr_manpower_planning
