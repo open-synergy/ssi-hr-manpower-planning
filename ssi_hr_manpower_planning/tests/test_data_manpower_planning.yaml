@@ -343,6 +343,12 @@ scenarios:
           quantity_vacant:
             type: "value"
             expected: 3
+          percent_filled:
+            type: "value"
+            expected: 0.0
+          percent_vacant:
+            type: "value"
+            expected: 100.0
       - step: "Find the summary row of the filled job"
         action: "search"
         model: "manpower_planning_summary"
@@ -368,6 +374,12 @@ scenarios:
           quantity_vacant:
             type: "value"
             expected: 0
+          percent_filled:
+            type: "value"
+            expected: 100.0
+          percent_vacant:
+            type: "value"
+            expected: 0.0
 
   - name: "Manpower Planning - Negative paths"
     steps:

@@ -136,6 +136,17 @@ class ManpowerPlanning(models.Model):
         help="Total manpower still vacant: needed minus filled.",
     )
 
+    contract_continue_percent = fields.Float(
+        string="Continued Contracts (%)",
+        compute="_compute_contract_continue_percent",
+        compute_sudo=True,
+        store=False,
+        help="Percentage of the contract review lines that are not "
+        "ended: lines with a recommendation that does not terminate "
+        "the contract, divided by all review lines. Shown as is, "
+        "without rounding up.",
+    )
+
     @api.depends("formation_ids", "formation_ids.quantity")
     def _compute_quantity_needed(self):
         """Sum the quantity needed of all formation lines."""
@@ -160,6 +171,32 @@ class ManpowerPlanning(models.Model):
         for record in self:
             result = record.quantity_needed - record.quantity_filled
             record.quantity_vacant = result
+
+    @api.depends(
+        "contract_ids",
+        "contract_ids.recommendation_id",
+        "contract_ids.recommendation_id.is_terminate",
+    )
+    def _compute_contract_continue_percent(self):
+        """Compute the share of contract lines that are continued.
+
+        The numerator counts the review lines that have a
+        recommendation which does not terminate the contract; the
+        denominator counts every review line. A planning without any
+        review line gets ``0.0``.
+        """
+        for record in self:
+            result = 0.0
+            total = len(record.contract_ids)
+            if total:
+                continued = len(
+                    record.contract_ids.filtered(
+                        lambda r: r.recommendation_id
+                        and not r.recommendation_id.is_terminate
+                    )
+                )
+                result = continued * 100.0 / total
+            record.contract_continue_percent = result
 
     @ssi_decorator.insert_on_form_view()
     def _insert_form_element(self, view_arch):

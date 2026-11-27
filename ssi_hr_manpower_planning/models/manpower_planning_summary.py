@@ -113,6 +113,20 @@ class ManpowerPlanningSummary(models.Model):
         readonly=True,
         help="Total manpower still vacant for the job position.",
     )
+    percent_filled = fields.Float(
+        string="Filled (%)",
+        readonly=True,
+        group_operator=False,
+        help="Percentage of the needed manpower that is already filled. "
+        "Shown as is, without rounding up.",
+    )
+    percent_vacant = fields.Float(
+        string="Vacant (%)",
+        readonly=True,
+        group_operator=False,
+        help="Percentage of the needed manpower that is still vacant. "
+        "Shown as is, without rounding up.",
+    )
 
     @property
     def _table_query(self):
@@ -179,7 +193,15 @@ class ManpowerPlanningSummary(models.Model):
             p.state AS state,
             SUM(s.quantity_needed) AS quantity_needed,
             SUM(s.quantity_filled) AS quantity_filled,
-            SUM(s.quantity_vacant) AS quantity_vacant
+            SUM(s.quantity_vacant) AS quantity_vacant,
+            (CASE WHEN SUM(s.quantity_needed) = 0 THEN 0.0
+                ELSE SUM(s.quantity_filled) * 100.0
+                    / SUM(s.quantity_needed)
+            END)::float AS percent_filled,
+            (CASE WHEN SUM(s.quantity_needed) = 0 THEN 0.0
+                ELSE SUM(s.quantity_vacant) * 100.0
+                    / SUM(s.quantity_needed)
+            END)::float AS percent_vacant
         """
         return select_str
 

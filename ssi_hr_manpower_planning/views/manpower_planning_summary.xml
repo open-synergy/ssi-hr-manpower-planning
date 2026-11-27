@@ -56,6 +56,8 @@
             <field name="quantity_needed" sum="Total" />
             <field name="quantity_filled" sum="Total" />
             <field name="quantity_vacant" sum="Total" />
+            <field name="percent_filled" />
+            <field name="percent_vacant" />
         </tree>
     </field>
 </record>
