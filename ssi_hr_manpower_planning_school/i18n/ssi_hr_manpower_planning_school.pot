@@ -159,6 +159,13 @@ msgid "Checked automatically when no teacher is selected."
 msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
+#: model:ir.model.fields,help:ssi_hr_manpower_planning_school.field_manpower_planning_workload__is_teacher
+msgid ""
+"Checked when the employee has at least one teaching line in the planning, as"
+" teacher or as co-teacher."
+msgstr ""
+
+#. module: ssi_hr_manpower_planning_school
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_teaching__grade_class_ids
 msgid "Classes"
 msgstr ""
@@ -173,6 +180,11 @@ msgstr ""
 #. module: ssi_hr_manpower_planning_school
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_teaching__co_employee_id
 msgid "Co-Teacher"
+msgstr ""
+
+#. module: ssi_hr_manpower_planning_school
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_workload__co_teaching_hours
+msgid "Co-Teaching Hours"
 msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
@@ -303,6 +315,11 @@ msgstr ""
 #. module: ssi_hr_manpower_planning_school
 #: model:ir.model.fields,help:ssi_hr_manpower_planning_school.field_manpower_planning_teaching__employee_id
 msgid "Employee who teaches. Leave empty when the line is vacant."
+msgstr ""
+
+#. module: ssi_hr_manpower_planning_school
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_workload__excess_weekly_hours
+msgid "Excess Weekly Hours"
 msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
@@ -448,6 +465,11 @@ msgid "Is Follower"
 msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_workload__is_teacher
+msgid "Is Teacher"
+msgstr ""
+
+#. module: ssi_hr_manpower_planning_school
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_assignment_type__job_id
 msgid "Job Position"
 msgstr ""
@@ -462,6 +484,11 @@ msgstr ""
 msgid ""
 "Kind of assignment this type stands for. It decides how the assignment line "
 "is grouped and which fields it shows."
+msgstr ""
+
+#. module: ssi_hr_manpower_planning_school
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_workload__lack_weekly_hours
+msgid "Lacking Weekly Hours"
 msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
@@ -505,6 +532,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_assignment_type__message_main_attachment_id
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_curriculum__message_main_attachment_id
 msgid "Main Attachment"
+msgstr ""
+
+#. module: ssi_hr_manpower_planning_school
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_workload__mandatory_weekly_hours
+msgid "Mandatory Weekly Hours"
+msgstr ""
+
+#. module: ssi_hr_manpower_planning_school
+#: model:ir.model.fields,help:ssi_hr_manpower_planning_school.field_manpower_planning_workload__lack_weekly_hours
+msgid ""
+"Mandatory weekly hours minus the total weekly hours, when positive. It is "
+"zero for an employee who does not teach, and when the school has no "
+"mandatory weekly hours."
 msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
@@ -842,6 +882,13 @@ msgid "Teacher"
 msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
+#: model:ir.model.fields,help:ssi_hr_manpower_planning_school.field_manpower_planning_workload__mandatory_weekly_hours
+msgid ""
+"Teacher mandatory weekly hours of the school of the planning. It is zero for"
+" an employee who does not teach."
+msgstr ""
+
+#. module: ssi_hr_manpower_planning_school
 #: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning_school.manpower_planning_view_form
 msgid "Teaching"
 msgstr ""
@@ -874,8 +921,8 @@ msgstr ""
 #. module: ssi_hr_manpower_planning_school
 #: model:ir.model.fields,help:ssi_hr_manpower_planning_school.field_manpower_planning_workload__total_weekly_hours
 msgid ""
-"Teaching hours plus the additional assignment hours counted per week plus "
-"the picket hours per week."
+"Teaching hours plus the co-teaching hours plus the additional assignment "
+"hours counted per week plus the picket hours per week."
 msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
@@ -893,6 +940,14 @@ msgstr ""
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_teaching__total_weekly_hours
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_workload__total_weekly_hours
 msgid "Total Weekly Hours"
+msgstr ""
+
+#. module: ssi_hr_manpower_planning_school
+#: model:ir.model.fields,help:ssi_hr_manpower_planning_school.field_manpower_planning_workload__excess_weekly_hours
+msgid ""
+"Total weekly hours minus the mandatory weekly hours, when positive. It is "
+"zero for an employee who does not teach, and when the school has no "
+"mandatory weekly hours."
 msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
@@ -951,6 +1006,13 @@ msgstr ""
 #. module: ssi_hr_manpower_planning_school
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_teaching__weekly_hours
 msgid "Weekly Hours per Class"
+msgstr ""
+
+#. module: ssi_hr_manpower_planning_school
+#: model:ir.model.fields,help:ssi_hr_manpower_planning_school.field_manpower_planning_workload__co_teaching_hours
+msgid ""
+"Weekly hours of the teaching lines the employee assists as co-teacher, "
+"multiplied by the co-teaching hour factor of the school of the planning."
 msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
