@@ -203,6 +203,12 @@ msgid "Cancelled"
 msgstr ""
 
 #. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning_summary__category
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning.manpower_planning_summary_view_search
+msgid "Category"
+msgstr ""
+
+#. module: ssi_hr_manpower_planning
 #: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_contract_recommendation__is_terminate
 msgid ""
 "Check if this recommendation means the employee contract should be ended "
@@ -493,6 +499,11 @@ msgstr ""
 #: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_head_count__activity_type_icon
 #: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_planning__activity_type_icon
 msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields.selection,name:ssi_hr_manpower_planning.selection__manpower_planning_summary__category__formation
+msgid "Formation"
 msgstr ""
 
 #. module: ssi_hr_manpower_planning
@@ -1108,6 +1119,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_head_count__reviewer_id
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning.field_manpower_planning__reviewer_id
 msgid "Reviewer"
+msgstr ""
+
+#. module: ssi_hr_manpower_planning
+#: model:ir.model.fields,help:ssi_hr_manpower_planning.field_manpower_planning_summary__category
+msgid "Source of the manpower lines the summary row is built from."
 msgstr ""
 
 #. module: ssi_hr_manpower_planning
