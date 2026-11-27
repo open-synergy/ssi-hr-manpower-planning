@@ -11,6 +11,7 @@
             <field name="planning_id" />
             <field name="employee_id" />
             <field name="school_id" />
+            <field name="academic_year_id" />
             <group name="group_by">
                 <filter
                         name="grp_planning"
@@ -21,6 +22,11 @@
                         name="grp_school"
                         string="School"
                         context="{'group_by':'school_id'}"
+                    />
+                <filter
+                        name="grp_academic_year"
+                        string="Academic Year"
+                        context="{'group_by':'academic_year_id'}"
                     />
                 <filter
                         name="grp_employee"
@@ -44,6 +50,7 @@
         <tree>
             <field name="planning_id" />
             <field name="school_id" />
+            <field name="academic_year_id" />
             <field name="employee_id" />
             <field name="state" />
             <field name="teaching_hours" sum="Total" />
@@ -67,6 +74,7 @@
     <field name="arch" type="xml">
         <pivot>
             <field name="school_id" type="row" />
+            <field name="academic_year_id" type="col" />
             <field name="employee_id" type="row" />
             <field name="teaching_hours" type="measure" />
             <field name="co_teaching_hours" type="measure" />

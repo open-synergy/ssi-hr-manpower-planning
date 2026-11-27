@@ -84,6 +84,15 @@ setup:
       save_as: "teacher_b"
       values:
         name: "MPP Workload Teacher B"
+    - step: "Create academic year"
+      action: "create"
+      model: "school_academic_year"
+      save_as: "year"
+      values:
+        name: "MPP Workload Academic Year"
+        code: "/"
+        date_start: "2026-07-01"
+        date_end: "2027-06-30"
     - step: "Create manpower planning of the school"
       action: "create"
       model: "manpower_planning"
@@ -91,6 +100,7 @@ setup:
       values:
         department_id: "REC: department.id"
         school_id: "REC: school.id"
+        academic_year_id: "REC: year.id"
         date_start: 2026-07-01
         date_end: 2027-06-30
     - step: "Create structural type of 6 hours per week"
@@ -152,7 +162,7 @@ scenarios:
           type_id: "REC: type_picket.id"
           employee_id: "REC: teacher_a.id"
           hours: 2
-      - step: "A vacant assignment line is left out of the recap"
+      - step: "A vacant assignment line has no employee and is kept in the recap"
         action: "create"
         model: "manpower_planning_assignment"
         save_as: "line_vacant"
@@ -193,6 +203,9 @@ scenarios:
           school_id:
             type: "m2o"
             expected: "REC: school"
+          academic_year_id:
+            type: "m2o"
+            expected: "REC: year"
       - step: "Find the workload of teacher B"
         action: "search"
         model: "manpower_planning_workload"
@@ -226,7 +239,7 @@ scenarios:
           excess_weekly_hours:
             type: "value"
             expected: 0
-      - step: "Only the two employees appear in the planning workloads"
+      - step: "The two employees and the vacant row appear in the planning workloads"
         action: "assert"
         target: "planning"
         refresh: true
@@ -234,7 +247,37 @@ scenarios:
           workload_ids:
             type: "o2m"
             check: "count"
-            expected_count: 2
+            expected_count: 3
+      - step: "Find the vacant row of the planning"
+        action: "search"
+        model: "manpower_planning_workload"
+        domain:
+          - ["planning_id", "=", "REC: planning.id"]
+          - ["employee_id", "=", false]
+        save_as: "workload_vacant"
+        expect_count: 1
+      - step: "The vacant row sums the 6 hours of the vacant line and is never judged"
+        action: "assert"
+        target: "workload_vacant"
+        asserts:
+          assignment_weekly_hours:
+            type: "value"
+            expected: 6
+          total_weekly_hours:
+            type: "value"
+            expected: 6
+          is_teacher:
+            type: "value"
+            expected: false
+          lack_weekly_hours:
+            type: "value"
+            expected: 0
+          excess_weekly_hours:
+            type: "value"
+            expected: 0
+          academic_year_id:
+            type: "m2o"
+            expected: "REC: year"
 
   - name: "Workload - The picket hours per day of the school multiply the picket days"
     steps:
@@ -669,6 +712,78 @@ scenarios:
           total_weekly_hours:
             type: "value"
             expected: 10
+          lack_weekly_hours:
+            type: "value"
+            expected: 0
+          excess_weekly_hours:
+            type: "value"
+            expected: 0
+
+  - name: "Workload - Vacant lines are gathered in one row that is never judged"
+    steps:
+      - step: "Teacher A teaches mathematics in one class"
+        action: "create"
+        model: "manpower_planning_teaching"
+        save_as: "line_teaching"
+        values:
+          planning_id: "REC: planning.id"
+          subject_id: "REC: subject_math.id"
+          grade_id: "REC: grade_x.id"
+          grade_class_ids:
+            - - 6
+              - 0
+              - - "REC: class_1.id"
+          weekly_hours: 4
+          employee_id: "REC: teacher_a.id"
+      - step: "A vacant teaching line of two classes, 8 hours per week"
+        action: "create"
+        model: "manpower_planning_teaching"
+        save_as: "line_teaching_vacant"
+        values:
+          planning_id: "REC: planning.id"
+          subject_id: "REC: subject_math.id"
+          grade_id: "REC: grade_x.id"
+          grade_class_ids:
+            - - 6
+              - 0
+              - - "REC: class_2.id"
+                - "REC: class_3.id"
+          weekly_hours: 4
+      - step: "A vacant structural line of 6 hours per week"
+        action: "create"
+        model: "manpower_planning_assignment"
+        save_as: "line_structural_vacant"
+        values:
+          planning_id: "REC: planning.id"
+          type_id: "REC: type_structural.id"
+          hours: 6
+      - step: "Find the vacant row"
+        action: "search"
+        model: "manpower_planning_workload"
+        domain:
+          - ["planning_id", "=", "REC: planning.id"]
+          - ["employee_id", "=", false]
+        save_as: "workload_vacant"
+        expect_count: 1
+      - step: "The vacant row sums 8 teaching and 6 assignment hours"
+        action: "assert"
+        target: "workload_vacant"
+        asserts:
+          teaching_hours:
+            type: "value"
+            expected: 8
+          assignment_weekly_hours:
+            type: "value"
+            expected: 6
+          total_weekly_hours:
+            type: "value"
+            expected: 14
+          is_teacher:
+            type: "value"
+            expected: false
+          mandatory_weekly_hours:
+            type: "value"
+            expected: 0
           lack_weekly_hours:
             type: "value"
             expected: 0

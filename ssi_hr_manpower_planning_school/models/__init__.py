@@ -9,3 +9,4 @@ from . import manpower_planning  # noqa: F401
 from . import manpower_planning_teaching  # noqa: F401
 from . import manpower_planning_assignment  # noqa: F401
 from . import manpower_planning_workload  # noqa: F401
+from . import manpower_planning_summary  # noqa: F401

@@ -28,6 +28,7 @@
         "views/manpower_planning_curriculum.xml",
         "views/manpower_planning_assignment_type.xml",
         "views/manpower_planning.xml",
+        "views/manpower_planning_summary.xml",
         "views/manpower_planning_workload.xml",
         "views/assets.xml",
     ],
