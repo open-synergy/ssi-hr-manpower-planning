@@ -331,6 +331,9 @@ scenarios:
         action: "assert"
         target: "summary_vacant"
         asserts:
+          category:
+            type: "value"
+            expected: "formation"
           quantity_needed:
             type: "value"
             expected: 3
@@ -353,6 +356,9 @@ scenarios:
         action: "assert"
         target: "summary_filled"
         asserts:
+          category:
+            type: "value"
+            expected: "formation"
           quantity_needed:
             type: "value"
             expected: 1
@@ -451,3 +457,88 @@ scenarios:
           department_id: "REC: dept.id"
           date_start: 2026-12-31
           date_end: 2026-01-01
+
+  - name: "Manpower Planning - Summary ids and empty planning"
+    steps:
+      - step: "Create department SU"
+        action: "create"
+        model: "hr.department"
+        save_as: "dept"
+        values:
+          name: "MPP Department SU"
+
+      - step: "Create shared job SU"
+        action: "create"
+        model: "hr.job"
+        save_as: "job_shared"
+        values:
+          name: "MPP Job Shared SU"
+
+      - step: "Create first planning with the shared job"
+        action: "create"
+        model: "manpower_planning"
+        save_as: "planning_one"
+        values:
+          department_id: "REC: dept.id"
+          date_start: 2026-01-01
+          date_end: 2026-12-31
+          formation_ids:
+            - - 0
+              - 0
+              - job_id: "REC: job_shared.id"
+                quantity: 2
+
+      - step: "Create second planning with the same job"
+        action: "create"
+        model: "manpower_planning"
+        save_as: "planning_two"
+        values:
+          department_id: "REC: dept.id"
+          date_start: 2027-01-01
+          date_end: 2027-12-31
+          formation_ids:
+            - - 0
+              - 0
+              - job_id: "REC: job_shared.id"
+                quantity: 1
+
+      - step: "Create a planning without any formation line"
+        action: "create"
+        model: "manpower_planning"
+        save_as: "planning_empty"
+        values:
+          department_id: "REC: dept.id"
+          date_start: 2028-01-01
+          date_end: 2028-12-31
+
+      - step: "First planning has exactly one summary row"
+        action: "search"
+        model: "manpower_planning_summary"
+        domain:
+          - ["planning_id", "=", "REC: planning_one.id"]
+        save_as: "summary_one"
+        expect_count: 1
+
+      - step: "Second planning has exactly one summary row"
+        action: "search"
+        model: "manpower_planning_summary"
+        domain:
+          - ["planning_id", "=", "REC: planning_two.id"]
+        save_as: "summary_two"
+        expect_count: 1
+
+      - step: "The same job in two plannings gets two distinct ids"
+        action: "search"
+        model: "manpower_planning_summary"
+        domain:
+          - ["job_id", "=", "REC: job_shared.id"]
+        save_as: "summary_shared"
+        expect_count: 2
+
+      - step: "Planning without formation lines has no summary"
+        action: "search"
+        model: "manpower_planning_summary"
+        domain:
+          - ["planning_id", "=", "REC: planning_empty.id"]
+        save_as: "summary_empty"
+        expect_count: 0
