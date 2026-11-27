@@ -21,7 +21,7 @@ odoo14-addon-ssi-transaction-done-mixin
 odoo14-addon-ssi-transaction-mixin
 odoo14-addon-ssi-transaction-open-mixin
 odoo-yaml-test
-odoo14-addon-ssi-school-academic>=14.0.1.15.0
+odoo14-addon-ssi-school-academic>=14.0.1.16.0
 odoo14-addon-ssi-school>=14.0.5.22.0
 odoo14-addon-ssi-py3o
 odoo14-addon-ssi-product

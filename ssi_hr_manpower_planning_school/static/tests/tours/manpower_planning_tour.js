@@ -107,17 +107,8 @@ odoo.define("ssi_hr_manpower_planning_school.manpower_planning_tour", function (
                         ".ui-autocomplete:visible .ui-menu-item a:contains(Tour MPPS School)",
                     in_modal: false,
                 },
-                {
-                    content: "Fill in the Curriculum",
-                    trigger: ".o_field_many2one[name='curriculum_id'] input",
-                    run: "text Tour MPPS Curriculum",
-                },
-                {
-                    content: "Pick the Curriculum from the dropdown",
-                    trigger:
-                        ".ui-autocomplete:visible .ui-menu-item a:contains(Tour MPPS Curriculum)",
-                    in_modal: false,
-                },
+                // The Curriculum is not filled by hand: it follows the
+                // School, and it is checked once the record is saved.
                 {
                     // Picked last on this tab: it triggers the onchange that
                     // fills Date Start and Date End.
@@ -281,6 +272,22 @@ odoo.define("ssi_hr_manpower_planning_school.manpower_planning_tour", function (
                         // Assertion only.
                     },
                 },
+
+                // Post-Condition -- the Curriculum was filled from the
+                // School on the School tab.
+                {
+                    content: "Open the School tab",
+                    trigger: ".o_notebook .nav-link:contains(School)",
+                    extra_trigger: ".o_form_view.o_form_readonly",
+                },
+                {
+                    content: "The Curriculum is filled from the School",
+                    trigger:
+                        ".o_field_widget[name='curriculum_id']:contains(Tour MPPS Curriculum)",
+                    run: function () {
+                        // Assertion only.
+                    },
+                },
             ]
         )
     );
@@ -360,6 +367,68 @@ odoo.define("ssi_hr_manpower_planning_school.manpower_planning_tour", function (
                     content: "The line is linked to its teaching assignment line",
                     trigger:
                         ".o_field_x2many[name='teaching_ids'] .o_data_row:contains(Tour MPPI Subject) .o_field_many2manytags[name='teaching_assignment_line_ids'] .badge:contains(Tour MPPI Class)",
+                    run: function () {
+                        // Assertion only.
+                    },
+                },
+            ]
+        )
+    );
+
+    // IK: docs/manpower_planning/18-generate-teaching-from-curriculum.md
+    tour.register(
+        "ssi_hr_manpower_planning_school_manpower_planning_generate_curriculum",
+        {
+            test: true,
+            url: "/web",
+        },
+        [].concat(
+            // Flow 1 -- Open the Human Resource > Manpower Planning >
+            // Manpower Plannings menu.
+            openPlanningList(),
+            [
+                // Flow 2 -- Open the draft planning, told apart by the
+                // unique department name.
+                {
+                    content: "Open the manpower planning",
+                    trigger: ".o_data_row:contains(Tour MPPG Dept) .o_data_cell:first",
+                    extra_trigger: ".o_list_view",
+                },
+                {
+                    content: "Form is open",
+                    trigger: ".o_form_view",
+                    run: function () {
+                        // Assertion only.
+                    },
+                },
+
+                // Flow 3 -- Click the Generate from Curriculum button.
+                {
+                    content: "Click the Generate from Curriculum button",
+                    trigger:
+                        ".o_statusbar_buttons button[name='action_generate_teaching_from_curriculum']",
+                    extra_trigger: ".o_form_view",
+                },
+
+                // Post-Condition -- the Teaching tab lists the generated line
+                // with its classes, and the line has no teacher.
+                {
+                    content: "Open the Teaching tab",
+                    trigger: ".o_notebook .nav-link:contains(Teaching)",
+                    extra_trigger: "body:not(:has(.modal)) .o_form_view",
+                },
+                {
+                    content: "The generated teaching line is listed",
+                    trigger:
+                        ".o_field_x2many[name='teaching_ids'] .o_data_row:contains(Tour MPPG Subject)",
+                    run: function () {
+                        // Assertion only.
+                    },
+                },
+                {
+                    content: "The line has the classes of the school for the grade",
+                    trigger:
+                        ".o_field_x2many[name='teaching_ids'] .o_data_row:contains(Tour MPPG Subject) .o_field_many2manytags[name='grade_class_ids'] .badge:contains(Tour MPPG Class)",
                     run: function () {
                         // Assertion only.
                     },
