@@ -91,6 +91,16 @@ class ManpowerPlanningTeaching(models.Model):
         help="Employee who assists the teacher. It must be a different "
         "employee than the teacher.",
     )
+    teaching_assignment_line_ids = fields.Many2many(
+        string="Teaching Assignment Lines",
+        comodel_name="school_teaching_assignment_line",
+        relation="manpower_planning_teaching_assignment_line_rel",
+        column1="teaching_id",
+        column2="assignment_line_id",
+        copy=False,
+        help="Lines of the school teaching assignment this plan line was "
+        "imported from. Optional; the line stays a plan that can be edited.",
+    )
     notes = fields.Text(
         string="Notes",
         help="Free-form remarks about this teaching line.",

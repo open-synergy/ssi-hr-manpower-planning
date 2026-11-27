@@ -284,4 +284,87 @@ odoo.define("ssi_hr_manpower_planning_school.manpower_planning_tour", function (
             ]
         )
     );
+
+    // IK: docs/manpower_planning/17-import-teaching-assignment.md
+    tour.register(
+        "ssi_hr_manpower_planning_school_manpower_planning_import_teaching_assignment",
+        {
+            test: true,
+            url: "/web",
+        },
+        [].concat(
+            // Flow 1 -- Open the Human Resource > Manpower Planning >
+            // Manpower Plannings menu.
+            openPlanningList(),
+            [
+                // Flow 2 -- Open the draft planning, told apart by the
+                // unique department name.
+                {
+                    content: "Open the manpower planning",
+                    trigger: ".o_data_row:contains(Tour MPPI Dept) .o_data_cell:first",
+                    extra_trigger: ".o_list_view",
+                },
+                {
+                    content: "Form is open",
+                    trigger: ".o_form_view",
+                    run: function () {
+                        // Assertion only.
+                    },
+                },
+
+                // Flow 3 -- Click the Import from Teaching Assignment button.
+                {
+                    content: "Click the Import from Teaching Assignment button",
+                    trigger:
+                        ".o_statusbar_buttons button[name='action_import_teaching_assignment']",
+                    extra_trigger: ".o_form_view",
+                },
+
+                // Flow 4 -- Select the Academic Term. In 14.0 an in-modal
+                // trigger must NOT be prefixed with ".modal"; the term field
+                // only exists in the wizard.
+                {
+                    content: "Fill in the Academic Term",
+                    trigger: ".o_field_many2one[name='academic_term_id'] input",
+                    run: "text Tour MPPI Term",
+                },
+                {
+                    content: "Pick the Academic Term from the dropdown",
+                    trigger:
+                        ".ui-autocomplete:visible .ui-menu-item a:contains(Tour MPPI Term)",
+                    in_modal: false,
+                },
+
+                // Flow 5 -- Click Import.
+                {
+                    content: "Click Import",
+                    trigger: ".modal-footer button[name='action_confirm']",
+                },
+
+                // Post-Condition -- the wizard closes and the Teaching tab
+                // lists the imported line with its source tags.
+                {
+                    content: "Open the Teaching tab",
+                    trigger: ".o_notebook .nav-link:contains(Teaching)",
+                    extra_trigger: "body:not(:has(.modal)) .o_form_view",
+                },
+                {
+                    content: "The imported teaching line is listed",
+                    trigger:
+                        ".o_field_x2many[name='teaching_ids'] .o_data_row:contains(Tour MPPI Subject)",
+                    run: function () {
+                        // Assertion only.
+                    },
+                },
+                {
+                    content: "The line is linked to its teaching assignment line",
+                    trigger:
+                        ".o_field_x2many[name='teaching_ids'] .o_data_row:contains(Tour MPPI Subject) .o_field_many2manytags[name='teaching_assignment_line_ids'] .badge:contains(Tour MPPI Class)",
+                    run: function () {
+                        // Assertion only.
+                    },
+                },
+            ]
+        )
+    );
 });

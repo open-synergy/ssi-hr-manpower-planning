@@ -85,3 +85,30 @@ class ManpowerPlanning(models.Model):
         self.date_end = False
         if self.academic_year_id:
             self.date_end = self.academic_year_id.date_end
+
+    def action_import_teaching_assignment(self):
+        """Open the wizard that imports teaching lines from assignments.
+
+        :return: an ``ir.actions.act_window`` dict opening the wizard
+        """
+        for record in self.sudo():
+            result = record._import_teaching_assignment()
+        return result
+
+    def _import_teaching_assignment(self):
+        """Build the action that opens the import wizard.
+
+        The wizard creates nothing until it is confirmed, so this method
+        writes nothing itself.
+
+        :return: an ``ir.actions.act_window`` dict opening the wizard
+        """
+        self.ensure_one()
+        return {
+            "type": "ir.actions.act_window",
+            "name": "Import from Teaching Assignment",
+            "res_model": "import_teaching_assignment",
+            "view_mode": "form",
+            "target": "new",
+            "context": {"default_planning_id": self.id},
+        }

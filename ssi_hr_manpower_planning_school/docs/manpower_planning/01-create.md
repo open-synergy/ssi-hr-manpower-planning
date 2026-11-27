@@ -42,6 +42,9 @@ as needed:
 - **Teacher**: Select the employee who teaches. Leave empty when the line is vacant.
 - **Co-Teacher**: Select the employee who assists the teacher. It must be a different
   employee than the teacher.
+- **Teaching Assignment Lines**: Shown as tags at the end of the line. Filled when the
+  line is imported from a teaching assignment (see the Import Teaching Lines from
+  Teaching Assignment work instruction); leave it empty for a manual line.
 
 On the **Additional Assignments** tab, click **Add a line**. Repeat the following steps
 as many times as needed:
