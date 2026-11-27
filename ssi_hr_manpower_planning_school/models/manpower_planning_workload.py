@@ -10,7 +10,8 @@ class ManpowerPlanningWorkload(models.Model):
     Read-only SQL view that recaps the workload of every employee in
     every school manpower planning: the teaching hours, the number of
     co-teaching lines, the additional assignment hours per week and per
-    day, the picket hours per week, and the total weekly hours. Lines
+    day, the picket hours per week, the total weekly hours, and for
+    employees who teach the mandatory, lacking and excess hours. Lines
     without an employee are left out. It feeds the workload tab of the
     planning form and the workload analysis.
     """
@@ -36,7 +37,11 @@ class ManpowerPlanningWorkload(models.Model):
             "hour_basis",
             "hours",
         ],
-        "school": ["manpower_picket_weekly_hours_per_day"],
+        "school": [
+            "manpower_picket_weekly_hours_per_day",
+            "teacher_mandatory_weekly_hours",
+            "co_teaching_hour_factor",
+        ],
     }
 
     planning_id = fields.Many2one(
@@ -108,11 +113,45 @@ class ManpowerPlanningWorkload(models.Model):
         help="Picket hours counted per day, multiplied by the picket "
         "hours per day of the school of the planning.",
     )
-    total_weekly_hours = fields.Integer(
+    co_teaching_hours = fields.Float(
+        string="Co-Teaching Hours",
+        readonly=True,
+        help="Weekly hours of the teaching lines the employee assists as "
+        "co-teacher, multiplied by the co-teaching hour factor of the "
+        "school of the planning.",
+    )
+    total_weekly_hours = fields.Float(
         string="Total Weekly Hours",
         readonly=True,
-        help="Teaching hours plus the additional assignment hours "
-        "counted per week plus the picket hours per week.",
+        help="Teaching hours plus the co-teaching hours plus the "
+        "additional assignment hours counted per week plus the picket "
+        "hours per week.",
+    )
+    is_teacher = fields.Boolean(
+        string="Is Teacher",
+        readonly=True,
+        help="Checked when the employee has at least one teaching line in "
+        "the planning, as teacher or as co-teacher.",
+    )
+    mandatory_weekly_hours = fields.Integer(
+        string="Mandatory Weekly Hours",
+        readonly=True,
+        help="Teacher mandatory weekly hours of the school of the "
+        "planning. It is zero for an employee who does not teach.",
+    )
+    lack_weekly_hours = fields.Float(
+        string="Lacking Weekly Hours",
+        readonly=True,
+        help="Mandatory weekly hours minus the total weekly hours, when "
+        "positive. It is zero for an employee who does not teach, and "
+        "when the school has no mandatory weekly hours.",
+    )
+    excess_weekly_hours = fields.Float(
+        string="Excess Weekly Hours",
+        readonly=True,
+        help="Total weekly hours minus the mandatory weekly hours, when "
+        "positive. It is zero for an employee who does not teach, and "
+        "when the school has no mandatory weekly hours.",
     )
 
     @property
@@ -151,12 +190,63 @@ class ManpowerPlanningWorkload(models.Model):
             SUM(w.picket_daily_hours) * COALESCE(
                 s.manpower_picket_weekly_hours_per_day, 1
             ) AS picket_weekly_hours,
-            SUM(w.teaching_hours) + SUM(w.assignment_weekly_hours)
-                + SUM(w.picket_daily_hours) * COALESCE(
-                    s.manpower_picket_weekly_hours_per_day, 1
-                ) AS total_weekly_hours
+            SUM(w.co_teaching_base_hours)::float * COALESCE(
+                s.co_teaching_hour_factor, 0.5
+            ) AS co_teaching_hours,
+            %(total)s AS total_weekly_hours,
+            SUM(w.teaching_line_count) > 0 AS is_teacher,
+            %(mandatory)s AS mandatory_weekly_hours,
+            CASE WHEN SUM(w.teaching_line_count) > 0
+                AND COALESCE(s.teacher_mandatory_weekly_hours, 0) > 0
+                THEN GREATEST(
+                    %(mandatory)s::float - %(total)s, 0::float
+                )
+                ELSE 0::float
+            END AS lack_weekly_hours,
+            CASE WHEN SUM(w.teaching_line_count) > 0
+                AND COALESCE(s.teacher_mandatory_weekly_hours, 0) > 0
+                THEN GREATEST(
+                    %(total)s - %(mandatory)s::float, 0::float
+                )
+                ELSE 0::float
+            END AS excess_weekly_hours
         """
-        return select_str
+        return select_str % {
+            "total": self._total_hours_sql(),
+            "mandatory": self._mandatory_hours_sql(),
+        }
+
+    @api.model
+    def _total_hours_sql(self):
+        """Return the SQL expression of the total weekly hours.
+
+        :return: SQL fragment summing the teaching, co-teaching,
+            assignment and picket hours per week of one employee
+        """
+        return """(
+            SUM(w.teaching_hours)::float
+            + SUM(w.co_teaching_base_hours)::float * COALESCE(
+                s.co_teaching_hour_factor, 0.5
+            )
+            + SUM(w.assignment_weekly_hours)
+            + SUM(w.picket_daily_hours) * COALESCE(
+                s.manpower_picket_weekly_hours_per_day, 1
+            )
+        )"""
+
+    @api.model
+    def _mandatory_hours_sql(self):
+        """Return the SQL expression of the mandatory weekly hours.
+
+        :return: SQL fragment giving the school mandatory hours for an
+            employee who teaches, and zero for any other employee
+        """
+        return """(
+            CASE WHEN SUM(w.teaching_line_count) > 0
+                THEN COALESCE(s.teacher_mandatory_weekly_hours, 0)
+                ELSE 0
+            END
+        )"""
 
     @api.model
     def _from(self):
@@ -175,6 +265,8 @@ class ManpowerPlanningWorkload(models.Model):
                 t.employee_id AS employee_id,
                 COALESCE(t.total_weekly_hours, 0) AS teaching_hours,
                 0 AS co_teaching_count,
+                0 AS co_teaching_base_hours,
+                1 AS teaching_line_count,
                 0 AS assignment_weekly_hours,
                 0 AS assignment_daily_hours,
                 0 AS picket_daily_hours
@@ -186,6 +278,8 @@ class ManpowerPlanningWorkload(models.Model):
                 t.co_employee_id AS employee_id,
                 0 AS teaching_hours,
                 1 AS co_teaching_count,
+                COALESCE(t.total_weekly_hours, 0) AS co_teaching_base_hours,
+                1 AS teaching_line_count,
                 0 AS assignment_weekly_hours,
                 0 AS assignment_daily_hours,
                 0 AS picket_daily_hours
@@ -197,6 +291,8 @@ class ManpowerPlanningWorkload(models.Model):
                 a.employee_id AS employee_id,
                 0 AS teaching_hours,
                 0 AS co_teaching_count,
+                0 AS co_teaching_base_hours,
+                0 AS teaching_line_count,
                 CASE WHEN a.hour_basis = 'week'
                     THEN COALESCE(a.hours, 0) ELSE 0
                 END AS assignment_weekly_hours,
@@ -228,6 +324,8 @@ class ManpowerPlanningWorkload(models.Model):
             p.school_id,
             p.user_id,
             p.state,
-            s.manpower_picket_weekly_hours_per_day
+            s.manpower_picket_weekly_hours_per_day,
+            s.co_teaching_hour_factor,
+            s.teacher_mandatory_weekly_hours
         """
         return group_by_str
