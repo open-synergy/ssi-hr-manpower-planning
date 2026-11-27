@@ -261,6 +261,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_curriculum__display_name
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_teaching__display_name
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_workload__display_name
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_school__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -410,6 +411,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_curriculum__id
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_teaching__id
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_workload__id
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_school__id
 msgid "ID"
 msgstr ""
 
@@ -469,6 +471,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_curriculum____last_update
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_teaching____last_update
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_workload____last_update
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_school____last_update
 msgid "Last Modified on"
 msgstr ""
 
@@ -715,6 +718,23 @@ msgid "Picket"
 msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_school__manpower_picket_weekly_hours_per_day
+msgid "Picket Hours per Day"
+msgstr ""
+
+#. module: ssi_hr_manpower_planning_school
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_workload__picket_weekly_hours
+msgid "Picket Hours per Week"
+msgstr ""
+
+#. module: ssi_hr_manpower_planning_school
+#: model:ir.model.fields,help:ssi_hr_manpower_planning_school.field_manpower_planning_workload__picket_weekly_hours
+msgid ""
+"Picket hours counted per day, multiplied by the picket hours per day of the "
+"school of the planning."
+msgstr ""
+
+#. module: ssi_hr_manpower_planning_school
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_assignment__position
 msgid "Position"
 msgstr ""
@@ -743,6 +763,7 @@ msgid ""
 msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
+#: model:ir.model,name:ssi_hr_manpower_planning_school.model_school
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning__school_id
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_teaching__school_id
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_workload__school_id
@@ -852,7 +873,9 @@ msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
 #: model:ir.model.fields,help:ssi_hr_manpower_planning_school.field_manpower_planning_workload__total_weekly_hours
-msgid "Teaching hours plus the additional assignment hours counted per week."
+msgid ""
+"Teaching hours plus the additional assignment hours counted per week plus "
+"the picket hours per week."
 msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
@@ -938,6 +961,13 @@ msgstr ""
 #. module: ssi_hr_manpower_planning_school
 #: model:ir.model.fields,help:ssi_hr_manpower_planning_school.field_manpower_planning_teaching__total_weekly_hours
 msgid "Weekly hours per class multiplied by the number of classes."
+msgstr ""
+
+#. module: ssi_hr_manpower_planning_school
+#: model:ir.model.fields,help:ssi_hr_manpower_planning_school.field_school__manpower_picket_weekly_hours_per_day
+msgid ""
+"Weekly lesson hours counted for each picket day. The manpower planning "
+"workload multiplies the picket days of an employee by this value."
 msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
