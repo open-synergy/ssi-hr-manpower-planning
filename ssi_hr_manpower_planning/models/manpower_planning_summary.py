@@ -133,9 +133,11 @@ class ManpowerPlanningSummary(models.Model):
 
         Every query must select, in this order, the columns
         ``planning_id``, ``job_id``, ``category``, ``quantity_needed``,
-        ``quantity_filled`` and ``quantity_vacant``. Other modules add
-        their own source by extending the returned list through
-        ``super()``.
+        ``quantity_filled`` and ``quantity_vacant``. ``category`` must
+        be cast to ``varchar`` (for example ``'x'::varchar``), because
+        an untyped literal cannot be grouped or ordered by the outer
+        query. Other modules add their own source by extending the
+        returned list through ``super()``.
 
         :return: list of SQL SELECT strings, one per source
         :rtype: list
@@ -144,7 +146,7 @@ class ManpowerPlanningSummary(models.Model):
         SELECT
             f.planning_id AS planning_id,
             f.job_id AS job_id,
-            'formation' AS category,
+            'formation'::varchar AS category,
             f.quantity AS quantity_needed,
             CASE WHEN f.employee_id IS NULL THEN 0 ELSE f.quantity END
                 AS quantity_filled,
