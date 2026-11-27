@@ -22,13 +22,24 @@ msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
 #: model:ir.model.fields.selection,name:ssi_hr_manpower_planning_school.selection__manpower_planning_assignment_type__category__binpres_academic
+#: model:ir.model.fields.selection,name:ssi_hr_manpower_planning_school.selection__manpower_planning_summary__category__binpres_academic
 msgid "Academic Achievement Coaching"
 msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning__academic_year_id
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_summary__academic_year_id
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_workload__academic_year_id
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning_school.manpower_planning_summary_view_search
 #: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning_school.manpower_planning_view_search
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning_school.manpower_planning_workload_view_search
 msgid "Academic Year"
+msgstr ""
+
+#. module: ssi_hr_manpower_planning_school
+#: model:ir.model.fields,help:ssi_hr_manpower_planning_school.field_manpower_planning_summary__academic_year_id
+#: model:ir.model.fields,help:ssi_hr_manpower_planning_school.field_manpower_planning_workload__academic_year_id
+msgid "Academic year of the manpower planning."
 msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
@@ -87,6 +98,7 @@ msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
 #: model:ir.model.fields.selection,name:ssi_hr_manpower_planning_school.selection__manpower_planning_assignment_type__category__additional
+#: model:ir.model.fields.selection,name:ssi_hr_manpower_planning_school.selection__manpower_planning_summary__category__additional
 msgid "Additional Duty"
 msgstr ""
 
@@ -140,6 +152,7 @@ msgstr ""
 #. module: ssi_hr_manpower_planning_school
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_assignment__category
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_assignment_type__category
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_summary__category
 msgid "Category"
 msgstr ""
 
@@ -271,6 +284,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_assignment__display_name
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_assignment_type__display_name
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_curriculum__display_name
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_summary__display_name
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_teaching__display_name
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_workload__display_name
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_school__display_name
@@ -296,7 +310,9 @@ msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
 #: model:ir.model.fields,help:ssi_hr_manpower_planning_school.field_manpower_planning_workload__employee_id
-msgid "Employee the workload is recapped for."
+msgid ""
+"Employee the workload is recapped for. Empty on the row that gathers the "
+"vacant lines of the planning."
 msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
@@ -324,6 +340,7 @@ msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
 #: model:ir.model.fields.selection,name:ssi_hr_manpower_planning_school.selection__manpower_planning_assignment_type__category__extracurricular
+#: model:ir.model.fields.selection,name:ssi_hr_manpower_planning_school.selection__manpower_planning_summary__category__extracurricular
 msgid "Extracurricular Coach"
 msgstr ""
 
@@ -426,6 +443,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_assignment__id
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_assignment_type__id
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_curriculum__id
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_summary__id
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_teaching__id
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_workload__id
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_school__id
@@ -496,6 +514,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_assignment____last_update
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_assignment_type____last_update
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_curriculum____last_update
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_summary____last_update
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_teaching____last_update
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_workload____last_update
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_school____last_update
@@ -563,6 +582,11 @@ msgstr ""
 #: model:ir.model,name:ssi_hr_manpower_planning_school.model_manpower_planning_curriculum
 #: model:res.groups,name:ssi_hr_manpower_planning_school.manpower_planning_curriculum_group
 msgid "Manpower Planning Curriculum"
+msgstr ""
+
+#. module: ssi_hr_manpower_planning_school
+#: model:ir.model,name:ssi_hr_manpower_planning_school.model_manpower_planning_summary
+msgid "Manpower Planning Summary"
 msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
@@ -659,11 +683,13 @@ msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
 #: model:ir.model.fields.selection,name:ssi_hr_manpower_planning_school.selection__manpower_planning_assignment_type__category__binpres_non_academic
+#: model:ir.model.fields.selection,name:ssi_hr_manpower_planning_school.selection__manpower_planning_summary__category__binpres_non_academic
 msgid "Non-Academic Achievement Coaching"
 msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
 #: model:ir.model.fields.selection,name:ssi_hr_manpower_planning_school.selection__manpower_planning_assignment_type__category__non_teacher
+#: model:ir.model.fields.selection,name:ssi_hr_manpower_planning_school.selection__manpower_planning_summary__category__non_teacher
 msgid "Non-Teacher"
 msgstr ""
 
@@ -754,6 +780,7 @@ msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
 #: model:ir.model.fields.selection,name:ssi_hr_manpower_planning_school.selection__manpower_planning_assignment_type__category__picket
+#: model:ir.model.fields.selection,name:ssi_hr_manpower_planning_school.selection__manpower_planning_summary__category__picket
 msgid "Picket"
 msgstr ""
 
@@ -805,8 +832,10 @@ msgstr ""
 #. module: ssi_hr_manpower_planning_school
 #: model:ir.model,name:ssi_hr_manpower_planning_school.model_school
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning__school_id
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_summary__school_id
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_teaching__school_id
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_workload__school_id
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning_school.manpower_planning_summary_view_search
 #: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning_school.manpower_planning_view_form
 #: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning_school.manpower_planning_view_search
 #: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning_school.manpower_planning_workload_view_search
@@ -824,6 +853,7 @@ msgid "School of the manpower planning, copied from the header."
 msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
+#: model:ir.model.fields,help:ssi_hr_manpower_planning_school.field_manpower_planning_summary__school_id
 #: model:ir.model.fields,help:ssi_hr_manpower_planning_school.field_manpower_planning_workload__school_id
 msgid "School of the manpower planning."
 msgstr ""
@@ -831,6 +861,11 @@ msgstr ""
 #. module: ssi_hr_manpower_planning_school
 #: model:ir.model.fields,help:ssi_hr_manpower_planning_school.field_manpower_planning__school_id
 msgid "School unit this manpower planning is made for. Optional."
+msgstr ""
+
+#. module: ssi_hr_manpower_planning_school
+#: model:ir.model.fields,help:ssi_hr_manpower_planning_school.field_manpower_planning_summary__category
+msgid "Source of the manpower lines the summary row is built from."
 msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
@@ -856,6 +891,7 @@ msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
 #: model:ir.model.fields.selection,name:ssi_hr_manpower_planning_school.selection__manpower_planning_assignment_type__category__structural
+#: model:ir.model.fields.selection,name:ssi_hr_manpower_planning_school.selection__manpower_planning_summary__category__structural
 msgid "Structural"
 msgstr ""
 
@@ -889,6 +925,7 @@ msgid ""
 msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
+#: model:ir.model.fields.selection,name:ssi_hr_manpower_planning_school.selection__manpower_planning_summary__category__teaching
 #: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning_school.manpower_planning_view_form
 msgid "Teaching"
 msgstr ""
