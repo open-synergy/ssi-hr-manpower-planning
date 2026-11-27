@@ -23,6 +23,7 @@ Work Instruction
 * `Edit Manpower Planning <docs/manpower_planning/index.html>`_
 * `Import Teaching Lines from Teaching Assignment <docs/manpower_planning/index.html>`_
 * `Generate Teaching Lines from Curriculum <docs/manpower_planning/index.html>`_
+* `Print Manpower Planning Summary <docs/manpower_planning/index.html>`_
 * `Create Assignment Type <docs/manpower_planning_assignment_type/index.html>`_
 * `Edit Assignment Type <docs/manpower_planning_assignment_type/index.html>`_
 * `Delete Assignment Type <docs/manpower_planning_assignment_type/index.html>`_

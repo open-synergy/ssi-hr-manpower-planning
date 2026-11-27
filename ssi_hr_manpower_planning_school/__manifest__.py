@@ -29,6 +29,7 @@
         "views/manpower_planning_summary.xml",
         "views/manpower_planning_workload.xml",
         "wizards/import_teaching_assignment.xml",
+        "reports/manpower_planning_summary_templates.xml",
         "views/assets.xml",
     ],
     "demo": [],
