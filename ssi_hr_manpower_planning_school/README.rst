@@ -7,11 +7,12 @@ HR - Manpower Planning - School
 ===============================
 
 Extends the manpower planning (MPP) of ``ssi_hr_manpower_planning`` for schools. A
-planning gets the school unit, academic year and curriculum, a teaching assignment plan
+planning gets the school unit, academic year and school curriculum, a teaching assignment plan
 per subject, grade and class with the weekly lesson hours, the teacher and the co-teacher,
 and the additional assignments (structural, additional duty, non-teacher, picket,
 achievement coaching and extracurricular coach) with their hours. A workload analysis
-recaps the teaching and assignment hours per employee. All school fields are optional, so
+recaps the teaching and assignment hours per employee. The teaching lines can be
+generated from the open school curriculum of the school. All school fields are optional, so
 plannings without school data keep working as before.
 
 
@@ -21,9 +22,7 @@ Work Instruction
 * `Create Manpower Planning <docs/manpower_planning/index.html>`_
 * `Edit Manpower Planning <docs/manpower_planning/index.html>`_
 * `Import Teaching Lines from Teaching Assignment <docs/manpower_planning/index.html>`_
-* `Create Curriculum <docs/manpower_planning_curriculum/index.html>`_
-* `Edit Curriculum <docs/manpower_planning_curriculum/index.html>`_
-* `Delete Curriculum <docs/manpower_planning_curriculum/index.html>`_
+* `Generate Teaching Lines from Curriculum <docs/manpower_planning/index.html>`_
 * `Create Assignment Type <docs/manpower_planning_assignment_type/index.html>`_
 * `Edit Assignment Type <docs/manpower_planning_assignment_type/index.html>`_
 * `Delete Assignment Type <docs/manpower_planning_assignment_type/index.html>`_

@@ -66,6 +66,13 @@
                         class="oe_highlight"
                         attrs="{'invisible': ['|', ('state', '!=', 'draft'), ('school_id', '=', False)]}"
                     />
+                <button
+                        name="action_generate_teaching_from_curriculum"
+                        type="object"
+                        string="Generate from Curriculum"
+                        class="oe_highlight"
+                        attrs="{'invisible': ['|', ('state', '!=', 'draft'), ('curriculum_id', '=', False)]}"
+                    />
             </xpath>
             <xpath expr="//page[@name='summary']" position="after">
                 <page name="school" string="School">
@@ -73,7 +80,11 @@
                         <field name="school_id" options="{'no_create': True}" />
                         <field name="school_branch_id" />
                         <field name="academic_year_id" options="{'no_create': True}" />
-                        <field name="curriculum_id" options="{'no_create': True}" />
+                        <field
+                                name="curriculum_id"
+                                options="{'no_create': True}"
+                                domain="[('school_id', '=', school_id), ('state', '=', 'open')]"
+                            />
                     </group>
                 </page>
                 <page name="teaching" string="Teaching">

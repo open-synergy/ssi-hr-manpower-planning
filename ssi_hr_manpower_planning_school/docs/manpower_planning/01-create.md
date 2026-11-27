@@ -6,8 +6,9 @@
 ## Additional Pre-Condition
 
 - **Module:** `ssi_hr_manpower_planning_school` is installed.
-- **Data:** The school, academic year and curriculum the planning is made for exist
-  (optional).
+- **Data:** The school and academic year the planning is made for exist (optional).
+- **Data:** The school has a school curriculum that is **On Progress** (optional). It is
+  filled in the **Curriculum** field when the school is selected.
 - **Data:** The subjects with their applicable grades, the grades, the classes of the
   school and the teachers exist (needed for the **Teaching** tab).
 - **Data:** The assignment types exist (needed for the **Additional Assignments** tab).
@@ -23,7 +24,11 @@ On the **School** tab:
 - **School Branch**: Automatically filled from **School**. Read-only.
 - **Academic Year**: Select the academic year. **Date Start** and **Date End** in the
   header are automatically filled from the academic year. Change if needed.
-- **Curriculum**: Select the curriculum the planning follows.
+- **Curriculum**: Automatically filled with the school curriculum that is **On
+  Progress** for the selected **School**, and left empty when the school has none.
+  Change or empty it if needed; only the **On Progress** curriculums of the school are
+  listed. Leave it empty for a planning that does not follow a curriculum, for example a
+  planning of non-teacher staff.
 
 On the **Teaching** tab, click **Add a line**. Repeat the following steps as many times
 as needed:
@@ -44,7 +49,9 @@ as needed:
   employee than the teacher.
 - **Teaching Assignment Lines**: Shown as tags at the end of the line. Filled when the
   line is imported from a teaching assignment (see the Import Teaching Lines from
-  Teaching Assignment work instruction); leave it empty for a manual line.
+  Teaching Assignment work instruction); leave it empty for a manual line. A line can
+  also be generated from the curriculum (see the Generate Teaching Lines from Curriculum
+  work instruction).
 
 On the **Additional Assignments** tab, click **Add a line**. Repeat the following steps
 as many times as needed:
