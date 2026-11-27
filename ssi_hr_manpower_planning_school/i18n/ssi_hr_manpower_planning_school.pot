@@ -14,6 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: ssi_hr_manpower_planning_school
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_import_teaching_assignment__planning_id
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_assignment__planning_id
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_teaching__planning_id
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_workload__planning_id
@@ -27,6 +28,12 @@ msgid "Academic Achievement Coaching"
 msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_import_teaching_assignment__academic_term_id
+msgid "Academic Term"
+msgstr ""
+
+#. module: ssi_hr_manpower_planning_school
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_import_teaching_assignment__academic_year_id
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning__academic_year_id
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_summary__academic_year_id
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_workload__academic_year_id
@@ -37,9 +44,28 @@ msgid "Academic Year"
 msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
+#: model:ir.model.fields,help:ssi_hr_manpower_planning_school.field_import_teaching_assignment__academic_term_id
+msgid "Academic term (semester) whose teaching assignments are imported."
+msgstr ""
+
+#. module: ssi_hr_manpower_planning_school
+#: model:ir.model.fields,help:ssi_hr_manpower_planning_school.field_import_teaching_assignment__allowed_academic_term_ids
+msgid ""
+"Academic terms that can be selected, following the academic year of the "
+"planning."
+msgstr ""
+
+#. module: ssi_hr_manpower_planning_school
 #: model:ir.model.fields,help:ssi_hr_manpower_planning_school.field_manpower_planning_summary__academic_year_id
 #: model:ir.model.fields,help:ssi_hr_manpower_planning_school.field_manpower_planning_workload__academic_year_id
 msgid "Academic year of the manpower planning."
+msgstr ""
+
+#. module: ssi_hr_manpower_planning_school
+#: model:ir.model.fields,help:ssi_hr_manpower_planning_school.field_import_teaching_assignment__academic_year_id
+msgid ""
+"Academic year of the planning. When it is filled, only the academic terms of"
+" that year can be selected."
 msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
@@ -103,6 +129,11 @@ msgid "Additional Duty"
 msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_import_teaching_assignment__allowed_academic_term_ids
+msgid "Allowed Academic Terms"
+msgstr ""
+
+#. module: ssi_hr_manpower_planning_school
 #: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning_school.manpower_planning_assignment_type_view_form
 msgid "Assignment"
 msgstr ""
@@ -142,6 +173,11 @@ msgstr ""
 #. module: ssi_hr_manpower_planning_school
 #: model:ir.model.fields,help:ssi_hr_manpower_planning_school.field_manpower_planning__school_branch_id
 msgid "Branch of the selected school, copied from the school."
+msgstr ""
+
+#. module: ssi_hr_manpower_planning_school
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning_school.import_teaching_assignment_view_form
+msgid "Cancel"
 msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
@@ -227,6 +263,7 @@ msgid "Company of the manpower planning."
 msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_import_teaching_assignment__create_uid
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_assignment__create_uid
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_assignment_type__create_uid
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_curriculum__create_uid
@@ -235,6 +272,7 @@ msgid "Created by"
 msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_import_teaching_assignment__create_date
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_assignment__create_date
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_assignment_type__create_date
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_curriculum__create_date
@@ -280,6 +318,7 @@ msgid "Description"
 msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_import_teaching_assignment__display_name
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning__display_name
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_assignment__display_name
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_assignment_type__display_name
@@ -439,6 +478,7 @@ msgid ""
 msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_import_teaching_assignment__id
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning__id
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_assignment__id
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_assignment_type__id
@@ -477,6 +517,21 @@ msgid "If checked, some messages have a delivery error."
 msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning_school.import_teaching_assignment_view_form
+msgid "Import"
+msgstr ""
+
+#. module: ssi_hr_manpower_planning_school
+#: model:ir.model,name:ssi_hr_manpower_planning_school.model_import_teaching_assignment
+msgid "Import Teaching Lines from Teaching Assignment"
+msgstr ""
+
+#. module: ssi_hr_manpower_planning_school
+#: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning_school.manpower_planning_view_form
+msgid "Import from Teaching Assignment"
+msgstr ""
+
+#. module: ssi_hr_manpower_planning_school
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_assignment_type__message_is_follower
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_curriculum__message_is_follower
 msgid "Is Follower"
@@ -510,6 +565,7 @@ msgid "Lacking Weekly Hours"
 msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_import_teaching_assignment____last_update
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning____last_update
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_assignment____last_update
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_assignment_type____last_update
@@ -522,6 +578,7 @@ msgid "Last Modified on"
 msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_import_teaching_assignment__write_uid
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_assignment__write_uid
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_assignment_type__write_uid
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_curriculum__write_uid
@@ -530,6 +587,7 @@ msgid "Last Updated by"
 msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_import_teaching_assignment__write_date
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_assignment__write_date
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_assignment_type__write_date
 #: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_curriculum__write_date
@@ -545,6 +603,13 @@ msgstr ""
 #. module: ssi_hr_manpower_planning_school
 #: model:ir.model.fields,help:ssi_hr_manpower_planning_school.field_manpower_planning_teaching__weekly_hours
 msgid "Lesson hours per week taught in each class. It must be at least 1."
+msgstr ""
+
+#. module: ssi_hr_manpower_planning_school
+#: model:ir.model.fields,help:ssi_hr_manpower_planning_school.field_manpower_planning_teaching__teaching_assignment_line_ids
+msgid ""
+"Lines of the school teaching assignment this plan line was imported from. "
+"Optional; the line stays a plan that can be edited."
 msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
@@ -613,6 +678,11 @@ msgstr ""
 #. module: ssi_hr_manpower_planning_school
 #: model:ir.model.fields,help:ssi_hr_manpower_planning_school.field_manpower_planning_workload__planning_id
 msgid "Manpower planning document the workload belongs to."
+msgstr ""
+
+#. module: ssi_hr_manpower_planning_school
+#: model:ir.model.fields,help:ssi_hr_manpower_planning_school.field_import_teaching_assignment__planning_id
+msgid "Manpower planning that receives the imported teaching lines."
 msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
@@ -928,6 +998,11 @@ msgstr ""
 #: model:ir.model.fields.selection,name:ssi_hr_manpower_planning_school.selection__manpower_planning_summary__category__teaching
 #: model_terms:ir.ui.view,arch_db:ssi_hr_manpower_planning_school.manpower_planning_view_form
 msgid "Teaching"
+msgstr ""
+
+#. module: ssi_hr_manpower_planning_school
+#: model:ir.model.fields,field_description:ssi_hr_manpower_planning_school.field_manpower_planning_teaching__teaching_assignment_line_ids
+msgid "Teaching Assignment Lines"
 msgstr ""
 
 #. module: ssi_hr_manpower_planning_school
