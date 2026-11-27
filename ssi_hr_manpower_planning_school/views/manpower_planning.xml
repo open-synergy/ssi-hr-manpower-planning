@@ -58,6 +58,15 @@
         />
     <field name="arch" type="xml">
         <data>
+            <xpath expr="//header/field[@name='state']" position="before">
+                <button
+                        name="action_import_teaching_assignment"
+                        type="object"
+                        string="Import from Teaching Assignment"
+                        class="oe_highlight"
+                        attrs="{'invisible': ['|', ('state', '!=', 'draft'), ('school_id', '=', False)]}"
+                    />
+            </xpath>
             <xpath expr="//page[@name='summary']" position="after">
                 <page name="school" string="School">
                     <group name="school_group_1" colspan="4" col="2">
@@ -88,6 +97,11 @@
                                 />
                             <field name="is_vacant" optional="hide" />
                             <field name="notes" optional="hide" />
+                            <field
+                                    name="teaching_assignment_line_ids"
+                                    widget="many2many_tags"
+                                    options="{'no_create': True}"
+                                />
                         </tree>
                         <form>
                             <group name="teaching_group_1">
@@ -104,6 +118,11 @@
                                 <field name="employee_id" />
                                 <field name="co_employee_id" />
                                 <field name="is_vacant" />
+                                <field
+                                        name="teaching_assignment_line_ids"
+                                        widget="many2many_tags"
+                                        options="{'no_create': True}"
+                                    />
                                 <field name="notes" />
                             </group>
                         </form>

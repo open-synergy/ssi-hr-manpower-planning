@@ -14,6 +14,9 @@
   while the planning is **Draft**. Their fields are described in the Create Manpower
   Planning work instruction of this module.
 
+- The **Teaching Assignment Lines** tags of a **Teaching** line, filled by the import
+  from a teaching assignment, can be changed like the other columns of the line.
+
 ## Modified Validation
 
 - Saving fails with the same rules as at creation when a **Teaching** line is changed to

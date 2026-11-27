@@ -20,6 +20,7 @@ Work Instruction
 
 * `Create Manpower Planning <docs/manpower_planning/index.html>`_
 * `Edit Manpower Planning <docs/manpower_planning/index.html>`_
+* `Import Teaching Lines from Teaching Assignment <docs/manpower_planning/index.html>`_
 * `Create Curriculum <docs/manpower_planning_curriculum/index.html>`_
 * `Edit Curriculum <docs/manpower_planning_curriculum/index.html>`_
 * `Delete Curriculum <docs/manpower_planning_curriculum/index.html>`_
