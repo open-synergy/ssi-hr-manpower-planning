@@ -8,6 +8,10 @@ from odoo_yaml_test import YamlTransactionCase
 
 from odoo.tests import tagged
 
+from ..reports.report_ssi_hr_manpower_planning_manpower_planning_summary_xlsx import (
+    ReportSsiHrManpowerPlanningManpowerPlanningSummaryXlsx as CoreXlsxReport,
+)
+
 
 @tagged("post_install", "-at_install")
 class TestManpowerPlanningReport(YamlTransactionCase):
@@ -246,7 +250,14 @@ class TestManpowerPlanningReport(YamlTransactionCase):
         self.assertIn("category_recap", values["docs"][0])
 
     def test_xlsx_sections_default_order(self):
-        """Assert the XLSX report lists its four default sections.
+        """Assert the core XLSX report lists its four default sections.
+
+        The method of the core class is called directly, not through
+        the registry model: other modules installed in the same
+        database (for example the school extension) add sections to
+        the registry model, so the registry list is no longer the core
+        list. The core method does not call ``super()``, so the call is
+        safe.
 
         Pure Python — trigger P1 (L-01: ``call`` discards the method
         return value, so the returned list of names can't be asserted
@@ -256,7 +267,7 @@ class TestManpowerPlanningReport(YamlTransactionCase):
             "report.ssi_hr_manpower_planning.manpower_planning_summary_xlsx"
         ]
         self.assertEqual(
-            report_xlsx._get_xlsx_sections(),
+            CoreXlsxReport._get_xlsx_sections(report_xlsx),
             [
                 "_write_xlsx_header",
                 "_write_xlsx_summary",
