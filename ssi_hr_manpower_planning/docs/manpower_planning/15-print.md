@@ -23,6 +23,10 @@
 
 ## Post-Condition
 
-- The report lists the needed, filled and vacant manpower per job position with a total,
-  followed by the contract review lines.
+- The report lists the needed, filled and vacant manpower per job position, with the
+  filled and vacant percentage of each row and a total.
+- The report then lists the same figures and percentages per category (Category Recap).
+- The report ends with the contract review lines and the percentage of contracts that
+  are continued (review lines whose recommendation does not end the contract, divided by
+  all review lines).
 - The planning itself is not changed.

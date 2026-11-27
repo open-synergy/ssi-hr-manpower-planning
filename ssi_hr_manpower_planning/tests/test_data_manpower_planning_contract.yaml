@@ -71,3 +71,96 @@ scenarios:
         values:
           planning_id: "REC: planning.id"
           employee_id: "REC: employee.id"
+
+  - name: "Manpower Planning Contract - Continued percentage"
+    steps:
+      - step: "Create department CP"
+        action: "create"
+        model: "hr.department"
+        save_as: "dept"
+        values:
+          name: "MPP Department CP"
+
+      - step: "Create employee CP 1"
+        action: "create"
+        model: "hr.employee"
+        save_as: "employee_1"
+        values:
+          name: "MPP Employee CP 1"
+          department_id: "REC: dept.id"
+
+      - step: "Create employee CP 2"
+        action: "create"
+        model: "hr.employee"
+        save_as: "employee_2"
+        values:
+          name: "MPP Employee CP 2"
+          department_id: "REC: dept.id"
+
+      - step: "Create recommendation that continues the contract"
+        action: "create"
+        model: "manpower_contract_recommendation"
+        save_as: "rec_continue"
+        values:
+          name: "Extend contract CP"
+          code: "MPP-REC-CP-1"
+
+      - step: "Create recommendation that terminates the contract"
+        action: "create"
+        model: "manpower_contract_recommendation"
+        save_as: "rec_terminate"
+        values:
+          name: "Terminate contract CP"
+          code: "MPP-REC-CP-2"
+          is_terminate: true
+
+      - step: "Create manpower planning without review lines"
+        action: "create"
+        model: "manpower_planning"
+        save_as: "planning"
+        values:
+          department_id: "REC: dept.id"
+          date_start: 2026-01-01
+          date_end: 2026-12-31
+
+      - step: "A planning without review lines continues 0 percent"
+        action: "assert"
+        target: "planning"
+        asserts:
+          contract_continue_percent:
+            type: "value"
+            expected: 0.0
+
+      - step: "Add a review line that continues the contract"
+        action: "create"
+        model: "manpower_planning_contract"
+        save_as: "line_continue"
+        values:
+          planning_id: "REC: planning.id"
+          employee_id: "REC: employee_1.id"
+          recommendation_id: "REC: rec_continue.id"
+
+      - step: "All review lines continue: 100 percent"
+        action: "assert"
+        target: "planning"
+        asserts:
+          contract_continue_percent:
+            type: "value"
+            expected: 100.0
+
+      - step: "Add a review line that terminates the contract"
+        action: "create"
+        model: "manpower_planning_contract"
+        save_as: "line_terminate"
+        values:
+          planning_id: "REC: planning.id"
+          employee_id: "REC: employee_2.id"
+          recommendation_id: "REC: rec_terminate.id"
+
+      - step: "One of two review lines continues: 50 percent"
+        action: "assert"
+        target: "planning"
+        asserts:
+          contract_continue_percent:
+            type: "value"
+            expected: 50.0

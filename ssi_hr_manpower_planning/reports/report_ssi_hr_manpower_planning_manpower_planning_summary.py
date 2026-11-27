@@ -16,15 +16,42 @@ class ReportSsiHrManpowerPlanningManpowerPlanningSummary(models.AbstractModel):
     _name = "report.ssi_hr_manpower_planning.manpower_planning_summary"
     _description = "Manpower Planning Summary Report"
 
+    @api.model
+    def _get_percent(self, part, total):
+        """Return ``part`` as a percentage of ``total``, unrounded.
+
+        :param part: the figure to express as a percentage
+        :param total: the figure that stands for 100 percent
+        :return: ``part * 100.0 / total``, or ``0.0`` when ``total`` is
+            zero
+        :rtype: float
+        """
+        if not total:
+            return 0.0
+        return part * 100.0 / total
+
+    def _get_category_label(self, category):
+        """Return the display label of a summary category.
+
+        :param category: technical value of the summary ``category``
+        :return: label of the selection value, or the value itself when
+            the selection has no such key
+        :rtype: str
+        """
+        selection = self.env["manpower_planning_summary"]._fields["category"]
+        labels = dict(selection._description_selection(self.env))
+        return labels.get(category, category or "")
+
     def _get_summary_lines(self, planning):
         """Return the manpower summary of a planning per job position.
 
         The rows come from the ``manpower_planning_summary`` SQL view.
 
         :param planning: a single ``manpower_planning`` record
-        :return: list of dicts with the keys ``job``,
-            ``quantity_needed``, ``quantity_filled`` and
-            ``quantity_vacant``; empty list when the planning has no
+        :return: list of dicts with the keys ``job``, ``category``
+            (label), ``quantity_needed``, ``quantity_filled``,
+            ``quantity_vacant``, ``percent_filled`` and
+            ``percent_vacant``; empty list when the planning has no
             formation line
         """
         self.env["manpower_planning_formation"].flush()
@@ -37,9 +64,58 @@ class ReportSsiHrManpowerPlanningManpowerPlanningSummary(models.AbstractModel):
             result.append(
                 {
                     "job": summary.job_id,
+                    "category": self._get_category_label(summary.category),
                     "quantity_needed": summary.quantity_needed,
                     "quantity_filled": summary.quantity_filled,
                     "quantity_vacant": summary.quantity_vacant,
+                    "percent_filled": summary.percent_filled,
+                    "percent_vacant": summary.percent_vacant,
+                }
+            )
+        return result
+
+    def _get_category_recap(self, planning):
+        """Return the manpower recap of a planning per category.
+
+        The figures are the sums of the summary rows of each category,
+        and the percentages are computed from those sums, not averaged
+        over the rows.
+
+        :param planning: a single ``manpower_planning`` record
+        :return: list of dicts with the keys ``category`` (label),
+            ``quantity_needed``, ``quantity_filled``,
+            ``quantity_vacant``, ``percent_filled`` and
+            ``percent_vacant``; empty list when the planning has no
+            summary row
+        """
+        self.env["manpower_planning_formation"].flush()
+        summaries = self.env["manpower_planning_summary"].search(
+            [("planning_id", "=", planning.id)],
+            order="category, job_id",
+        )
+        totals = {}
+        for summary in summaries:
+            total = totals.setdefault(
+                summary.category,
+                {"needed": 0, "filled": 0, "vacant": 0},
+            )
+            total["needed"] += summary.quantity_needed
+            total["filled"] += summary.quantity_filled
+            total["vacant"] += summary.quantity_vacant
+        result = []
+        for category, total in totals.items():
+            result.append(
+                {
+                    "category": self._get_category_label(category),
+                    "quantity_needed": total["needed"],
+                    "quantity_filled": total["filled"],
+                    "quantity_vacant": total["vacant"],
+                    "percent_filled": self._get_percent(
+                        total["filled"], total["needed"]
+                    ),
+                    "percent_vacant": self._get_percent(
+                        total["vacant"], total["needed"]
+                    ),
                 }
             )
         return result
@@ -92,7 +168,8 @@ class ReportSsiHrManpowerPlanningManpowerPlanningSummary(models.AbstractModel):
         :param data: unused, present for the report engine signature
         :return: dict with ``doc_ids``, ``doc_model`` and ``docs``;
             each doc holds the planning, its summary lines, the summary
-            total and its contract review lines
+            total, the per category recap, the percentage of continued
+            contracts and its contract review lines
         """
         plannings = self.env["manpower_planning"].browse(docids)
         docs = []
@@ -103,6 +180,8 @@ class ReportSsiHrManpowerPlanningManpowerPlanningSummary(models.AbstractModel):
                     "planning": planning,
                     "summary_lines": summary_lines,
                     "summary_total": self._get_summary_total(summary_lines),
+                    "category_recap": self._get_category_recap(planning),
+                    "contract_continue_percent": (planning.contract_continue_percent),
                     "contract_lines": self._get_contract_lines(planning),
                 }
             )
