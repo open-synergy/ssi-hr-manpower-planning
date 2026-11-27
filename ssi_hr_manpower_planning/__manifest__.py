@@ -11,6 +11,7 @@
     "installable": True,
     "application": True,
     "depends": [
+        "ssi_hr",
         "ssi_hr_employee",
         "ssi_master_data_mixin",
         "ssi_transaction_confirm_mixin",
@@ -46,6 +47,7 @@
         "views/manpower_planning.xml",
         "views/manpower_planning_summary.xml",
         "views/manpower_head_count.xml",
+        "views/res_config_settings.xml",
         "reports/manpower_planning_summary_templates.xml",
         "reports/manpower_planning_summary.xml",
         "views/assets.xml",

@@ -30,6 +30,7 @@ Work Instruction
 * `Reset Document Number - Manpower Planning <docs/manpower_planning/index.html>`_
 * `Restart Approval Process - Manpower Planning <docs/manpower_planning/index.html>`_
 * `Print Manpower Planning Summary <docs/manpower_planning/index.html>`_
+* `Generate Contract Reviews - Manpower Planning <docs/manpower_planning/index.html>`_
 * `Create Head Count Snapshot <docs/manpower_head_count/index.html>`_
 * `Edit Head Count Snapshot <docs/manpower_head_count/index.html>`_
 * `Delete Head Count Snapshot <docs/manpower_head_count/index.html>`_

@@ -2,7 +2,8 @@
 # Copyright 2026 PT. Simetri Sinergi Indonesia
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import UserError
 
 from odoo.addons.ssi_decorator import ssi_decorator
 
@@ -197,6 +198,100 @@ class ManpowerPlanning(models.Model):
                 )
                 result = continued * 100.0 / total
             record.contract_continue_percent = result
+
+    def action_generate_contract(self):
+        """Add contract review lines for the employees on contract.
+
+        Triggered by the **Generate Contract** button of a draft
+        planning. Employees that already have a review line are kept
+        as they are.
+
+        :return: nothing; the new lines appear on the Contract Reviews
+            tab
+        """
+        for record in self.sudo():
+            record._generate_contract()
+
+    def _generate_contract(self):
+        """Create one review line per employee on a contract status.
+
+        The lines copy the contract dates of the employee and leave the
+        recommendation empty. An employee that already has a line in
+        this planning is skipped, so the action can run again safely.
+        When no employee matches nothing is created.
+
+        :raises UserError: when the planning is not a draft, or when
+            the company has no contract employment status configured
+        """
+        self.ensure_one()
+        if self.state != "draft":
+            error_message = """
+Document Type: %s
+Context: Generate contract review lines
+Database ID: %s
+Problem: Contract review lines can only be generated while the planning is draft
+Solution: Restart the planning to draft first
+""" % (
+                self._description.lower(),
+                self.id,
+            )
+            raise UserError(_(error_message))
+        if not self.company_id.manpower_contract_employment_status_ids:
+            error_message = """
+Document Type: %s
+Context: Generate contract review lines
+Database ID: %s
+Problem: The company has no contract employment status configured
+Solution: Configure contract employment statuses in the Settings first
+""" % (
+                self._description.lower(),
+                self.id,
+            )
+            raise UserError(_(error_message))
+        contract_obj = self.env["manpower_planning_contract"]
+        existing = self.contract_ids.mapped("employee_id")
+        employees = self.env["hr.employee"].search(
+            self._get_contract_employee_criteria()
+        )
+        for employee in employees - existing:
+            contract_obj.create(self._prepare_contract_values(employee))
+
+    def _get_contract_employee_criteria(self):
+        """Build the domain of the employees given a review line.
+
+        Extension point: override to add more filters.
+
+        :return: search domain of active employees of the company of
+            the planning that have a contract employment status, and
+            that belong to the department of the planning when it is set
+        """
+        self.ensure_one()
+        status_ids = self.company_id.manpower_contract_employment_status_ids.ids
+        criteria = [
+            ("company_id", "=", self.company_id.id),
+            ("active", "=", True),
+            ("employment_status_id", "in", status_ids),
+        ]
+        if self.department_id:
+            criteria.append(("department_id", "=", self.department_id.id))
+        return criteria
+
+    def _prepare_contract_values(self, employee):
+        """Build the create values of the review line of an employee.
+
+        Extension point: override to fill more fields of the line.
+
+        :param employee: a single ``hr.employee`` record
+        :return: ``manpower_planning_contract`` create values with the
+            contract dates copied from the employee
+        """
+        self.ensure_one()
+        return {
+            "planning_id": self.id,
+            "employee_id": employee.id,
+            "date_contract_start": employee.date_contract_start,
+            "date_contract_end": employee.date_contract_end,
+        }
 
     @ssi_decorator.insert_on_form_view()
     def _insert_form_element(self, view_arch):

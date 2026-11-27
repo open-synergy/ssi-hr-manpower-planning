@@ -9,3 +9,5 @@ from . import manpower_planning_contract  # noqa: F401
 from . import manpower_planning_summary  # noqa: F401
 from . import manpower_head_count  # noqa: F401
 from . import manpower_head_count_line  # noqa: F401
+from . import res_company  # noqa: F401
+from . import res_config_settings  # noqa: F401

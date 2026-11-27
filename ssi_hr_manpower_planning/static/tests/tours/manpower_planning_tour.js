@@ -450,4 +450,60 @@ odoo.define("ssi_hr_manpower_planning.manpower_planning_tour", function (require
             ]
         )
     );
+
+    // IK: docs/manpower_planning/16-generate-contract.md
+    tour.register(
+        "ssi_hr_manpower_planning_manpower_planning_generate_contract",
+        {
+            test: true,
+            url: "/web",
+        },
+        [].concat(
+            // Flow 1 -- Open the Human Resource > Manpower Planning >
+            // Manpower Plannings menu.
+            openPlanningList(),
+            // Flow 2 -- Open the draft planning to fill.
+            openPlanningByDepartment("Tour MPP Generate Dept"),
+            [
+                // Flow 3 -- Click the Generate Contract button.
+                {
+                    content: "Click the Generate Contract button",
+                    trigger:
+                        ".o_statusbar_buttons button[name='action_generate_contract']",
+                    extra_trigger: ".o_form_view",
+                },
+                {
+                    // The button sits in the statusbar, so it stays
+                    // disabled while the action and the reload run.
+                    content: "Generate Contract has finished",
+                    trigger:
+                        ".o_statusbar_buttons button[name='action_generate_contract']:enabled",
+                    run: function () {
+                        // Assertion only.
+                    },
+                },
+
+                // Flow 4 -- Open the Contract Reviews tab. The row of the
+                // fixture employee only exists once the lines are
+                // generated, so it cannot match earlier.
+                {
+                    content: "Open the Contract Reviews tab",
+                    trigger: ".o_notebook .nav-link:contains(Contract Reviews)",
+                    extra_trigger: ".o_form_view",
+                },
+
+                // Post-Condition -- a review line exists for the
+                // employee on a contract status. The copied dates and the
+                // skipped employees are values and belong to the unit test.
+                {
+                    content: "The contract review line is generated",
+                    trigger:
+                        ".o_field_x2many[name='contract_ids'] .o_data_row:contains(Tour MPP Generate Employee)",
+                    run: function () {
+                        // Assertion only.
+                    },
+                },
+            ]
+        )
+    );
 });
