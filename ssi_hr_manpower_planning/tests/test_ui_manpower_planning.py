@@ -70,6 +70,28 @@ class TestUiManpowerPlanning(HttpSavepointCase):
         # cancel policy allows.
         cls.planning_cancel = cls._create_planning("Cancel")
 
+        # Pre-Condition 16-generate-contract.md: Draft, the company has a
+        # contract employment status and the department has one active
+        # employee with that status. The employee is the delta the tour
+        # waits for, because the planning has no review line before the
+        # button is clicked.
+        company = cls.admin.company_id
+        cls.contract_status = cls.env["hr.employment_status"].create(
+            {"name": "Tour MPP Contract Status", "code": "/"}
+        )
+        company.manpower_contract_employment_status_ids = [(4, cls.contract_status.id)]
+        cls.planning_generate = cls._create_planning("Generate")
+        cls.env["hr.employee"].create(
+            {
+                "name": "Tour MPP Generate Employee",
+                "company_id": company.id,
+                "department_id": cls.planning_generate.department_id.id,
+                "employment_status_id": cls.contract_status.id,
+                "date_contract_start": "2026-01-01",
+                "date_contract_end": "2026-12-31",
+            }
+        )
+
     @classmethod
     def _create_planning(cls, label):
         """Create one Draft planning dedicated to a single tour.
@@ -166,5 +188,16 @@ class TestUiManpowerPlanning(HttpSavepointCase):
         self.start_tour(
             "/web",
             "ssi_hr_manpower_planning_manpower_planning_cancel",
+            login="admin",
+        )
+
+    def test_generate_contract(self):
+        """Run the generate contract tour for ``manpower_planning``.
+
+        IK: docs/manpower_planning/16-generate-contract.md
+        """
+        self.start_tour(
+            "/web",
+            "ssi_hr_manpower_planning_manpower_planning_generate_contract",
             login="admin",
         )

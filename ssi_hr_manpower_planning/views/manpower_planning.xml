@@ -54,6 +54,15 @@
     <field name="mode">primary</field>
     <field name="arch" type="xml">
         <data>
+            <xpath expr="//header/field[@name='state']" position="before">
+                <button
+                        name="action_generate_contract"
+                        type="object"
+                        string="Generate Contract"
+                        class="oe_highlight"
+                        attrs="{'invisible':[('state','!=','draft')]}"
+                    />
+            </xpath>
             <xpath expr="//group[@name='header_right']" position="inside">
                 <field name="department_id" options="{'no_create': True}" />
                 <field name="date_start" />

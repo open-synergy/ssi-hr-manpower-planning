@@ -1,0 +1,360 @@
+options:
+  auto_refresh: true
+
+scenarios:
+  - name: "Generate Contract - Rejected when not configured or not draft"
+    steps:
+      - step: "Create department NC"
+        action: "create"
+        model: "hr.department"
+        save_as: "dept"
+        values:
+          name: "MPP Department GC NC"
+
+      - step: "Create manpower planning NC"
+        action: "create"
+        model: "manpower_planning"
+        save_as: "planning"
+        values:
+          department_id: "REC: dept.id"
+          date_start: 2026-01-01
+          date_end: 2026-12-31
+
+      - step: "No contract employment status is configured"
+        action: "call"
+        target: "planning"
+        method: "action_generate_contract"
+        expect_error:
+          type: "UserError"
+          message_contains: "contract employment status"
+
+      - step: "Confirm planning NC"
+        action: "call"
+        target: "planning"
+        method: "action_confirm"
+        as_user: "base.user_admin"
+        asserts:
+          state:
+            type: "value"
+            expected: "confirm"
+
+      - step: "A planning that is not draft is rejected"
+        action: "call"
+        target: "planning"
+        method: "action_generate_contract"
+        expect_error:
+          type: "UserError"
+          message_contains: "draft"
+
+  - name: "Generate Contract - Lines, no duplicate and department filter"
+    steps:
+      - step: "Create department A"
+        action: "create"
+        model: "hr.department"
+        save_as: "dept_a"
+        values:
+          name: "MPP Department GC A"
+
+      - step: "Create department B"
+        action: "create"
+        model: "hr.department"
+        save_as: "dept_b"
+        values:
+          name: "MPP Department GC B"
+
+      - step: "Create the contract employment status"
+        action: "create"
+        model: "hr.employment_status"
+        save_as: "status_contract"
+        values:
+          name: "MPP GC Contract"
+          code: "/"
+
+      - step: "Create another employment status"
+        action: "create"
+        model: "hr.employment_status"
+        save_as: "status_permanent"
+        values:
+          name: "MPP GC Permanent"
+          code: "/"
+
+      - step: "Configure the contract employment status on the company"
+        action: "write"
+        target: "company"
+        values:
+          manpower_contract_employment_status_ids:
+            - - 6
+              - 0
+              - - "REC: status_contract.id"
+
+      - step: "Create employee 1 on contract in department A"
+        action: "create"
+        model: "hr.employee"
+        save_as: "employee_1"
+        values:
+          name: "MPP GC Employee 1"
+          department_id: "REC: dept_a.id"
+          employment_status_id: "REC: status_contract.id"
+          date_contract_start: 2026-01-01
+          date_contract_end: 2026-06-30
+
+      - step: "Create employee 2 on contract in department A"
+        action: "create"
+        model: "hr.employee"
+        save_as: "employee_2"
+        values:
+          name: "MPP GC Employee 2"
+          department_id: "REC: dept_a.id"
+          employment_status_id: "REC: status_contract.id"
+          date_contract_start: 2026-03-01
+          date_contract_end: 2026-12-31
+
+      - step: "Create employee 3 with another status in department A"
+        action: "create"
+        model: "hr.employee"
+        save_as: "employee_3"
+        values:
+          name: "MPP GC Employee 3"
+          department_id: "REC: dept_a.id"
+          employment_status_id: "REC: status_permanent.id"
+
+      - step: "Create employee 4 on contract in department B"
+        action: "create"
+        model: "hr.employee"
+        save_as: "employee_4"
+        values:
+          name: "MPP GC Employee 4"
+          department_id: "REC: dept_b.id"
+          employment_status_id: "REC: status_contract.id"
+
+      - step: "Create archived employee 5 on contract in department A"
+        action: "create"
+        model: "hr.employee"
+        values:
+          name: "MPP GC Employee 5"
+          active: false
+          department_id: "REC: dept_a.id"
+          employment_status_id: "REC: status_contract.id"
+
+      - step: "Create manpower planning of department A"
+        action: "create"
+        model: "manpower_planning"
+        save_as: "planning_a"
+        values:
+          department_id: "REC: dept_a.id"
+          date_start: 2026-01-01
+          date_end: 2026-12-31
+
+      - step: "Generate the contract review lines"
+        action: "call"
+        target: "planning_a"
+        method: "action_generate_contract"
+        asserts:
+          contract_ids:
+            type: "o2m"
+            check: "count"
+            expected_count: 2
+
+      - step: "Employee 2 got a line"
+        action: "search"
+        model: "manpower_planning_contract"
+        save_as: "line_2"
+        expect_count: 1
+        domain:
+          - ["planning_id", "=", "REC: planning_a.id"]
+          - ["employee_id", "=", "REC: employee_2.id"]
+
+      - step: "Employees of another status, department or archived got none"
+        action: "search"
+        model: "manpower_planning_contract"
+        save_as: "other_lines"
+        expect_count: 0
+        domain:
+          - ["planning_id", "=", "REC: planning_a.id"]
+          - ["employee_id", "not in", ["REC: employee_1.id", "REC: employee_2.id"]]
+
+      - step: "Find the line of employee 1"
+        action: "search"
+        model: "manpower_planning_contract"
+        save_as: "line_1"
+        expect_count: 1
+        domain:
+          - ["planning_id", "=", "REC: planning_a.id"]
+          - ["employee_id", "=", "REC: employee_1.id"]
+
+      - step: "The line copies the contract dates and has no recommendation"
+        action: "assert"
+        target: "line_1"
+        asserts:
+          date_contract_start:
+            type: "value"
+            expected: 2026-01-01
+          date_contract_end:
+            type: "value"
+            expected: 2026-06-30
+          recommendation_id:
+            type: "value"
+            operator: "is_falsy"
+
+      - step: "Generate again does not duplicate the lines"
+        action: "call"
+        target: "planning_a"
+        method: "action_generate_contract"
+        asserts:
+          contract_ids:
+            type: "o2m"
+            check: "count"
+            expected_count: 2
+
+      - step: "Create manpower planning of department B"
+        action: "create"
+        model: "manpower_planning"
+        save_as: "planning_b"
+        values:
+          department_id: "REC: dept_b.id"
+          date_start: 2026-01-01
+          date_end: 2026-12-31
+
+      - step: "Fill the review line of employee 4 manually"
+        action: "create"
+        model: "manpower_planning_contract"
+        save_as: "line_4"
+        values:
+          planning_id: "REC: planning_b.id"
+          employee_id: "REC: employee_4.id"
+          notes: "Filled by hand"
+
+      - step: "Generate skips the employee that already has a line"
+        action: "call"
+        target: "planning_b"
+        method: "action_generate_contract"
+        asserts:
+          contract_ids:
+            type: "o2m"
+            check: "count"
+            expected_count: 1
+
+      - step: "The manual line is left as it was"
+        action: "assert"
+        target: "line_4"
+        asserts:
+          notes:
+            type: "value"
+            expected: "Filled by hand"
+
+      - step: "Restore the company configuration"
+        action: "write"
+        target: "company"
+        values:
+          manpower_contract_employment_status_ids:
+            - - 5
+              - 0
+              - 0
+
+  - name: "Generate Contract - Nobody to add when no employee matches"
+    steps:
+      - step: "Create department NM"
+        action: "create"
+        model: "hr.department"
+        save_as: "dept"
+        values:
+          name: "MPP Department GC NM"
+
+      - step: "Create the contract employment status NM"
+        action: "create"
+        model: "hr.employment_status"
+        save_as: "status_contract"
+        values:
+          name: "MPP GC Contract NM"
+          code: "/"
+
+      - step: "Configure the contract employment status NM on the company"
+        action: "write"
+        target: "company"
+        values:
+          manpower_contract_employment_status_ids:
+            - - 6
+              - 0
+              - - "REC: status_contract.id"
+
+      - step: "Create manpower planning NM"
+        action: "create"
+        model: "manpower_planning"
+        save_as: "planning"
+        values:
+          department_id: "REC: dept.id"
+          date_start: 2026-01-01
+          date_end: 2026-12-31
+
+      - step: "Generate creates nothing and raises no error"
+        action: "call"
+        target: "planning"
+        method: "action_generate_contract"
+        asserts:
+          contract_ids:
+            type: "o2m"
+            check: "count"
+            expected_count: 0
+
+      - step: "Restore the company configuration NM"
+        action: "write"
+        target: "company"
+        values:
+          manpower_contract_employment_status_ids:
+            - - 5
+              - 0
+              - 0
+
+  - name: "Generate Contract - Settings form saves the statuses"
+    steps:
+      - step: "Create the contract employment status ST"
+        action: "create"
+        model: "hr.employment_status"
+        save_as: "status_contract"
+        values:
+          name: "MPP GC Contract ST"
+          code: "/"
+
+      - step: "Open the Settings form"
+        action: "form"
+        model: "res.config.settings"
+        save_as: "settings_open"
+
+      - step: "Apply the opened Settings"
+        action: "call"
+        target: "settings_open"
+        method: "execute"
+
+      - step: "Create the Settings with the new field"
+        action: "create"
+        model: "res.config.settings"
+        save_as: "settings"
+        values:
+          manpower_contract_employment_status_ids:
+            - - 6
+              - 0
+              - - "REC: status_contract.id"
+
+      - step: "Apply the Settings"
+        action: "call"
+        target: "settings"
+        method: "execute"
+
+      - step: "The company received the statuses"
+        action: "assert"
+        target: "company"
+        asserts:
+          manpower_contract_employment_status_ids:
+            type: "m2m"
+            check: "exact"
+            expected_records:
+              - "REC: status_contract"
+
+      - step: "Restore the company configuration ST"
+        action: "write"
+        target: "company"
+        values:
+          manpower_contract_employment_status_ids:
+            - - 5
+              - 0
+              - 0
