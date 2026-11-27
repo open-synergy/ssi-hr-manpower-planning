@@ -114,6 +114,7 @@
                 <page name="summary" string="Summary">
                     <field name="summary_ids" nolabel="1">
                         <tree>
+                            <field name="category" />
                             <field name="job_id" />
                             <field name="quantity_needed" sum="Total" />
                             <field name="quantity_filled" sum="Total" />
@@ -121,6 +122,7 @@
                         </tree>
                         <form>
                             <group name="summary_group_1">
+                                <field name="category" />
                                 <field name="job_id" />
                                 <field name="quantity_needed" />
                                 <field name="quantity_filled" />

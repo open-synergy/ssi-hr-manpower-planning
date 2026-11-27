@@ -11,6 +11,7 @@
             <field name="planning_id" />
             <field name="department_id" />
             <field name="job_id" />
+            <field name="category" />
             <group name="group_by">
                 <filter
                         name="grp_planning"
@@ -26,6 +27,11 @@
                         name="grp_job"
                         string="Job Position"
                         context="{'group_by':'job_id'}"
+                    />
+                <filter
+                        name="grp_category"
+                        string="Category"
+                        context="{'group_by':'category'}"
                     />
                 <filter
                         name="grp_state"
@@ -45,6 +51,7 @@
             <field name="planning_id" />
             <field name="department_id" />
             <field name="job_id" />
+            <field name="category" />
             <field name="state" />
             <field name="quantity_needed" sum="Total" />
             <field name="quantity_filled" sum="Total" />
