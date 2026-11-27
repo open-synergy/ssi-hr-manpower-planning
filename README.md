@@ -23,7 +23,6 @@ addon | version | maintainers | summary
 --- | --- | --- | ---
 [ssi_hr_manpower_planning](ssi_hr_manpower_planning/) | 14.0.1.4.0 |  | HR - Manpower Planning
 [ssi_hr_manpower_planning_recruitment](ssi_hr_manpower_planning_recruitment/) | 14.0.1.0.1 |  | HR - Manpower Planning - Recruitment
-[ssi_hr_manpower_planning_school](ssi_hr_manpower_planning_school/) | 14.0.1.6.0 |  | HR - Manpower Planning - School
 
 [//]: # (end addons)
 
