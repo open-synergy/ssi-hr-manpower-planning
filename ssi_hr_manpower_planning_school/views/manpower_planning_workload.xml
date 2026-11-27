@@ -50,6 +50,7 @@
             <field name="co_teaching_count" sum="Total" />
             <field name="assignment_weekly_hours" sum="Total" />
             <field name="assignment_daily_hours" sum="Total" />
+            <field name="picket_weekly_hours" sum="Total" />
             <field name="total_weekly_hours" sum="Total" />
         </tree>
     </field>
@@ -64,6 +65,7 @@
             <field name="employee_id" type="row" />
             <field name="teaching_hours" type="measure" />
             <field name="assignment_weekly_hours" type="measure" />
+            <field name="picket_weekly_hours" type="measure" />
             <field name="total_weekly_hours" type="measure" />
         </pivot>
     </field>

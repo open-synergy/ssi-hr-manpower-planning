@@ -12,6 +12,7 @@
     "application": False,
     "depends": [
         "ssi_hr_manpower_planning",
+        "ssi_school",
         "ssi_school_academic",
         "ssi_master_data_mixin",
         "web_tour",
@@ -23,6 +24,7 @@
         "security/ir_model_access/manpower_planning_assignment_type.xml",
         "security/ir_model_access/manpower_planning.xml",
         "security/ir_rule/manpower_planning_workload.xml",
+        "views/school.xml",
         "views/manpower_planning_curriculum.xml",
         "views/manpower_planning_assignment_type.xml",
         "views/manpower_planning.xml",
