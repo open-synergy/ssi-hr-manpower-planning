@@ -10,9 +10,9 @@ class ManpowerPlanningWorkload(models.Model):
     Read-only SQL view that recaps the workload of every employee in
     every school manpower planning: the teaching hours, the number of
     co-teaching lines, the additional assignment hours per week and per
-    day, and the total weekly hours. Lines without an employee are left
-    out. It feeds the workload tab of the planning form and the workload
-    analysis.
+    day, the picket hours per week, and the total weekly hours. Lines
+    without an employee are left out. It feeds the workload tab of the
+    planning form and the workload analysis.
     """
 
     _name = "manpower_planning_workload"
@@ -32,9 +32,11 @@ class ManpowerPlanningWorkload(models.Model):
         "manpower_planning_assignment": [
             "planning_id",
             "employee_id",
+            "category",
             "hour_basis",
             "hours",
         ],
+        "school": ["manpower_picket_weekly_hours_per_day"],
     }
 
     planning_id = fields.Many2one(
@@ -100,10 +102,17 @@ class ManpowerPlanningWorkload(models.Model):
         readonly=True,
         help="Hours of the additional assignments counted per day.",
     )
+    picket_weekly_hours = fields.Integer(
+        string="Picket Hours per Week",
+        readonly=True,
+        help="Picket hours counted per day, multiplied by the picket "
+        "hours per day of the school of the planning.",
+    )
     total_weekly_hours = fields.Integer(
         string="Total Weekly Hours",
         readonly=True,
-        help="Teaching hours plus the additional assignment hours " "counted per week.",
+        help="Teaching hours plus the additional assignment hours "
+        "counted per week plus the picket hours per week.",
     )
 
     @property
@@ -139,8 +148,13 @@ class ManpowerPlanningWorkload(models.Model):
             SUM(w.co_teaching_count) AS co_teaching_count,
             SUM(w.assignment_weekly_hours) AS assignment_weekly_hours,
             SUM(w.assignment_daily_hours) AS assignment_daily_hours,
+            SUM(w.picket_daily_hours) * COALESCE(
+                s.manpower_picket_weekly_hours_per_day, 1
+            ) AS picket_weekly_hours,
             SUM(w.teaching_hours) + SUM(w.assignment_weekly_hours)
-                AS total_weekly_hours
+                + SUM(w.picket_daily_hours) * COALESCE(
+                    s.manpower_picket_weekly_hours_per_day, 1
+                ) AS total_weekly_hours
         """
         return select_str
 
@@ -162,7 +176,8 @@ class ManpowerPlanningWorkload(models.Model):
                 COALESCE(t.total_weekly_hours, 0) AS teaching_hours,
                 0 AS co_teaching_count,
                 0 AS assignment_weekly_hours,
-                0 AS assignment_daily_hours
+                0 AS assignment_daily_hours,
+                0 AS picket_daily_hours
             FROM manpower_planning_teaching t
             WHERE t.employee_id IS NOT NULL
             UNION ALL
@@ -172,7 +187,8 @@ class ManpowerPlanningWorkload(models.Model):
                 0 AS teaching_hours,
                 1 AS co_teaching_count,
                 0 AS assignment_weekly_hours,
-                0 AS assignment_daily_hours
+                0 AS assignment_daily_hours,
+                0 AS picket_daily_hours
             FROM manpower_planning_teaching t
             WHERE t.co_employee_id IS NOT NULL
             UNION ALL
@@ -186,11 +202,15 @@ class ManpowerPlanningWorkload(models.Model):
                 END AS assignment_weekly_hours,
                 CASE WHEN a.hour_basis = 'day'
                     THEN COALESCE(a.hours, 0) ELSE 0
-                END AS assignment_daily_hours
+                END AS assignment_daily_hours,
+                CASE WHEN a.hour_basis = 'day' AND a.category = 'picket'
+                    THEN COALESCE(a.hours, 0) ELSE 0
+                END AS picket_daily_hours
             FROM manpower_planning_assignment a
             WHERE a.employee_id IS NOT NULL
         ) w
         JOIN manpower_planning p ON p.id = w.planning_id
+        LEFT JOIN school s ON s.id = p.school_id
         """
         return from_str
 
@@ -207,6 +227,7 @@ class ManpowerPlanningWorkload(models.Model):
             p.company_id,
             p.school_id,
             p.user_id,
-            p.state
+            p.state,
+            s.manpower_picket_weekly_hours_per_day
         """
         return group_by_str
