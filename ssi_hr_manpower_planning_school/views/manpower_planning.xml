@@ -159,20 +159,30 @@
                             <field name="employee_id" />
                             <field name="teaching_hours" sum="Total" />
                             <field name="co_teaching_count" sum="Total" />
+                            <field name="co_teaching_hours" sum="Total" />
                             <field name="assignment_weekly_hours" sum="Total" />
                             <field name="assignment_daily_hours" sum="Total" />
                             <field name="picket_weekly_hours" sum="Total" />
                             <field name="total_weekly_hours" sum="Total" />
+                            <field name="is_teacher" />
+                            <field name="mandatory_weekly_hours" />
+                            <field name="lack_weekly_hours" sum="Total" />
+                            <field name="excess_weekly_hours" sum="Total" />
                         </tree>
                         <form>
                             <group name="workload_group_1">
                                 <field name="employee_id" />
                                 <field name="teaching_hours" />
                                 <field name="co_teaching_count" />
+                                <field name="co_teaching_hours" />
                                 <field name="assignment_weekly_hours" />
                                 <field name="assignment_daily_hours" />
                                 <field name="picket_weekly_hours" />
                                 <field name="total_weekly_hours" />
+                                <field name="is_teacher" />
+                                <field name="mandatory_weekly_hours" />
+                                <field name="lack_weekly_hours" />
+                                <field name="excess_weekly_hours" />
                             </group>
                         </form>
                     </field>
